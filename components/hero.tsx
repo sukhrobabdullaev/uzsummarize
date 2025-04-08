@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState } from "react"
 import { ArrowDown, Sparkles, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Typewriter } from "react-simple-typewriter"
@@ -9,6 +9,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 const Hero = () => {
   const t = useTranslations()
+  
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const [isHovering, setIsHovering] = useState(false)
