@@ -1,6 +1,14 @@
-import {getTranslations} from 'next-intl/server';
- 
-export default async function HomePage() {
-  const t = await getTranslations('HomePage');
-  return <h1>{t('title')}</h1>;
+import Hero from "@/components/hero";
+import Features from "@/components/shared/features";
+import SummarizeForm from "@/components/summarize-form";
+
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <SummarizeForm />
+      <Features />
+    </>
+  );
 }

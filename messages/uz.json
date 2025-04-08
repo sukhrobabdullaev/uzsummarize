@@ -1,6 +1,267 @@
 {
-  "HomePage": {
-    "title": "Salom, dunyo!",
-    "about": "Biz haqimizda sahifasiga o'tish"
+  "common": {
+    "welcome": "Xush kelibsiz",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "success": "Muvaffaqiyatli",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash",
+    "tryNow": "Sinab ko'rish",
+    "learnMore": "Batafsil ma'lumot",
+    "selectFile": "Fayl tanlash",
+    "dragAndDrop": "Faylni shu yerga tashlang yoki tanlang",
+    "fileSupport": "PDF va rasmlar (PNG, JPG, JPEG) 5MB gacha qabul qilinadi",
+    "minCharacters": "Kamida {{count}} ta belgi",
+    "currentCharacters": "{{count}} ta belgi",
+    "remove": "O'chirish",
+    "processing": "Ishlanmoqda...",
+    "finalizing": "Natijalar yakunlanmoqda...",
+    "reset": "Tozalash"
+  },
+  "navigation": {
+    "home": "Bosh sahifa",
+    "about": "Biz haqimizda",
+    "contact": "Bog'lanish",
+    "changelog": "Yangilanishlar",
+    "voiceAssistant": "Ovozli yordamchi",
+    "tagline": "O'ZBEK TILI UCHUN SUN'IY INTELLEKT QISQARTIRUVCHI",
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish",
+    "language": "Til",
+    "tryNow": "Hoziroq sinab ko'ring"
+  },
+  "auth": {
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "logout": "Chiqish",
+    "email": "Elektron pochta",
+    "password": "Parol"
+  },
+  "hero": {
+    "tagline": "SI yordamida o'zbek tilida xulosa olish",
+    "title": "O'zbek tilida",
+    "description": "Uzun matnlar, rasmlar yoki PDF fayllarni sun'iy intellekt yordamida qisqa va aniq xulosalarga aylantiring. Vaqtingizni tejang va asosiy ma'lumotlarni tezda oling.",
+    "summarization": "dan xulosa olish",
+    "typewriter": {
+      "text": "Matn",
+      "image": "Rasm",
+      "pdf": "PDF"
+    }
+  },
+  "summarizer": {
+    "title": "Sun'iy intellekt bilan matnlarni qisqartirish",
+    "description": "Qisqa xulosa olish yoki rasm tahlili uchun matn kiriting yoki fayl yuklang",
+    "tabs": {
+      "text": "Matn kiritish",
+      "file": "Fayl yuklash"
+    },
+    "textInput": {
+      "label": "Matningizni kiriting",
+      "placeholder": "Qisqartirmoqchi bo'lgan matningizni shu yerga joylashtiring..."
+    },
+    "fileUpload": {
+      "title": "Fayl yuklash",
+      "supportedFormats": "PDF va rasmlar (PNG, JPG, JPEG) 5MB gacha qabul qilinadi"
+    },
+    "errors": {
+      "noInput": "Iltimos, matn kiriting yoki fayl yuklang",
+      "textTooShort": "Matn kamida {{count}} ta belgidan iborat bo'lishi kerak. Hozirgi uzunlik: {{current}}",
+      "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
+      "unsupportedType": "Fayl turi mos kelmaydi. Faqat PDF yoki rasmlar (.png, .jpg, .jpeg) qabul qilinadi",
+      "processingFailed": "Qisqartirish jarayonida xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
+    },
+    "success": {
+      "imageAnalysis": "Rasm tahlili yakunlandi",
+      "summaryGenerated": "Qisqartma muvaffaqiyatli yaratildi"
+    },
+    "summarize": "Xulosa olish",
+    "analyzeImage": "Matnni ajratib olish o'rniga rasm tarkibini tahlil qilish",
+    "summarizeImage": "Rasmdan xulosa olish"
+  },
+  "summaryResult": {
+    "title": "Xulosa natijasi",
+    "copySuccess": "Xulosa xotiraga nusxalandi",
+    "copyError": "Xotiraga nusxalashda xatolik yuz berdi"
+  },
+  "features": {
+    "textSummarization": {
+      "title": "Matnni qisqartirish",
+      "description": "Uzun maqolalar, hujjatlar va matnlarni o'zbek tilida tezda qisqartiring."
+    },
+    "imageAnalysis": {
+      "title": "Rasm tahlili",
+      "description": "O'zbek tilidagi matnli rasmlardan matnni ajratib oling va qisqartiring."
+    },
+    "pdfProcessing": {
+      "title": "PDF fayllarni qayta ishlash",
+      "description": "PDF hujjatlarni yuklang va ularning o'zbek tilidagi mazmunini qisqa xulosa sifatida oling."
+    }
+  },
+  "about": {
+    "title": "UzSummarize haqida",
+    "mission": {
+      "title": "Bizning maqsadimiz",
+      "description": "UzSummarize o'zbek tilidagi ma'lumotlarni qulay va tushunarli qilish uchun yaratildi. Biz til to'siqlarini bartaraf etishga va odamlarga uzun matnlar, PDF va rasmlardan muhim ma'lumotlarni saqlab, vaqt tejashga yordam berishga ishonamiz."
+    },
+    "howItWorks": {
+      "title": "Qanday ishlaydi",
+      "description": "Bizning qisqartirish vositamiz o'zbek tiliga maxsus sozlangan zamonaviy tabiiy tilni qayta ishlash va rasm tahlili modellaridan foydalanadi. Yangi xususiyatlarimiz bilan UzSummarize endi matn, PDF va rasm formatlarini qo'llab-quvvatlaydi.",
+      "steps": {
+        "input": {
+          "step": "01",
+          "title": "Kirish",
+          "description": "5MB gacha bo'lgan matn, PDF yoki rasmlarni qabul qilish"
+        },
+        "analyze": {
+          "step": "02",
+          "title": "Tahlil",
+          "description": "Mazmun tuzilishi va kontekstini qayta ishlash"
+        },
+        "identify": {
+          "step": "03",
+          "title": "Aniqlash",
+          "description": "Lingvistik aniqlik bilan asosiy ma'lumotlarni ajratib olish"
+        },
+        "refine": {
+          "step": "04",
+          "title": "Safarbar qilish",
+          "description": "Mazmunni saqlab, ortiqcha matnni olib tashlash"
+        },
+        "deliver": {
+          "step": "05",
+          "title": "Yetkazish",
+          "description": "Tabiiy va qisqa xulosa taqdim etish"
+        }
+      }
+    },
+    "features": {
+      "title": "Xususiyatlar",
+      "pdfSummarization": {
+        "title": "PDF fayllarni qisqartirish",
+        "description": "PDF hujjatlarni yuklang va UzSummarize o'zbek tilida mazmunni ajratib olish va qisqartirish imkonini beradi. Hisobotlar, maqolalar yoki ilmiy ishlar uchun juda qulay."
+      },
+      "imageAnalysis": {
+        "title": "Rasm tahlili",
+        "description": "O'zbek tilidagi matn yoki vizual ma'lumotlarni o'z ichiga olgan rasmlarni yuklang. Bizning vositamiz rasmni tahlil qiladi, tegishli matnni ajratib oladi va qisqa xulosa taqdim etadi."
+      },
+      "seamlessIntegration": {
+        "title": "Uzluksiz integratsiya",
+        "description": "Matn, PDF yoki rasm bilan ishlayotgan bo'lsangiz ham, UzSummarize o'zbek tilida mazmunli va aniq xulosa taqdim etishni ta'minlaydi."
+      }
+    },
+    "technology": {
+      "title": "Texnologiyalar",
+      "description": "UzSummarize Open AI, React va TailwindCSS kabi zamonaviy texnologiyalar yordamida yaratilgan. Bizning modellarimiz mashina o'rganishi orqali doimiy ravishda yaxshilanib, o'zbek tilining nuanslariga e'tibor qaratgan holda, aniqroq xulosalar va rasm tahlillarini taqdim etadi."
+    },
+    "contact": {
+      "title": "Bog'lanish",
+      "description": "Savollaringiz, fikr-mulohazalaringiz yoki takliflaringiz bormi? Biz sizdan eshitishdan xursand bo'lamiz."
+    }
+  },
+  "changelog": {
+    "title": "UzSummarize yangilanishlari",
+    "description": "UzSummarize-ni yangi xususiyatlar va yaxshilanishlar bilan takomillashtirish yo'limizni kuzating. Biz o'zbek tilidagi ma'lumotlarni qulayroq qilish uchun doimiy ravishda ishlayapmiz.",
+    "latest": "So'nggi",
+    "newFeatures": "Yangi xususiyatlar",
+    "improvements": "Yaxshilanishlar",
+    "bugFixes": "Xatoliklarni tuzatish",
+    "version": "Versiya"
+  },
+  "voiceAssistant": {
+    "title": "Ovozni matnga aylantirishh",
+    "description": "Ovozni matnga va matnni ovozga aylantirish",
+    "howToUse": {
+      "title": "Ovozli yordamchidan foydalanish",
+      "subtitle": "Boshlash uchun qo'llanma",
+      "textToSpeech": {
+        "title": "Matnni ovozga aylantirish",
+        "steps": {
+          "enterText": "Matnni kiriting",
+          "chooseVoice": "Ovozni tanlang",
+          "adjustSpeed": "Ovoz tezligini sozlang",
+          "clickSpeak": "Ovozga aylantirish uchun \"Ovozga aylantirish\" tugmasini bosing"
+        }
+      },
+      "speechToText": {
+        "title": "Ovozni matnga aylantirish",
+        "steps": {
+          "clickRecord": "Yozishni boshlash uchun \"Yozish\" tugmasini bosing",
+          "speakClearly": "Mikrofonga aniq gapiring",
+          "clickStop": "Tugaganda \"To'xtatish\" tugmasini bosing",
+          "viewTranscription": "Transkripsiya qilingan matn quyida ko'rinadi"
+        }
+      },
+      "proTips": {
+        "title": "Professional maslahatlar",
+        "tips": {
+          "quietEnvironment": "Yaxshiroq yozish sifatini olish uchun jim muhitdan foydalaning",
+          "adjustSpeed": "Ovoz tezligini o'z xohishingizga moslashtiring",
+          "tryVoices": "Sizga eng mos keladigan ovozni topish uchun turli ovozlarni sinab ko'ring",
+          "copyText": "Transkripsiya qilingan matnni ulashish uchun nusxalash tugmasidan foydalaning"
+        }
+      }
+    },
+    "textToSpeech": {
+      "title": "Matnni ovozga aylantirish",
+      "description": "Matningizni tabiiy ovozga aylantiring",
+      "placeholder": "Matnni shu yerga kiriting...",
+      "voice": {
+        "label": "Ovozni tanlang",
+        "alloy": "Alloy (Standart)",
+        "echo": "Echo",
+        "fable": "Fable",
+        "nova": "Nova (Ayol)"
+      },
+      "speed": {
+        "label": "Tezlik",
+        "tooltip": "Ovoz tezligini sozlang (0.5x dan 2x gacha)"
+      },
+      "buttons": {
+        "clear": "Matnni tozalash",
+        "speak": "Gapir",
+        "stop": "To'xtatish"
+      }
+    },
+    "speechToText": {
+      "title": "Ovozni matnga",
+      "description": "Ovozingizni matnga aylantiring",
+      "buttons": {
+        "record": "Yozish",
+        "stop": "To'xtatish",
+        "upload": "Fayl yuklash"
+      },
+      "processing": "Qayta ishlanmoqda...",
+      "transcribedText": {
+        "title": "Matn:",
+        "copy": "Nusxa olish"
+      }
+    },
+    "toasts": {
+      "recordingStarted": "Yozish boshlandi",
+      "recordingStopped": "Yozish to'xtatildi",
+      "microphoneDenied": "Mikrofonga ruxsat berilmadi",
+      "transcriptionSuccess": "Matn muvaffaqiyatli o'girildi",
+      "transcriptionError": "Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.",
+      "textRequired": "Iltimos, avval matn kiriting",
+      "textCopied": "Matn nusxalandi",
+      "textCleared": "Matn tozalandi",
+      "speechError": "Ovoz yaratishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.",
+      "invalidFileType": "Noto'g'ri fayl turi. Iltimos, MP3, WAV yoki OGG faylini yuklang."
+    },
+    "remainingRequests": "Qolgan so'rovlar: {{count}}"
+  },
+  "footer": {
+    "copyright": "UzSummarize. Barcha huquqlar himoyalangan."
+  },
+  "rateLimit": {
+    "exceeded": "So'rovlar cheklovi: {{timeWindow}} soat ichida faqat {{maxRequests}} ta so'rov ruxsat etilgan. Iltimos, {{hoursLeft}} soat{{plural}} kuting va qayta urinib ko'ring.",
+    "remaining": "{{count}} ta so'rov qoldi"
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "description": "Qidirgan sahifangiz mavjud emas yoki boshqa joyga ko'chirilgan.",
+    "button": "Bosh sahifaga qaytish"
   }
 }

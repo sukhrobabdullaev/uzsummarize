@@ -1,11 +1,34 @@
-import createMiddleware from 'next-intl/middleware';
-import {routing} from './i18n/routing';
- 
-export default createMiddleware(routing);
- 
+import { NextRequest, NextResponse } from "next/server";
+
+const PUBLIC_FILE = /\.(.*)$/;
+const SUPPORTED_LOCALES = ["en", "uz", "ru"];
+const DEFAULT_LOCALE = "uz";
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // Skip static files, API routes, or already-locale-prefixed routes
+  if (
+    PUBLIC_FILE.test(pathname) ||
+    pathname.startsWith("/api") ||
+    SUPPORTED_LOCALES.some((locale) => pathname.startsWith(`/${locale}`))
+  ) {
+    return NextResponse.next();
+  }
+
+  // Redirect to default locale
+  const url = req.nextUrl.clone();
+  url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
+  return NextResponse.redirect(url);
+}
+
 export const config = {
-  // Match all pathnames except for
-  // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
-  // - … the ones containing a dot (e.g. `favicon.ico`)
-  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)'
+  matcher: [
+    /*
+     * Match all paths except:
+     * - static files
+     * - API routes
+     */
+    "/((?!api|_next|.*\\..*).*)"
+  ],
 };

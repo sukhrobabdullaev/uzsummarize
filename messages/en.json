@@ -1,6 +1,267 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "tryNow": "Try it now",
+    "learnMore": "Learn more",
+    "selectFile": "Select File",
+    "dragAndDrop": "Drag & drop or click to upload",
+    "fileSupport": "Supports PDF and images (PNG, JPG, JPEG) up to 5MB",
+    "minCharacters": "Min {{count}} characters",
+    "currentCharacters": "{{count}} characters",
+    "remove": "Remove",
+    "processing": "Processing...",
+    "finalizing": "Finalizing...",
+    "reset": "Reset"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "changelog": "Changelog",
+    "voiceAssistant": "Voice Assistant",
+    "tagline": "UZBEK AI SUMMARIZER",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "tryNow": "Try UzSummarize Now"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password"
+  },
+  "hero": {
+    "tagline": "AI-powered Uzbek language summarization",
+    "title": "Uzbek",
+    "description": "Transform long texts, images or PDFs into concise, accurate summaries with our AI-powered tool. Save time and extract key information instantly.",
+    "summarization": "Summarization",
+    "typewriter": {
+      "text": "Text",
+      "image": "Image",
+      "pdf": "PDF"
+    }
+  },
+  "summarizer": {
+    "title": "AI Content Summarizer",
+    "description": "Enter text or upload a file to generate a concise summary or analyze image content",
+    "tabs": {
+      "text": "Text Input",
+      "file": "File Upload"
+    },
+    "textInput": {
+      "label": "Enter your text",
+      "placeholder": "Paste your text here to summarize..."
+    },
+    "fileUpload": {
+      "title": "File Upload",
+      "supportedFormats": "Supports PDF and images (PNG, JPG, JPEG) up to 5MB"
+    },
+    "errors": {
+      "noInput": "Please enter text or upload a file to process",
+      "textTooShort": "Text must be at least {{count}} characters long. Current length: {{current}}",
+      "fileTooLarge": "File size exceeds 5MB limit",
+      "unsupportedType": "Unsupported file type. Use .pdf or images (.png, .jpg, .jpeg)",
+      "processingFailed": "Failed to generate summary. Please try again."
+    },
+    "success": {
+      "imageAnalysis": "Image analysis completed",
+      "summaryGenerated": "Summary generated successfully"
+    },
+    "summarize": "Summarize",
+    "analyzeImage": "Analyze image content instead of extracting text",
+    "summarizeImage": "Summarize Image"
+  },
+  "summaryResult": {
+    "title": "Summary Result",
+    "copySuccess": "Summary copied to clipboard",
+    "copyError": "Failed to copy to clipboard"
+  },
+  "features": {
+    "textSummarization": {
+      "title": "Text Summarization",
+      "description": "Quickly summarize long articles, documents, and text in Uzbek language."
+    },
+    "imageAnalysis": {
+      "title": "Image Analysis",
+      "description": "Extract and summarize text from images containing Uzbek language content."
+    },
+    "pdfProcessing": {
+      "title": "PDF Processing",
+      "description": "Upload PDF documents and get concise summaries of their Uzbek content."
+    }
+  },
+  "about": {
+    "title": "About UzSummarize",
+    "mission": {
+      "title": "Our Mission",
+      "description": "UzSummarize was created to make information in the Uzbek language more accessible and digestible. We believe in breaking down language barriers and helping people save time while retaining the essential information from lengthy texts, PDFs, and images."
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "description": "Our summarization tool uses advanced natural language processing and image analysis models specifically fine-tuned for the Uzbek language. With our latest features, UzSummarize now supports text, PDF, and image inputs.",
+      "steps": {
+        "input": {
+          "step": "01",
+          "title": "Input",
+          "description": "Accept text, PDFs, or images up to 5MB"
+        },
+        "analyze": {
+          "step": "02",
+          "title": "Analyze",
+          "description": "Process structure and context of the content"
+        },
+        "identify": {
+          "step": "03",
+          "title": "Identify",
+          "description": "Extract key information with linguistic accuracy"
+        },
+        "refine": {
+          "step": "04",
+          "title": "Refine",
+          "description": "Remove redundant content while preserving meaning"
+        },
+        "deliver": {
+          "step": "05",
+          "title": "Deliver",
+          "description": "Provide concise, natural-sounding summary"
+        }
+      }
+    },
+    "features": {
+      "title": "Features",
+      "pdfSummarization": {
+        "title": "PDF Summarization",
+        "description": "Upload PDF documents and let UzSummarize extract and summarize the content in Uzbek. Perfect for reports, articles, or research papers."
+      },
+      "imageAnalysis": {
+        "title": "Image Analysis",
+        "description": "Upload images containing text or visual information in Uzbek. Our tool analyzes the image, extracts relevant text, and provides a concise summary."
+      },
+      "seamlessIntegration": {
+        "title": "Seamless Integration",
+        "description": "Whether you're working with text, a PDF, or an image, UzSummarize ensures the output is a coherent and accurate summary in the Uzbek language."
+      }
+    },
+    "technology": {
+      "title": "Technology",
+      "description": "UzSummarize is built using cutting-edge technologies including Open AI, React, and TailwindCSS. Our models are continuously improving through machine learning to provide increasingly accurate summaries and image analyses, with a focus on the nuances of the Uzbek language."
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "description": "Have questions, feedback, or suggestions? We'd love to hear from you."
+    }
+  },
+  "changelog": {
+    "title": "UzSummarize Changelog",
+    "description": "Track our journey as we improve UzSummarize with new features and enhancements. We're constantly working to make information in the Uzbek language more accessible.",
+    "latest": "Latest",
+    "newFeatures": "New Features",
+    "improvements": "Improvements",
+    "bugFixes": "Bug Fixes",
+    "version": "Version"
+  },
+  "voiceAssistant": {
+    "title": "Voice Assistant",
+    "description": "Convert text to speech and speech to text",
+    "howToUse": {
+      "title": "How to Use Voice Assistant",
+      "subtitle": "Quick guide to get started",
+      "textToSpeech": {
+        "title": "Text to Speech",
+        "steps": {
+          "enterText": "Enter your text in the input field",
+          "chooseVoice": "Choose a voice from the dropdown menu",
+          "adjustSpeed": "Adjust the speech rate using the slider",
+          "clickSpeak": "Click \"Speak\" to hear your text"
+        }
+      },
+      "speechToText": {
+        "title": "Speech to Text",
+        "steps": {
+          "clickRecord": "Click \"Record\" to start recording",
+          "speakClearly": "Speak clearly into your microphone",
+          "clickStop": "Click \"Stop\" when you're done",
+          "viewTranscription": "Your transcribed text will appear below"
+        }
+      },
+      "proTips": {
+        "title": "Pro Tips",
+        "tips": {
+          "quietEnvironment": "Use a quiet environment for better recording quality",
+          "adjustSpeed": "Adjust speech rate to match your preferred listening speed",
+          "tryVoices": "Try different voices to find the one that works best for you",
+          "copyText": "Use the copy button to easily share transcribed text"
+        }
+      }
+    },
+    "textToSpeech": {
+      "title": "Text to Speech",
+      "description": "Convert your text into natural-sounding speech",
+      "placeholder": "Enter your text here...",
+      "voice": {
+        "label": "Select voice",
+        "alloy": "Alloy (Default)",
+        "echo": "Echo",
+        "fable": "Fable",
+        "nova": "Nova (Female)"
+      },
+      "speed": {
+        "label": "Speed",
+        "tooltip": "Adjust the speech rate (0.5x to 2x)"
+      },
+      "buttons": {
+        "clear": "Clear text",
+        "speak": "Speak",
+        "stop": "Stop"
+      }
+    },
+    "speechToText": {
+      "title": "Speech to Text",
+      "description": "Convert your voice into text",
+      "buttons": {
+        "record": "Record",
+        "stop": "Stop",
+        "upload": "Upload File"
+      },
+      "processing": "Processing...",
+      "transcribedText": {
+        "title": "Transcribed Text:",
+        "copy": "Copy to clipboard"
+      }
+    },
+    "toasts": {
+      "recordingStarted": "Recording started",
+      "recordingStopped": "Recording stopped",
+      "microphoneDenied": "Microphone permission denied",
+      "transcriptionSuccess": "Text transcribed successfully",
+      "transcriptionError": "Error occurred. Please try again later.",
+      "textRequired": "Please enter text first",
+      "textCopied": "Text copied to clipboard",
+      "textCleared": "Text cleared",
+      "speechError": "Error occurred while generating speech. Please try again.",
+      "invalidFileType": "Invalid file type. Please upload an MP3, WAV, or OGG file."
+    },
+    "remainingRequests": "Remaining requests: {{count}}"
+  },
+  "footer": {
+    "copyright": "UzSummarize. All rights reserved."
+  },
+  "rateLimit": {
+    "exceeded": "Rate limit exceeded: Only {{maxRequests}} requests allowed per {{timeWindow}} hours. Please wait {{hoursLeft}} hour{{plural}} and try again.",
+    "remaining": "{{count}} requests remaining"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "button": "Return to Home"
   }
 }
