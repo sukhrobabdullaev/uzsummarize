@@ -136,7 +136,7 @@ const SummaryResult = ({ summary }: SummaryResultProps) => {
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
         />
-        <p className="whitespace-pre-wrap leading-relaxed text-foreground/90">{displayText}</p>
+        <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">{displayText}</p>
       </motion.div>
     </motion.div>
   )

@@ -18,7 +18,8 @@
     "remove": "Remove",
     "processing": "Processing...",
     "finalizing": "Finalizing...",
-    "reset": "Reset"
+    "reset": "Reset",
+    "empty": "Empty"
   },
   "navigation": {
     "home": "Home",
@@ -54,33 +55,33 @@
   "summarizer": {
     "title": "AI Content Summarizer",
     "description": "Enter text or upload a file to generate a concise summary or analyze image content",
-    "tabs": {
-      "text": "Text Input",
-      "file": "File Upload"
+    "model": {
+      "label": "AI Model",
+      "placeholder": "Select a model",
+      "gpt": "GPT-4o-mini",
+      "gemini": "gemini-2.0-flash"
     },
     "textInput": {
-      "label": "Enter your text",
+      "label": "Your Text",
       "placeholder": "Paste your text here to summarize..."
     },
-    "fileUpload": {
-      "title": "File Upload",
-      "supportedFormats": "Supports PDF and images (PNG, JPG, JPEG) up to 5MB"
-    },
     "errors": {
-      "noInput": "Please enter text or upload a file to process",
-      "textTooShort": "Text must be at least {{count}} characters long. Current length: {{current}}",
-      "fileTooLarge": "File size exceeds 5MB limit",
-      "unsupportedType": "Unsupported file type. Use .pdf or images (.png, .jpg, .jpeg)",
-      "processingFailed": "Failed to generate summary. Please try again."
+      "textTooShort": "Please enter at least {{count}} characters",
+      "textTooLong": "Text exceeds maximum limit of {{count}} characters",
+      "fileTooLarge": "Text exceeds maximum limit of {{count}} characters",
+      "processingFailed": "Failed to generate summary"
     },
     "success": {
-      "imageAnalysis": "Image analysis completed",
-      "summaryGenerated": "Summary generated successfully"
+      "summaryGenerated": "Summary generated successfully!"
     },
-    "summarize": "Summarize",
-    "analyzeImage": "Analyze image content instead of extracting text",
-    "summarizeImage": "Summarize Image"
+    "validLength": "Valid length",
+    "charCount": "{{count}}/{{max}}",
+    "minChars": "{{count}} min",
+    "maxChars": "{{count}} max",
+    "summarize": "Generate Summary"
   },
+
+
   "summaryResult": {
     "title": "Summary Result",
     "copySuccess": "Summary copied to clipboard",
@@ -320,5 +321,27 @@
     "fileReady": "File ready",
     "processing": "Processing...",
     "generateText": "Generate Text"
+  },
+  "services": {
+    "imageTextExtraction": {
+      "name": "Image Text Extraction",
+      "description": "Extract text from images or screenshots"
+    },
+    "imageDescription": {
+      "name": "Image Description",
+      "description": "Get AI-generated descriptions of images"
+    },
+    "pdfSummarization": {
+      "name": "PDF Summarization",
+      "description": "Summarize PDF documents automatically"
+    },
+    "studyNotes": {
+      "name": "Study Notes",
+      "description": "Generate study notes from your content"
+    },
+    "conceptExplanation": {
+      "name": "Concept Explanation",
+      "description": "Get simple explanations of complex topics"
+    }
   }
 }

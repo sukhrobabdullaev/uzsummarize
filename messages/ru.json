@@ -18,7 +18,8 @@
     "remove": "Удалить",
     "processing": "Обработка...",
     "finalizing": "Завершение...",
-    "reset": "Сбросить"
+    "reset": "Сбросить",
+    "empty": "Пусто"
   },
   "navigation": {
     "home": "Главная",
@@ -52,34 +53,32 @@
     }
   },
   "summarizer": {
-    "title": "ИИ-сумматор контента",
+    "title": "AI-Суммаризатор контента",
     "description": "Введите текст или загрузите файл для создания краткого резюме или анализа изображения",
-    "tabs": {
-      "text": "Ввод текста",
-      "file": "Загрузка файла"
+    "model": {
+      "label": "AI Модель",
+      "placeholder": "Выберите модель",
+      "gpt": "GPT-4o-mini",
+      "gemini": "gemini-2.0-flash"
     },
     "textInput": {
-      "label": "Введите ваш текст",
+      "label": "Ваш текст",
       "placeholder": "Вставьте ваш текст для суммаризации..."
     },
-    "fileUpload": {
-      "title": "Загрузка файла",
-      "supportedFormats": "Поддерживаются PDF и изображения (PNG, JPG, JPEG) до 5MB"
-    },
     "errors": {
-      "noInput": "Пожалуйста, введите текст или загрузите файл для обработки",
-      "textTooShort": "Текст должен содержать минимум {{count}} символов. Текущая длина: {{current}}",
-      "fileTooLarge": "Размер файла превышает лимит 5MB",
-      "unsupportedType": "Неподдерживаемый тип файла. Используйте .pdf или изображения (.png, .jpg, .jpeg)",
-      "processingFailed": "Не удалось создать резюме. Пожалуйста, попробуйте снова."
+      "textTooShort": "Пожалуйста, введите минимум {{count}} символов",
+      "textTooLong": "Текст превышает максимальный лимит в {{count}} символов",
+      "fileTooLarge": "Текст превышает максимальный лимит в {{count}} символов",
+      "processingFailed": "Не удалось создать резюме"
     },
     "success": {
-      "imageAnalysis": "Анализ изображения завершен",
-      "summaryGenerated": "Резюме успешно создано"
+      "summaryGenerated": "Резюме успешно создано!"
     },
-    "summarize": "Суммаризация",
-    "analyzeImage": "Анализ изображения вместо извлечения текста",
-    "summarizeImage": "Суммаризация изображения"
+    "validLength": "Допустимая длина",
+    "charCount": "{{count}}/{{max}}",
+    "minChars": "мин. {{count}}",
+    "maxChars": "макс. {{count}}",
+    "summarize": "Создать резюме"
   },
   "summaryResult": {
     "title": "Результат резюме",
@@ -269,7 +268,7 @@
     "title": "Описание изображения",
     "description": "Получите подробное описание изображений с помощью нашей передовой технологии ИИ",
     "upload": {
-      "title": "Загрузка изображения",
+      "title": "Загрузить изображение",
       "description": "Загрузите изображение для получения подробного описания",
       "supportedFormats": "Поддерживаются PNG, JPG, JPEG до 5MB",
       "dragDrop": "Перетащите файл или нажмите для загрузки",
@@ -283,15 +282,15 @@
       "copyError": "Не удалось скопировать в буфер обмена"
     },
     "errors": {
-      "noImage": "Пожалуйста, сначала загрузите изображение",
-      "fileTooLarge": "Размер файла превышает лимит 5MB",
-      "unsupportedType": "Неподдерживаемый тип файла. Используйте .png, .jpg или .jpeg",
-      "processingFailed": "Не удалось создать описание. Пожалуйста, попробуйте снова.",
-      "error": "Ошибка"
+      "noImage": "Please upload an image first",
+      "fileTooLarge": "File size exceeds 5MB limit",
+      "unsupportedType": "Unsupported file type. Use .png, .jpg, or .jpeg",
+      "processingFailed": "Failed to generate description. Please try again.",
+      "error": "Error"
     },
-    "processing": "Обработка...",
-    "generateDescription": "Создать описание",
-    "fileReady": "Файл готов"
+    "processing": "Processing...",
+    "generateDescription": "Generate Description",
+    "fileReady": "File ready"
   },
   "imageExtraction": {
     "title": "Извлечение текста из изображения",
@@ -320,5 +319,27 @@
     "processing": "Обработка...",
     "generateText": "Извлечь текст",
     "fileReady": "Файл готов"
+  },
+  "services": {
+    "imageTextExtraction": {
+      "name": "Извлечение текста из изображения",
+      "description": "Извлечение текста из изображения или скриншота"
+    },
+    "imageDescription": {
+      "name": "Описание изображения",
+      "description": "Получите подробное описание изображений с помощью нашей передовой технологии ИИ"
+    },
+    "pdfSummarization": {
+      "name": "Суммаризация PDF",
+      "description": "Суммаризация PDF-документов автоматически"
+    },
+    "studyNotes": {
+      "name": "Заметки для изучения",
+      "description": "Генерация заметок для изучения из вашего контента"
+    },
+    "conceptExplanation": {
+      "name": "Объяснение концепции",
+      "description": "Получите простые объяснения сложных тем"
+    }
   }
 }

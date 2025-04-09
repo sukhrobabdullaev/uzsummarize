@@ -12,8 +12,10 @@ import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2, Sparkles, Bot, Eraser, BrainCircuit } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 const SummaryForm = () => {
+  const t = useTranslations()
   const [text, setText] = useState("")
   const [summary, setSummary] = useState("")
   const [model, setModel] = useState("GEMINI")
@@ -28,11 +30,11 @@ const SummaryForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (charCount < MIN_CHARS) {
-      toast.error(`Please enter at least ${MIN_CHARS} characters`)
+      toast.error(t("summarizer.errors.textTooShort", { count: MIN_CHARS, current: charCount }))
       return
     }
     if (charCount > MAX_CHARS) {
-      toast.error(`Text exceeds maximum limit of ${MAX_CHARS} characters`)
+      toast.error(t("summarizer.errors.fileTooLarge"))
       return
     }
 
@@ -48,13 +50,13 @@ const SummaryForm = () => {
 
       if (res.ok) {
         setSummary(data.summary)
-        toast.success("Summary generated successfully!")
+        toast.success(t("summarizer.success.summaryGenerated"))
       } else {
-        toast.error(data.error || "Failed to generate summary")
+        toast.error(data.error || t("summarizer.errors.processingFailed"))
       }
     } catch (error) {
       console.error("Error:", error)
-      toast.error("Server error occurred")
+      toast.error(t("common.error"))
     } finally {
       setIsLoading(false)
     }
@@ -77,32 +79,32 @@ const SummaryForm = () => {
         <CardHeader className="pb-2">
           <CardTitle className="text-2xl font-bold flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-amber-500" />
-            Text Summarizer
+            {t("summarizer.title")}
           </CardTitle>
-          <CardDescription>Paste your text below and let AI create a concise summary for you</CardDescription>
+          <CardDescription>{t("summarizer.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <div className="w-full sm:w-auto space-y-2">
                 <Label htmlFor="model" className="text-sm font-medium">
-                  AI Model
+                  {t("summarizer.model.label")}
                 </Label>
                 <Select value={model} onValueChange={setModel}>
                   <SelectTrigger className="w-full sm:w-[180px] transition-all">
-                    <SelectValue placeholder="Select a model" />
+                    <SelectValue placeholder={t("summarizer.model.placeholder")} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="GPT" className="flex items-center">
                       <div className="flex items-center gap-2">
                         <BrainCircuit className="h-4 w-4 text-emerald-500" />
-                        <span>GPT-4o-mini</span>
+                        <span>{t("summarizer.model.gpt")}</span>
                       </div>
                     </SelectItem>
                     <SelectItem value="GEMINI">
                       <div className="flex items-center gap-2">
                         <Bot className="h-4 w-4 text-violet-500" />
-                        <span>gemini-2.0-flash</span>
+                        <span>{t("summarizer.model.gemini")}</span>
                       </div>
                     </SelectItem>
                   </SelectContent>
@@ -120,42 +122,41 @@ const SummaryForm = () => {
                 disabled={!text.length || isLoading}
               >
                 <Eraser className="mr-2 h-3.5 w-3.5" />
-                Clear
+                {t("common.reset")}
               </Button>
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <Label htmlFor="text" className="text-sm font-medium">
-                  Your Text
+                  {t("summarizer.textInput.label")}
                 </Label>
                 <span
-                  className={`text-xs px-2 py-0.5 rounded-full ${
-                    charCount === 0
-                      ? "bg-gray-100 text-gray-500"
-                      : charCount < MIN_CHARS
-                        ? "bg-amber-100 text-amber-700"
-                        : charCount > MAX_CHARS
-                          ? "bg-red-100 text-red-700"
-                          : "bg-emerald-100 text-emerald-700"
-                  }`}
+                  className={`text-xs px-2 py-0.5 rounded-full ${charCount === 0
+                    ? "bg-gray-100 text-gray-500"
+                    : charCount < MIN_CHARS
+                      ? "bg-amber-100 text-amber-700"
+                      : charCount > MAX_CHARS
+                        ? "bg-red-100 text-red-700"
+                        : "bg-emerald-100 text-emerald-700"
+                    }`}
                 >
                   {charCount === 0
-                    ? "Empty"
+                    ? t("common.empty")
                     : charCount < MIN_CHARS
-                      ? `${MIN_CHARS - charCount} more needed`
+                      ? t("summarizer.errors.textTooShort", { count: MIN_CHARS - charCount })
                       : charCount > MAX_CHARS
-                        ? `${charCount - MAX_CHARS} over limit`
-                        : "Valid length"}
+                        ? t("summarizer.errors.textTooLong", { count: charCount - MAX_CHARS })
+                        : t("summarizer.validLength")}
                 </span>
               </div>
               <div className="relative group">
                 <Textarea
                   id="text"
-                  placeholder="Paste your text here to summarize..."
+                  placeholder={t("summarizer.textInput.placeholder")}
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  className="min-h-[200px] max-h-[400px] resize-none transition-all duration-200 ease-in-out focus:shadow-lg focus:border-primary/50 hover:border-primary/30 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent"
+                  className="min-h-[200px] max-h-[400px] resize-none transition-all duration-200 ease-in-out focus:shadow-lg focus:border-primary/50 hover:border-primary/30 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent text-sm"
                 />
                 <div className="absolute bottom-2 right-2 text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded-md">
                   {charCount}/{MAX_CHARS}
@@ -174,12 +175,12 @@ const SummaryForm = () => {
               {isLoading ? (
                 <div className="flex items-center justify-center">
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  <span>Generating Summary...</span>
+                  <span>{t("common.processing")}</span>
                 </div>
               ) : (
                 <div className="flex items-center justify-center">
                   <Sparkles className="mr-2 h-4 w-4" />
-                  <span>Generate Summary</span>
+                  <span>{t("summarizer.summarize")}</span>
                 </div>
               )}
             </Button>
@@ -196,7 +197,6 @@ const SummaryForm = () => {
             transition={{ duration: 0.3 }}
           >
             <Card className="border-none shadow-lg overflow-hidden">
-            
               <CardContent>
                 <SummaryResult summary={summary} />
               </CardContent>

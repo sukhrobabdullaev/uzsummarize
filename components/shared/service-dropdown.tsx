@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, FileText, ImageIcon, FileSearch, BookOpen, Lightbulb, Clock } from "lucide-react"
@@ -13,48 +13,47 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
     const t = useTranslations()
     const locale = useLocale()
 
-    const services = [
+    const services = useMemo(() => [
         {
-            name: "Image Text Extraction",
-            description: "Extract text from images and screenshots",
+            name: t("services.imageTextExtraction.name"),
+            description: t("services.imageTextExtraction.description"),
             icon: ImageIcon,
             path: `/${locale}/services/image-extraction`,
             color: "from-blue-500 to-cyan-400",
         },
         {
-            name: "Image Description",
-            description: "Get AI-generated descriptions of images",
+            name: t("services.imageDescription.name"),
+            description: t("services.imageDescription.description"),
             icon: FileText,
             path: `/${locale}/services/image-description`,
             color: "from-violet-500 to-purple-400",
         },
         {
-            name: "PDF Summarization",
-            description: "Summarize PDF documents automatically",
+            name: t("services.pdfSummarization.name"),
+            description: t("services.pdfSummarization.description"),
             icon: FileSearch,
             path: `/${locale}/services/pdf-summarization`,
             color: "from-rose-500 to-pink-400",
             comingSoon: true
         },
         {
-            name: "Study Notes",
-            description: "Generate study notes from your content",
+            name: t("services.studyNotes.name"),
+            description: t("services.studyNotes.description"),
             icon: BookOpen,
             path: `/${locale}/services/study-notes`,
             color: "from-emerald-500 to-green-400",
             comingSoon: true
         },
         {
-            name: "Concept Explanation",
-            description: "Get simple explanations of complex topics",
+            name: t("services.conceptExplanation.name"),
+            description: t("services.conceptExplanation.description"),
             icon: Lightbulb,
             path: `/${locale}/services/concept-explanation`,
             color: "from-amber-500 to-yellow-400",
             comingSoon: true
         },
-    ]
+    ], [locale, t])
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -66,7 +65,6 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
         return () => document.removeEventListener("mousedown", handleClickOutside)
     }, [])
 
-    // Set active service based on current path
     useEffect(() => {
         const path = window.location.pathname
         const currentService = services.find(service => path.startsWith(service.path))
@@ -80,11 +78,11 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
                     className="flex items-center justify-between p-4 rounded-xl hover:bg-accent/50 transition-all duration-200 group border border-transparent hover:border-white/5"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    <span className="text-lg font-medium">{t("navigation.services")}</span>
+                    <span className="text-lg font-medium whitespace-nowrap">{t("navigation.services")}</span>
                     <motion.div
                         animate={{ rotate: isOpen ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
-                        className="h-8 w-8 rounded-full bg-background/80 flex items-center justify-center border border-white/5 shadow-sm group-hover:bg-primary/10"
+                        className="h-8 w-8 flex-shrink-0 rounded-full bg-background/80 flex items-center justify-center border border-white/5 shadow-sm group-hover:bg-primary/10 ml-2"
                     >
                         <ChevronDown className="h-4 w-4 text-primary group-hover:text-primary/80" />
                     </motion.div>
@@ -109,7 +107,7 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
                                     >
                                         <Link
                                             href={service.path}
-                                            className={`flex items-center p-3 rounded-lg transition-all duration-200 group ${service.comingSoon
+                                            className={`flex items-start p-3 rounded-lg transition-all duration-200 group ${service.comingSoon
                                                 ? 'opacity-60 cursor-not-allowed'
                                                 : 'hover:bg-accent/30'
                                                 }`}
@@ -120,20 +118,20 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
                                             }}
                                         >
                                             <div
-                                                className={`h-8 w-8 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3 shadow-sm`}
+                                                className={`h-8 w-8 flex-shrink-0 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3 shadow-sm`}
                                             >
                                                 <service.icon className="h-4 w-4 text-white" />
                                             </div>
-                                            <div>
-                                                <p className="text-sm font-medium flex items-center gap-2">
-                                                    {service.name}
+                                            <div className="min-w-0 flex-1">
+                                                <p className="text-sm font-medium flex items-center gap-2 flex-wrap">
+                                                    <span className="break-words">{service.name}</span>
                                                     {service.comingSoon && (
-                                                        <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                                                        <span className="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary flex-shrink-0">
                                                             <Clock className="w-4 h-4" />
                                                         </span>
                                                     )}
                                                 </p>
-                                                <p className="text-xs text-foreground/60">{service.description}</p>
+                                                <p className="text-xs text-foreground/60 break-words">{service.description}</p>
                                             </div>
                                         </Link>
                                     </motion.div>
@@ -154,7 +152,7 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
             onMouseLeave={() => setIsOpen(false)}
         >
             <button
-                className="relative px-4 py-1.5 text-foreground/80 hover:text-foreground transition-all duration-200 text-sm rounded-full hover:bg-background/70 group"
+                className="relative px-4 py-1.5 text-foreground/80 hover:text-foreground transition-all duration-200 text-sm rounded-full hover:bg-background/70 group whitespace-nowrap"
             >
                 <span className="relative z-10 flex items-center gap-1">
                     {t("navigation.services")}
@@ -179,7 +177,7 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-0 top-full mt-2 w-full sm:w-72 rounded-xl bg-background/95 backdrop-blur-xl border border-white/5 shadow-lg overflow-hidden"
+                        className="absolute left-0 top-full mt-2 w-[280px] sm:w-[320px] max-w-[95vw] rounded-xl bg-background/95 backdrop-blur-xl border border-white/5 shadow-lg overflow-hidden"
                     >
                         <div className="p-2 space-y-1">
                             {services.map((service, index) => (
@@ -191,7 +189,7 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
                                 >
                                     <Link
                                         href={service.path}
-                                        className={`flex items-center p-3 rounded-lg transition-all duration-200 group ${service.comingSoon
+                                        className={`flex items-start p-3 rounded-lg transition-all duration-200 group ${service.comingSoon
                                             ? 'opacity-60 cursor-not-allowed'
                                             : 'hover:bg-accent/30'
                                             }`}
@@ -202,20 +200,20 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
                                         }}
                                     >
                                         <div
-                                            className={`h-8 w-8 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3 shadow-sm sm:mr-3`}
+                                            className={`h-8 w-8 flex-shrink-0 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3 shadow-sm`}
                                         >
                                             <service.icon className="h-4 w-4 text-white" />
                                         </div>
-                                        <div>
-                                            <p className="text-sm font-medium flex items-center gap-2">
-                                                {service.name}
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-sm font-medium flex items-center gap-2 flex-wrap">
+                                                <span className="break-words">{service.name}</span>
                                                 {service.comingSoon && (
-                                                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                                                    <span className="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary flex-shrink-0">
                                                         <Clock className="w-4 h-4" />
                                                     </span>
                                                 )}
                                             </p>
-                                            <p className="text-xs text-foreground/60">{service.description}</p>
+                                            <p className="text-xs text-foreground/60 break-words">{service.description}</p>
                                         </div>
                                     </Link>
                                 </motion.div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, ChevronUp, Sparkles, Wrench, Bug } from "lucide-react"
+import { ChevronDown, ChevronUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl";
@@ -82,64 +82,70 @@ export default function Changelog() {
                         </div>
 
                         {expandedVersions["1.0.0"] && (
-                            <motion.div 
-                                className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4 sm:space-y-6"
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.1 }}
-                                >
-                                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                                        <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                                        <h3 className="font-medium text-base sm:text-lg">{t('newFeatures')}</h3>
-                                    </div>
-                                    <ul className="space-y-1.5 sm:space-y-2 pl-5 sm:pl-7 list-disc text-sm sm:text-base text-foreground/80">
-                                        <li>Added multi-language support (Uzbek, English, Russian)</li>
-                                        <li>Implemented language persistence across sessions</li>
-                                        <li>Added voice assistant feature for text-to-speech and speech-to-text</li>
-                                        <li>Implemented modern glass design UI components</li>
-                                        <li>Added animated particle background</li>
-                                    </ul>
-                                </motion.div>
+                            // <motion.div 
+                            //     className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4 sm:space-y-6"
+                            //     initial={{ opacity: 0, height: 0 }}
+                            //     animate={{ opacity: 1, height: "auto" }}
+                            //     exit={{ opacity: 0, height: 0 }}
+                            //     transition={{ duration: 0.3 }}
+                            // >
+                            //     <motion.div
+                            //         initial={{ opacity: 0, x: -20 }}
+                            //         animate={{ opacity: 1, x: 0 }}
+                            //         transition={{ delay: 0.1 }}
+                            //     >
+                            //         <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                            //             <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                            //             <h3 className="font-medium text-base sm:text-lg">{t('newFeatures')}</h3>
+                            //         </div>
+                            //         <ul className="space-y-1.5 sm:space-y-2 pl-5 sm:pl-7 list-disc text-sm sm:text-base text-foreground/80">
+                            //             <li>Added multi-language support (Uzbek, English, Russian)</li>
+                            //             <li>Implemented language persistence across sessions</li>
+                            //             <li>Added voice assistant feature for text-to-speech and speech-to-text</li>
+                            //             <li>Implemented modern glass design UI components</li>
+                            //             <li>Added animated particle background</li>
+                            //         </ul>
+                            //     </motion.div>
 
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.2 }}
-                                >
-                                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                                        <Wrench className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
-                                        <h3 className="font-medium text-base sm:text-lg">{t('improvements')}</h3>
-                                    </div>
-                                    <ul className="space-y-1.5 sm:space-y-2 pl-5 sm:pl-7 list-disc text-sm sm:text-base text-foreground/80">
-                                        <li>Enhanced UI/UX with responsive design</li>
-                                        <li>Improved language switching mechanism</li>
-                                        <li>Added smooth animations and transitions</li>
-                                        <li>Implemented proper error handling and loading states</li>
-                                    </ul>
-                                </motion.div>
+                            //     <motion.div
+                            //         initial={{ opacity: 0, x: -20 }}
+                            //         animate={{ opacity: 1, x: 0 }}
+                            //         transition={{ delay: 0.2 }}
+                            //     >
+                            //         <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                            //             <Wrench className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
+                            //             <h3 className="font-medium text-base sm:text-lg">{t('improvements')}</h3>
+                            //         </div>
+                            //         <ul className="space-y-1.5 sm:space-y-2 pl-5 sm:pl-7 list-disc text-sm sm:text-base text-foreground/80">
+                            //             <li>Enhanced UI/UX with responsive design</li>
+                            //             <li>Improved language switching mechanism</li>
+                            //             <li>Added smooth animations and transitions</li>
+                            //             <li>Implemented proper error handling and loading states</li>
+                            //         </ul>
+                            //     </motion.div>
 
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.3 }}
-                                >
-                                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                                        <Bug className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
-                                        <h3 className="font-medium text-base sm:text-lg">{t('bugFixes')}</h3>
-                                    </div>
-                                    <ul className="space-y-1.5 sm:space-y-2 pl-5 sm:pl-7 list-disc text-sm sm:text-base text-foreground/80">
-                                        <li>Fixed language detection and persistence issues</li>
-                                        <li>Resolved mobile responsiveness bugs</li>
-                                        <li>Fixed translation inconsistencies</li>
-                                    </ul>
-                                </motion.div>
-                            </motion.div>
+                            //     <motion.div
+                            //         initial={{ opacity: 0, x: -20 }}
+                            //         animate={{ opacity: 1, x: 0 }}
+                            //         transition={{ delay: 0.3 }}
+                            //     >
+                            //         <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                            //             <Bug className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
+                            //             <h3 className="font-medium text-base sm:text-lg">{t('bugFixes')}</h3>
+                            //         </div>
+                            //         <ul className="space-y-1.5 sm:space-y-2 pl-5 sm:pl-7 list-disc text-sm sm:text-base text-foreground/80">
+                            //             <li>Fixed language detection and persistence issues</li>
+                            //             <li>Resolved mobile responsiveness bugs</li>
+                            //             <li>Fixed translation inconsistencies</li>
+                            //         </ul>
+                            //     </motion.div>
+                            // </motion.div>
+
+                            <div>
+                                <p>
+                                   waiting...
+                                </p>
+                            </div>
                         )}
                     </motion.div>
 {/* 

@@ -18,7 +18,8 @@
     "remove": "O'chirish",
     "processing": "Ishlanmoqda...",
     "finalizing": "Natijalar yakunlanmoqda...",
-    "reset": "Tozalash"
+    "reset": "Tozalash",
+    "empty": "Bo'sh"
   },
   "navigation": {
     "home": "Bosh sahifa",
@@ -52,34 +53,32 @@
     }
   },
   "summarizer": {
-    "title": "Sun'iy intellekt bilan matnlarni qisqartirish",
-    "description": "Qisqa xulosa olish yoki rasm tahlili uchun matn kiriting yoki fayl yuklang",
-    "tabs": {
-      "text": "Matn kiritish",
-      "file": "Fayl yuklash"
+    "title": "AI Kontent Qisqartiruvchi",
+    "description": "Qisqa xulosa yaratish yoki rasmni tahlil qilish uchun matn kiriting yoki fayl yuklang",
+    "model": {
+      "label": "AI Model",
+      "placeholder": "Modelni tanlang",
+      "gpt": "GPT-4o-mini",
+      "gemini": "gemini-2.0-flash"
     },
     "textInput": {
-      "label": "Matningizni kiriting",
-      "placeholder": "Qisqartirmoqchi bo'lgan matningizni shu yerga joylashtiring..."
-    },
-    "fileUpload": {
-      "title": "Fayl yuklash",
-      "supportedFormats": "PDF va rasmlar (PNG, JPG, JPEG) 5MB gacha qabul qilinadi"
+      "label": "Sizning matningiz",
+      "placeholder": "Qisqartirish uchun matningizni shu yerga joylashtiring..."
     },
     "errors": {
-      "noInput": "Iltimos, matn kiriting yoki fayl yuklang",
-      "textTooShort": "Matn kamida {{count}} ta belgidan iborat bo'lishi kerak. Hozirgi uzunlik: {{current}}",
-      "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
-      "unsupportedType": "Fayl turi mos kelmaydi. Faqat PDF yoki rasmlar (.png, .jpg, .jpeg) qabul qilinadi",
-      "processingFailed": "Qisqartirish jarayonida xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
+      "textTooShort": "Iltimos, kamida {{count}} ta belgi kiriting",
+      "textTooLong": "Matn maksimal {{count}} ta belgi chegarasidan oshib ketdi",
+      "fileTooLarge": "Matn maksimal {{count}} ta belgi chegarasidan oshib ketdi",
+      "processingFailed": "Xulosa yaratib bo'lmadi"
     },
     "success": {
-      "imageAnalysis": "Rasm tahlili yakunlandi",
-      "summaryGenerated": "Qisqartma muvaffaqiyatli yaratildi"
+      "summaryGenerated": "Xulosa muvaffaqiyatli yaratildi!"
     },
-    "summarize": "Xulosa olish",
-    "analyzeImage": "Matnni ajratib olish o'rniga rasm tarkibini tahlil qilish",
-    "summarizeImage": "Rasmdan xulosa olish"
+    "validLength": "To'g'ri uzunlik",
+    "charCount": "{{count}}/{{max}}",
+    "minChars": "min {{count}}",
+    "maxChars": "max {{count}}",
+    "summarize": "Xulosa Yaratish"
   },
   "summaryResult": {
     "title": "Xulosa natijasi",
@@ -273,27 +272,27 @@
     "description": "Zamonaviy sun'iy intellekt texnologiyasi yordamida rasmlarning batafsil tavsifini oling",
     "upload": {
       "title": "Rasm yuklash",
-      "description": "Batafsil tavsif olish uchun rasm yuklang",
+      "description": "Rasm yuklash uchun rasm yuklang",
       "supportedFormats": "PNG, JPG, JPEG formatlari 5MB gacha qabul qilinadi",
       "dragDrop": "Rasmni shu yerga tashlang yoki tanlang",
       "browseFiles": "yoki fayllarni tanlang",
       "chooseFile": "Fayl tanlash"
     },
     "result": {
-      "title": "Rasm tavsifi",
+      "title": "Matn",
       "copy": "Xotiraga nusxalash",
-      "copySuccess": "Tavsif xotiraga nusxalandi",
+      "copySuccess": "Matn xotiraga nusxalandi",
       "copyError": "Xotiraga nusxalashda xatolik yuz berdi"
     },
     "errors": {
       "noImage": "Iltimos, avval rasm yuklang",
       "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
       "unsupportedType": "Fayl turi mos kelmaydi. Faqat .png, .jpg yoki .jpeg formatlari qabul qilinadi",
-      "processingFailed": "Tavsif yaratishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+      "processingFailed": "Matn ajrati  b olishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
       "error": "Xatolik"
     },
-    "processing": "Qayta ishlanmoqda...",
-    "generateDescription": "Tavsif yaratish",
+    "processing": "Ishlanmoqda...",
+    "generateDescription": "Matn ajratib olish",
     "fileReady": "Fayl yuklandi"
   },
   "imageExtraction": {
@@ -323,5 +322,27 @@
     "processing": "Qayta ishlanmoqda...",
     "generateText": "Matn ajratib olish",
     "fileReady": "Fayl yuklandi"
+  },
+  "services": {
+    "imageTextExtraction": {
+      "name": "Rasmdan matn ajratib olish",
+      "description": "Rasm yoki screenshotdan matnni ajratib oling"
+    },
+    "imageDescription": {
+      "name": "Rasm tavsifi",
+      "description": "Zamonaviy sun'iy intellekt texnologiyasi yordamida rasmlarning batafsil tavsifini oling"
+    },
+    "pdfSummarization": {
+      "name": "PDF xulosasi",
+      "description": "PDF fayllarni avtomatik ravishda qisqartirish"
+    },
+    "studyNotes": {
+      "name": "O'rganishga yordam",
+      "description": "Sizning matningizdan o'rganishga yordamchi matn yaratish"
+    },
+    "conceptExplanation": {
+      "name": "Tushuncha tushuntirish",
+      "description": "Murakkab tushunchalarni soddalashtirilgan tushuntirish"
+    }
   }
 }
