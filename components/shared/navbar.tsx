@@ -8,6 +8,7 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { LanguageSwitcher } from "@/components/shared/language-switcher"
 import { useLocale, useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
+import { ServicesDropdown } from "@/components/shared/service-dropdown"
 
 const Navbar = () => {
   const t = useTranslations()
@@ -37,6 +38,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: t("navigation.home"), path: `/${locale}` },
+    { name: t("navigation.services"), component: <ServicesDropdown /> },
     { name: t("navigation.about"), path: `/${locale}/about` },
     { name: t("navigation.changelog"), path: `/${locale}/changelog` },
     { name: t("navigation.voiceAssistant"), path: `/${locale}/voice-assistant` },
@@ -44,11 +46,10 @@ const Navbar = () => {
 
   return (
     <header
-      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "py-2.5 bg-background/60 backdrop-blur-xl border-b border-white/5 shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
-          : "py-4 bg-background/30 backdrop-blur-md"
-      }`}
+      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? "py-2.5 bg-background/60 backdrop-blur-xl border-b border-white/5 shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
+        : "py-4 bg-background/30 backdrop-blur-md"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -83,11 +84,15 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center">
             <div className="mr-5 bg-accent/40 backdrop-blur-md rounded-full px-1.5 py-1.5 flex items-center border border-white/5 shadow-sm">
               {navItems.map((item) => {
+                if (item.component) {
+                  return <div key="services">{item.component}</div>
+                }
+
                 const isActive = activeItem === item.path
                 return (
                   <Link
                     key={item.path}
-                    href={item.path}
+                    href={item.path || ""}
                     className="relative px-4 py-1.5 text-foreground/80 hover:text-foreground transition-all duration-200 text-sm rounded-full hover:bg-background/70 group"
                     onClick={() => setActiveItem(item.path)}
                   >
@@ -169,32 +174,47 @@ const Navbar = () => {
               ></motion.div>
 
               <nav className="flex flex-col bg-background/80 p-6 space-y-2">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.path}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                  >
-                    <Link
-                      href={item.path}
-                      className="flex items-center justify-between p-4 rounded-xl hover:bg-accent/50 transition-all duration-200 group border border-transparent hover:border-white/5"
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        setActiveItem(item.path)
-                      }}
-                    >
-                      <span className="text-lg font-medium">{item.name}</span>
+                {navItems.map((item, index) => {
+                  if (item.component) {
+                    return (
                       <motion.div
-                        whileHover={{ scale: 1.1, rotate: 10 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="h-8 w-8 rounded-full bg-background/80 flex items-center justify-center border border-white/5 shadow-sm group-hover:bg-primary/10"
+                        key="services"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1, duration: 0.3 }}
                       >
-                        <ChevronRight className="h-4 w-4 text-primary group-hover:text-primary/80" />
+                        <ServicesDropdown isMobile={true} />
                       </motion.div>
-                    </Link>
-                  </motion.div>
-                ))}
+                    )
+                  }
+
+                  return (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.3 }}
+                    >
+                      <Link
+                        href={item.path || ""}
+                        className="flex items-center justify-between p-4 rounded-xl hover:bg-accent/50 transition-all duration-200 group border border-transparent hover:border-white/5"
+                        onClick={() => {
+                          setMobileMenuOpen(false)
+                          setActiveItem(item.path)
+                        }}
+                      >
+                        <span className="text-lg font-medium">{item.name}</span>
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 10 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="h-8 w-8 rounded-full bg-background/80 flex items-center justify-center border border-white/5 shadow-sm group-hover:bg-primary/10"
+                        >
+                          <ChevronRight className="h-4 w-4 text-primary group-hover:text-primary/80" />
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+                  )
+                })}
 
                 <motion.div
                   initial={{ opacity: 0, scaleX: 0 }}

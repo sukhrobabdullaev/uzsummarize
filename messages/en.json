@@ -22,6 +22,7 @@
   },
   "navigation": {
     "home": "Home",
+    "services": "Services",
     "about": "About",
     "contact": "Contact",
     "changelog": "Changelog",
@@ -260,8 +261,64 @@
     "remaining": "{{count}} requests remaining"
   },
   "notFound": {
-    "title": "Page Not Found",
-    "description": "The page you're looking for doesn't exist or has been moved.",
-    "button": "Return to Home"
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "button": "Return to home"
+  },
+  "imageDescription": {
+    "title": "Image Description",
+    "description": "Get a detailed description of images with our advanced AI technology",
+    "upload": {
+      "title": "Upload Image",
+      "description": "Upload an image to get a detailed description",
+      "supportedFormats": "Supports PNG, JPG, JPEG up to 5MB",
+      "dragDrop": "Drag & drop or click to upload",
+      "browseFiles": "or browse files",
+      "chooseFile": "Choose File"
+    },
+    "result": {
+      "title": "Image Description",
+      "copy": "Copy to clipboard",
+      "copySuccess": "Description copied to clipboard",
+      "copyError": "Failed to copy to clipboard"
+    },
+    "errors": {
+      "noImage": "Please upload an image first",
+      "fileTooLarge": "File size exceeds 5MB limit",
+      "unsupportedType": "Unsupported file type. Use .png, .jpg, or .jpeg",
+      "processingFailed": "Failed to generate description. Please try again.",
+      "error": "Error"
+    },
+    "processing": "Processing...",
+    "generateDescription": "Generate Description",
+    "fileReady": "File ready"
+  },
+  "imageExtraction": {
+    "title": "Image Text Extraction",
+    "description": "Extract text from images or screenshots",
+    "upload": {
+      "title": "Upload Image",
+      "description": "Upload an image to extract text",
+      "supportedFormats": "Supports PNG, JPG, JPEG up to 5MB",
+      "dragDrop": "Drag & drop or click to upload",
+      "browseFiles": "or browse files",
+      "chooseFile": "Choose File"
+    },
+    "result": {
+      "title": "Extracted Text",
+      "copy": "Copy to clipboard",
+      "copySuccess": "Text copied to clipboard",
+      "copyError": "Failed to copy to clipboard"
+    },
+    "errors": {
+      "noImage": "Please upload an image first",
+      "fileTooLarge": "File size exceeds 5MB limit",
+      "unsupportedType": "Unsupported file type. Use .png, .jpg, or .jpeg",
+      "processingFailed": "Failed to extract text. Please try again.",
+      "error": "Error"
+    },
+    "fileReady": "File ready",
+    "processing": "Processing...",
+    "generateText": "Generate Text"
   }
 }

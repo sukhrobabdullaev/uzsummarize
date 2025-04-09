@@ -4,9 +4,10 @@ import { routing } from '@/i18n/routing';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from '@/components/shared/navbar';
+
 import Footer from '@/components/shared/footer';
 import { Toaster } from "@/components/ui/sonner"
+import Navbar from '@/components/shared/navbar';
 
 const inter = Inter({
   variable: "--font-inter",

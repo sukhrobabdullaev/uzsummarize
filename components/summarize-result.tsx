@@ -69,9 +69,8 @@ const SummaryResult = ({ summary }: SummaryResultProps) => {
             />
             <motion.button
               onClick={() => setScriptMode("latin")}
-              className={`relative z-10 flex h-7 w-[56px] items-center justify-center rounded-full text-sm font-medium transition-colors ${
-                scriptMode === "latin" ? "text-white" : "text-muted-foreground"
-              }`}
+              className={`relative z-10 flex h-7 w-[56px] items-center justify-center rounded-full text-sm font-medium transition-colors ${scriptMode === "latin" ? "text-white" : "text-muted-foreground"
+                }`}
               whileTap={{ scale: 0.95 }}
             >
               <motion.span animate={{ opacity: scriptMode === "latin" ? 1 : 0.7 }} transition={{ duration: 0.2 }}>
@@ -80,9 +79,8 @@ const SummaryResult = ({ summary }: SummaryResultProps) => {
             </motion.button>
             <motion.button
               onClick={() => setScriptMode("cyrillic")}
-              className={`relative z-10 flex h-7 w-[56px] items-center justify-center rounded-full text-sm font-medium transition-colors ${
-                scriptMode === "cyrillic" ? "text-white" : "text-muted-foreground"
-              }`}
+              className={`relative z-10 flex h-7 w-[56px] items-center justify-center rounded-full text-sm font-medium transition-colors ${scriptMode === "cyrillic" ? "text-white" : "text-muted-foreground"
+                }`}
               whileTap={{ scale: 0.95 }}
             >
               <motion.span animate={{ opacity: scriptMode === "cyrillic" ? 1 : 0.7 }} transition={{ duration: 0.2 }}>

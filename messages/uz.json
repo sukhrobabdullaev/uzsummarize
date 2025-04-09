@@ -22,6 +22,7 @@
   },
   "navigation": {
     "home": "Bosh sahifa",
+    "services": "Xizmatlar",
     "about": "Biz haqimizda",
     "contact": "Bog'lanish",
     "changelog": "Yangilanishlar",
@@ -247,8 +248,11 @@
       "textRequired": "Iltimos, avval matn kiriting",
       "textCopied": "Matn nusxalandi",
       "textCleared": "Matn tozalandi",
-      "speechError": "Ovoz yaratishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.",
-      "invalidFileType": "Noto'g'ri fayl turi. Iltimos, MP3, WAV yoki OGG faylini yuklang."
+      "speechStarted": "Ovozga aylantirish boshlandi",
+      "speechStopped": "Ovozga aylantirish to'xtatildi",
+      "voiceError": "Ovozga aylantirishda xatolik yuz berdi",
+      "fileUploaded": "Fayl muvaffaqiyatli yuklandi",
+      "fileUploadError": "Fayl yuklashda xatolik yuz berdi"
     },
     "remainingRequests": "Qolgan so'rovlar: {{count}}"
   },
@@ -263,5 +267,61 @@
     "title": "Sahifa topilmadi",
     "description": "Qidirgan sahifangiz mavjud emas yoki boshqa joyga ko'chirilgan.",
     "button": "Bosh sahifaga qaytish"
+  },
+  "imageDescription": {
+    "title": "Rasm tavsifi",
+    "description": "Zamonaviy sun'iy intellekt texnologiyasi yordamida rasmlarning batafsil tavsifini oling",
+    "upload": {
+      "title": "Rasm yuklash",
+      "description": "Batafsil tavsif olish uchun rasm yuklang",
+      "supportedFormats": "PNG, JPG, JPEG formatlari 5MB gacha qabul qilinadi",
+      "dragDrop": "Rasmni shu yerga tashlang yoki tanlang",
+      "browseFiles": "yoki fayllarni tanlang",
+      "chooseFile": "Fayl tanlash"
+    },
+    "result": {
+      "title": "Rasm tavsifi",
+      "copy": "Xotiraga nusxalash",
+      "copySuccess": "Tavsif xotiraga nusxalandi",
+      "copyError": "Xotiraga nusxalashda xatolik yuz berdi"
+    },
+    "errors": {
+      "noImage": "Iltimos, avval rasm yuklang",
+      "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
+      "unsupportedType": "Fayl turi mos kelmaydi. Faqat .png, .jpg yoki .jpeg formatlari qabul qilinadi",
+      "processingFailed": "Tavsif yaratishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+      "error": "Xatolik"
+    },
+    "processing": "Qayta ishlanmoqda...",
+    "generateDescription": "Tavsif yaratish",
+    "fileReady": "Fayl yuklandi"
+  },
+  "imageExtraction": {
+    "title": "Rasmdan matn ajratib olish",
+    "description": "Rasm yoki screenshotdan matnni ajratib oling",
+    "upload": {
+      "title": "Rasm yuklash",
+      "description": "Matnni ajratib olish uchun rasm yuklang",
+      "supportedFormats": "PNG, JPG, JPEG formatlari 5MB gacha qabul qilinadi",
+      "dragDrop": "Rasmni shu yerga tashlang yoki tanlang",
+      "browseFiles": "yoki fayllarni tanlang",
+      "chooseFile": "Fayl tanlash"
+    },
+    "result": {
+      "title": "Matn",
+      "copy": "Xotiraga nusxalash",
+      "copySuccess": "Matn xotiraga nusxalandi",
+      "copyError": "Xotiraga nusxalashda xatolik yuz berdi"
+    },
+    "errors": {
+      "noImage": "Iltimos, avval rasm yuklang",
+      "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
+      "unsupportedType": "Fayl turi mos kelmaydi. Faqat .png, .jpg yoki .jpeg formatlari qabul qilinadi",
+      "processingFailed": "Matn ajrati  b olishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+      "error": "Xatolik"
+    },
+    "processing": "Qayta ishlanmoqda...",
+    "generateText": "Matn ajratib olish",
+    "fileReady": "Fayl yuklandi"
   }
 }
