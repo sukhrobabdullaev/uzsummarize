@@ -41,7 +41,7 @@ export function ImageExtraction() {
         if (e.dataTransfer.files?.length) {
             processFile(e.dataTransfer.files[0])
         }
-    }, [])
+    }, [processFile])
 
     const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()

@@ -13,25 +13,6 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
     const t = useTranslations()
     const locale = useLocale()
 
-    // Close dropdown when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setIsOpen(false)
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside)
-        return () => document.removeEventListener("mousedown", handleClickOutside)
-    }, [])
-
-    // Set active service based on current path
-    useEffect(() => {
-        const path = window.location.pathname
-        const currentService = services.find(service => path.startsWith(service.path))
-        setActiveService(currentService?.path || null)
-    }, [])
-
     const services = [
         {
             name: "Image Text Extraction",
@@ -72,6 +53,25 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
             comingSoon: true
         },
     ]
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [])
+
+    // Set active service based on current path
+    useEffect(() => {
+        const path = window.location.pathname
+        const currentService = services.find(service => path.startsWith(service.path))
+        setActiveService(currentService?.path || null)
+    }, [services])
 
     if (isMobile) {
         return (

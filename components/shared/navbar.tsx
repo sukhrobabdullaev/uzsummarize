@@ -40,8 +40,7 @@ const Navbar = () => {
     { name: t("navigation.home"), path: `/${locale}` },
     { name: t("navigation.services"), component: <ServicesDropdown /> },
     { name: t("navigation.about"), path: `/${locale}/about` },
-    { name: t("navigation.changelog"), path: `/${locale}/changelog` },
-    { name: t("navigation.voiceAssistant"), path: `/${locale}/voice-assistant` },
+    { name: t("navigation.changelog"), path: `/${locale}/changelog` }
   ]
 
   return (
