@@ -1,6 +1,18 @@
 import { prisma } from '@/lib/prisma'
 import { formatDistanceToNow } from 'date-fns'
 
+
+interface Request {
+    id: string;
+    type: string;
+    content: string;
+    summary: string | null;
+    status: 'COMPLETED' | 'FAILED' | 'PENDING';
+    modelUsed: string | null;
+    processingTime: number | null;
+    createdAt: Date;
+}
+
 export default async function AdminPage() {
     const requests = await prisma.request.findMany({
         orderBy: {
@@ -26,7 +38,7 @@ export default async function AdminPage() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
-                        {requests.map((request) => (
+                        {requests.map((request: Request) => (
                             <tr key={request.id} className="hover:bg-gray-50">
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                     {request.type}
