@@ -26,13 +26,13 @@ export function ImageExtraction() {
         }
     }
 
-    const processFile = (file: File) => {
+    const processFile = useCallback((file: File) => {
         setSelectedFile(file)
         setPreviewUrl(URL.createObjectURL(file))
         setResult("")
         setError(null)
         toast.success(`${file.name} ${t('imageExtraction.fileReady')}`)
-    }
+    }, [t])
 
     const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -65,6 +65,11 @@ export function ImageExtraction() {
             })
 
             const data = await response.json()
+
+            if (response.status === 429) {
+                toast.error(data.error || t("imageExtraction.errors.rateLimitExceeded"))
+                return
+            }
 
             if (!response.ok) {
                 throw new Error(data.error || "Failed to process image")
@@ -174,7 +179,7 @@ export function ImageExtraction() {
 
                 {error && (
                     <div className="p-4 bg-destructive/10 text-destructive rounded-lg animate-in fade-in-50 duration-300">
-                        <h3 className="font-semibold mb-2">{t('imageExtraction.error')}</h3>
+                        <h3 className="font-semibold mb-2">{t('imageExtraction.errors.error')}</h3>
                         <p className="text-sm md:text-base">{error}</p>
                     </div>
                 )}

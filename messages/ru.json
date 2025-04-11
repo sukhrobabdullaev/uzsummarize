@@ -69,7 +69,8 @@
       "textTooShort": "Пожалуйста, введите минимум {{count}} символов",
       "textTooLong": "Текст превышает максимальный лимит в {{count}} символов",
       "fileTooLarge": "Текст превышает максимальный лимит в {{count}} символов",
-      "processingFailed": "Не удалось создать резюме"
+      "processingFailed": "Не удалось создать резюме",
+      "rateLimitExceeded": "Превышен лимит запросов. Пожалуйста, попробуйте позже."
     },
     "success": {
       "summaryGenerated": "Резюме успешно создано!"
@@ -282,15 +283,15 @@
       "copyError": "Не удалось скопировать в буфер обмена"
     },
     "errors": {
-      "noImage": "Please upload an image first",
-      "fileTooLarge": "File size exceeds 5MB limit",
-      "unsupportedType": "Unsupported file type. Use .png, .jpg, or .jpeg",
-      "processingFailed": "Failed to generate description. Please try again.",
-      "error": "Error"
+      "noImage": "Пожалуйста, сначала загрузите изображение",
+      "fileTooLarge": "Размер файла превышает лимит 5MB",
+      "unsupportedType": "Неподдерживаемый тип файла. Используйте .png, .jpg или .jpeg",
+      "processingFailed": "Не удалось сгенерировать описание. Пожалуйста, попробуйте снова.",
+      "error": "Ошибка"
     },
-    "processing": "Processing...",
-    "generateDescription": "Generate Description",
-    "fileReady": "File ready"
+    "processing": "Обработка...",
+    "generateDescription": "Генерировать описание",
+    "fileReady": "Файл готов"
   },
   "imageExtraction": {
     "title": "Извлечение текста из изображения",
@@ -314,7 +315,8 @@
       "fileTooLarge": "Размер файла превышает лимит 5MB",
       "unsupportedType": "Неподдерживаемый тип файла. Используйте .png, .jpg или .jpeg",
       "processingFailed": "Не удалось извлечь текст. Пожалуйста, попробуйте снова.",
-      "error": "Ошибка"
+      "error": "Ошибка",
+      "rateLimitExceeded": "Превышен лимит запросов. Пожалуйста, попробуйте позже."
     },
     "processing": "Обработка...",
     "generateText": "Извлечь текст",

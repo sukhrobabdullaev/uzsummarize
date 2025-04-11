@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { rateLimit } from "@/lib/rate-limit";
 
 const MODELS = {
   GPT: {
@@ -44,6 +45,21 @@ const MODELS = {
 };
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for") || "unknown";
+  
+  const { success, resetAt } = await rateLimit(ip);
+
+  if (!success) {
+    return NextResponse.json(
+      {
+        error: `After 2 requests, your limit will reset at ${resetAt}.`,
+      },
+      {
+        status: 429,
+      }
+    );
+  }
+
   const { text, model = "GPT" } = await req.json();
 
   if (!text) {

@@ -69,7 +69,8 @@
       "textTooShort": "Please enter at least {{count}} characters",
       "textTooLong": "Text exceeds maximum limit of {{count}} characters",
       "fileTooLarge": "Text exceeds maximum limit of {{count}} characters",
-      "processingFailed": "Failed to generate summary"
+      "processingFailed": "Failed to generate summary",
+      "rateLimitExceeded": "Rate limit exceeded. Please try again later."
     },
     "success": {
       "summaryGenerated": "Summary generated successfully!"
@@ -316,7 +317,8 @@
       "fileTooLarge": "File size exceeds 5MB limit",
       "unsupportedType": "Unsupported file type. Use .png, .jpg, or .jpeg",
       "processingFailed": "Failed to extract text. Please try again.",
-      "error": "Error"
+      "error": "Error",
+      "rateLimitExceeded": "Rate limit exceeded. Please try again later."
     },
     "fileReady": "File ready",
     "processing": "Processing...",

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
+import { rateLimit } from "@/lib/rate-limit";
 
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
@@ -12,6 +13,22 @@ const openai = new OpenAI({
 });
 
 export async function POST(request: NextRequest) {
+
+  const ip = request.headers.get("x-forwarded-for") || "unknown";
+  
+  const { success, resetAt } = await rateLimit(ip);
+
+  if (!success) {
+    return NextResponse.json(
+      {
+        error: `After 2 requests, your limit will reset at ${resetAt}.`,
+      },
+      {
+        status: 429,
+      }
+    );
+  }
+
   try {
     const formData = await request.formData();
     const file = formData.get("image") as File;

@@ -69,7 +69,8 @@
       "textTooShort": "Iltimos, kamida {{count}} ta belgi kiriting",
       "textTooLong": "Matn maksimal {{count}} ta belgi chegarasidan oshib ketdi",
       "fileTooLarge": "Matn maksimal {{count}} ta belgi chegarasidan oshib ketdi",
-      "processingFailed": "Xulosa yaratib bo'lmadi"
+      "processingFailed": "Xulosa yaratib bo'lmadi",
+      "rateLimitExceeded": "So'rovlar soni chegarasi oshib ketdi. Iltimos, keyinroq qayta urinib ko'ring."
     },
     "success": {
       "summaryGenerated": "Xulosa muvaffaqiyatli yaratildi!"
@@ -279,20 +280,20 @@
       "chooseFile": "Fayl tanlash"
     },
     "result": {
-      "title": "Matn",
-      "copy": "Xotiraga nusxalash",
-      "copySuccess": "Matn xotiraga nusxalandi",
-      "copyError": "Xotiraga nusxalashda xatolik yuz berdi"
+      "title": "Tasnif",
+      "copy": "Nusxa olish",
+      "copySuccess": "Tasnif nusxalandi",
+      "copyError": "Nusxalashda xatolik yuz berdi"
     },
     "errors": {
       "noImage": "Iltimos, avval rasm yuklang",
       "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
       "unsupportedType": "Fayl turi mos kelmaydi. Faqat .png, .jpg yoki .jpeg formatlari qabul qilinadi",
-      "processingFailed": "Matn ajrati  b olishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+      "processingFailed": "Tasnif yaratib bo'lmadi. Iltimos, qayta urinib ko'ring.",
       "error": "Xatolik"
     },
     "processing": "Ishlanmoqda...",
-    "generateDescription": "Matn ajratib olish",
+    "generateDescription": "Tasnif yaratish",
     "fileReady": "Fayl yuklandi"
   },
   "imageExtraction": {
@@ -317,7 +318,8 @@
       "fileTooLarge": "Fayl hajmi 5MB dan oshib ketdi",
       "unsupportedType": "Fayl turi mos kelmaydi. Faqat .png, .jpg yoki .jpeg formatlari qabul qilinadi",
       "processingFailed": "Matn ajrati  b olishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
-      "error": "Xatolik"
+      "error": "Xatolik",
+      "rateLimitExceeded": "So'rovlar soni cheklovi oshib ketdi. Iltimos, keyinroq qayta urinib ko'ring."
     },
     "processing": "Qayta ishlanmoqda...",
     "generateText": "Matn ajratib olish",

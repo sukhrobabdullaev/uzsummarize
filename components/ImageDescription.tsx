@@ -66,6 +66,10 @@ export function ImageDescription() {
 
             const data = await response.json()
 
+            if (response.status === 429) {
+                toast.error(data.error || t("imageDescription.errors.rateLimitExceeded"))
+                return
+            }
             if (!response.ok) {
                 throw new Error(data.error || "Failed to process image")
             }

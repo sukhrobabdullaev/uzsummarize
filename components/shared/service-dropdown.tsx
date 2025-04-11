@@ -34,7 +34,6 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
             icon: FileSearch,
             path: `/${locale}/services/pdf-summarization`,
             color: "from-rose-500 to-pink-400",
-            comingSoon: true
         },
         {
             name: t("services.studyNotes.name"),

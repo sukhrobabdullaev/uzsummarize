@@ -48,6 +48,10 @@ const SummaryForm = () => {
 
       const data = await res.json()
 
+      if (res.status === 429) {
+        toast.error(data.error || t("summarizer.errors.rateLimitExceeded"))
+        return
+      }
       if (res.ok) {
         setSummary(data.summary)
         toast.success(t("summarizer.success.summaryGenerated"))
