@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { rateLimit } from "@/lib/rate-limit";
+import { prisma } from "@/lib/prisma";
 
 const MODELS = {
   GPT: {
@@ -46,7 +47,7 @@ const MODELS = {
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for") || "unknown";
-  
+
   const { success, resetAt } = await rateLimit(ip);
 
   if (!success) {
@@ -74,26 +75,65 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  let dbRequest;
   try {
+    // Create a new request record
+    dbRequest = await prisma.request.create({
+      data: {
+        type: "TEXT",
+        content: text,
+        language: "uz",
+        status: "PENDING",
+      },
+    });
+
     if (model === "GEMINI") {
       if (!process.env.GEMINI_API_KEY) {
+        await prisma.request.update({
+          where: { id: dbRequest.id },
+          data: {
+            status: "FAILED",
+            error: "Gemini API key not configured",
+          },
+        });
         return NextResponse.json(
           { error: "Gemini API key not configured" },
           { status: 500 }
         );
       }
+      const startTime = Date.now();
       const summary = await MODELS.GEMINI.generate(text);
+      const processingTime = Date.now() - startTime;
+
+      await prisma.request.update({
+        where: { id: dbRequest.id },
+        data: {
+          summary,
+          processingTime,
+          modelUsed: "gemini-2.0-flash",
+          status: "COMPLETED",
+        },
+      });
+
       return NextResponse.json({ summary });
     }
 
     // Handle GPT case
     if (!process.env.OPENAI_API_KEY) {
+      await prisma.request.update({
+        where: { id: dbRequest.id },
+        data: {
+          status: "FAILED",
+          error: "OpenAI API key not configured",
+        },
+      });
       return NextResponse.json(
         { error: "OpenAI API key not configured" },
         { status: 500 }
       );
     }
 
+    const startTime = Date.now();
     const response = await fetch(MODELS.GPT.url, {
       method: "POST",
       headers: MODELS.GPT.headers(),
@@ -103,6 +143,17 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       const errorData = await response.json();
       console.error("GPT API error response:", errorData);
+
+      await prisma.request.update({
+        where: { id: dbRequest.id },
+        data: {
+          status: "FAILED",
+          error: `API error: ${
+            errorData.error?.message || response.statusText
+          }`,
+        },
+      });
+
       return NextResponse.json(
         {
           error: `API error: ${
@@ -115,10 +166,33 @@ export async function POST(req: NextRequest) {
 
     const data = await response.json();
     const summary = data.choices[0]?.message?.content;
+    const processingTime = Date.now() - startTime;
+
+    await prisma.request.update({
+      where: { id: dbRequest.id },
+      data: {
+        summary,
+        processingTime,
+        modelUsed: "gpt-4o-mini",
+        status: "COMPLETED",
+      },
+    });
 
     return NextResponse.json({ summary });
   } catch (error) {
     console.error(`${model} API error:`, error);
+
+    if (dbRequest) {
+      await prisma.request.update({
+        where: { id: dbRequest.id },
+        data: {
+          status: "FAILED",
+          error:
+            error instanceof Error ? error.message : "Failed to fetch summary",
+        },
+      });
+    }
+
     return NextResponse.json(
       {
         error:

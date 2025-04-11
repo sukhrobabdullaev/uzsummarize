@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 import { rateLimit } from "@/lib/rate-limit";
+import { prisma } from "@/lib/prisma";
 
 // Initialize Gemini with timeout
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
@@ -19,7 +20,7 @@ const openai = new OpenAI({
 });
 
 // Maximum file size (2MB) - reduced to help with processing time
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
 // Add AbortController for better timeout handling
 const controller = new AbortController();
@@ -41,6 +42,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  let dbRequest;
   try {
     const formData = await request.formData();
     const file = formData.get("image") as File;
@@ -53,7 +55,7 @@ export async function POST(request: NextRequest) {
     // Validate file size
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { error: "Image size must be less than 5MB" },
+        { error: "Image size must be less than 2MB" },
         { status: 400 }
       );
     }
@@ -69,9 +71,20 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const base64Image = buffer.toString("base64");
 
+    // Create a new request record
+    dbRequest = await prisma.request.create({
+      data: {
+        type: "IMAGE",
+        content: `data:${file.type};base64,${base64Image.substring(0, 100)}...`, // Store first 100 chars of base64
+        language: "uz",
+        status: "PENDING",
+      },
+    });
+
     if (mode === "text") {
       try {
         // Text extraction using Gemini
+        const startTime = Date.now();
         const prompt =
           "Extract all the text from this image. Return only the text, nothing else.";
         const result = await model.generateContent(
@@ -88,11 +101,31 @@ export async function POST(request: NextRequest) {
         );
         const response = await result.response;
         const text = response.text();
+        const processingTime = Date.now() - startTime;
+
+        await prisma.request.update({
+          where: { id: dbRequest.id },
+          data: {
+            summary: text,
+            processingTime,
+            modelUsed: "gemini-1.5-flash",
+            status: "COMPLETED",
+          },
+        });
+
         clearTimeout(timeout);
         return NextResponse.json({ text });
       } catch (error: unknown) {
         clearTimeout(timeout);
         if (error instanceof Error && error.name === "AbortError") {
+          await prisma.request.update({
+            where: { id: dbRequest.id },
+            data: {
+              status: "FAILED",
+              error:
+                "Request timed out. Please try again with a smaller image.",
+            },
+          });
           return NextResponse.json(
             {
               error:
@@ -102,6 +135,15 @@ export async function POST(request: NextRequest) {
           );
         }
         console.error("Gemini API error:", error);
+
+        await prisma.request.update({
+          where: { id: dbRequest.id },
+          data: {
+            status: "FAILED",
+            error: "Failed to extract text from image",
+          },
+        });
+
         return NextResponse.json(
           { error: "Failed to extract text from image" },
           { status: 500 }
@@ -110,6 +152,7 @@ export async function POST(request: NextRequest) {
     } else if (mode === "description") {
       try {
         // Image description using GPT-4 Vision
+        const startTime = Date.now();
         const response = await openai.chat.completions.create(
           {
             model: "gpt-4o",
@@ -136,31 +179,94 @@ export async function POST(request: NextRequest) {
         );
 
         const description = response.choices[0].message.content;
+        const processingTime = Date.now() - startTime;
+
+        await prisma.request.update({
+          where: { id: dbRequest.id },
+          data: {
+            summary: description,
+            processingTime,
+            modelUsed: "gpt-4o",
+            status: "COMPLETED",
+          },
+        });
+
         clearTimeout(timeout);
         return NextResponse.json({ description });
       } catch (error: unknown) {
         clearTimeout(timeout);
-        if (error instanceof Error && error.name === "AbortError") {
-          return NextResponse.json(
-            {
-              error:
-                "Request timed out. Please try again with a smaller image.",
+        if (error instanceof Error) {
+          if (error.name === "AbortError") {
+            await prisma.request.update({
+              where: { id: dbRequest.id },
+              data: {
+                status: "FAILED",
+                error:
+                  "Request timed out. Please try again with a smaller image.",
+              },
+            });
+            return NextResponse.json(
+              {
+                error:
+                  "Request timed out. Please try again with a smaller image.",
+              },
+              { status: 408 }
+            );
+          }
+          console.error("OpenAI API error:", error.message);
+
+          await prisma.request.update({
+            where: { id: dbRequest.id },
+            data: {
+              status: "FAILED",
+              error: `OpenAI API error: ${error.message}`,
             },
-            { status: 408 }
+          });
+
+          return NextResponse.json(
+            { error: `OpenAI API error: ${error.message}` },
+            { status: 500 }
           );
         }
-        console.error("OpenAI API error:", error);
+        console.error("Unknown error:", error);
+
+        await prisma.request.update({
+          where: { id: dbRequest.id },
+          data: {
+            status: "FAILED",
+            error: "Failed to generate image description",
+          },
+        });
+
         return NextResponse.json(
           { error: "Failed to generate image description" },
           { status: 500 }
         );
       }
     } else {
+      await prisma.request.update({
+        where: { id: dbRequest.id },
+        data: {
+          status: "FAILED",
+          error: "Invalid mode",
+        },
+      });
       return NextResponse.json({ error: "Invalid mode" }, { status: 400 });
     }
   } catch (error) {
     clearTimeout(timeout);
     console.error("Error processing image:", error);
+
+    if (dbRequest) {
+      await prisma.request.update({
+        where: { id: dbRequest.id },
+        data: {
+          status: "FAILED",
+          error: "Failed to process image. Please try again later.",
+        },
+      });
+    }
+
     return NextResponse.json(
       { error: "Failed to process image. Please try again later." },
       { status: 500 }
