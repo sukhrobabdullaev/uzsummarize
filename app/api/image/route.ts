@@ -15,11 +15,15 @@ const model = genAI.getGenerativeModel({
 // Initialize OpenAI with timeout
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  timeout: 30000, // 30 seconds timeout
+  timeout: 8000, // 8 seconds timeout to stay under Vercel's 10s limit
 });
 
-// Maximum file size (5MB)
+// Maximum file size (2MB) - reduced to help with processing time
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+// Add AbortController for better timeout handling
+const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 8000);
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for") || "unknown";
@@ -70,19 +74,33 @@ export async function POST(request: NextRequest) {
         // Text extraction using Gemini
         const prompt =
           "Extract all the text from this image. Return only the text, nothing else.";
-        const result = await model.generateContent([
-          prompt,
-          {
-            inlineData: {
-              data: base64Image,
-              mimeType: file.type,
+        const result = await model.generateContent(
+          [
+            prompt,
+            {
+              inlineData: {
+                data: base64Image,
+                mimeType: file.type,
+              },
             },
-          },
-        ]);
+          ],
+          { signal: controller.signal }
+        );
         const response = await result.response;
         const text = response.text();
+        clearTimeout(timeout);
         return NextResponse.json({ text });
-      } catch (error) {
+      } catch (error: unknown) {
+        clearTimeout(timeout);
+        if (error instanceof Error && error.name === "AbortError") {
+          return NextResponse.json(
+            {
+              error:
+                "Request timed out. Please try again with a smaller image.",
+            },
+            { status: 408 }
+          );
+        }
         console.error("Gemini API error:", error);
         return NextResponse.json(
           { error: "Failed to extract text from image" },
@@ -92,31 +110,45 @@ export async function POST(request: NextRequest) {
     } else if (mode === "description") {
       try {
         // Image description using GPT-4 Vision
-        const response = await openai.chat.completions.create({
-          model: "gpt-4o-mini",
-          messages: [
-            {
-              role: "user",
-              content: [
-                {
-                  type: "text",
-                  text: "Describe this image in 4-5 sentences in Uzbek. Focus on the main subjects, colors, and any notable features.",
-                },
-                {
-                  type: "image_url",
-                  image_url: {
-                    url: `data:${file.type};base64,${base64Image}`,
+        const response = await openai.chat.completions.create(
+          {
+            model: "gpt-4o",
+            messages: [
+              {
+                role: "user",
+                content: [
+                  {
+                    type: "text",
+                    text: "Describe this image in 4-5 sentences in Uzbek. Focus on the main subjects, colors, and any notable features.",
                   },
-                },
-              ],
-            },
-          ],
-          max_tokens: 300,
-        });
+                  {
+                    type: "image_url",
+                    image_url: {
+                      url: `data:${file.type};base64,${base64Image}`,
+                    },
+                  },
+                ],
+              },
+            ],
+            max_tokens: 300,
+          },
+          { signal: controller.signal }
+        );
 
         const description = response.choices[0].message.content;
+        clearTimeout(timeout);
         return NextResponse.json({ description });
-      } catch (error) {
+      } catch (error: unknown) {
+        clearTimeout(timeout);
+        if (error instanceof Error && error.name === "AbortError") {
+          return NextResponse.json(
+            {
+              error:
+                "Request timed out. Please try again with a smaller image.",
+            },
+            { status: 408 }
+          );
+        }
         console.error("OpenAI API error:", error);
         return NextResponse.json(
           { error: "Failed to generate image description" },
@@ -127,6 +159,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid mode" }, { status: 400 });
     }
   } catch (error) {
+    clearTimeout(timeout);
     console.error("Error processing image:", error);
     return NextResponse.json(
       { error: "Failed to process image. Please try again later." },
