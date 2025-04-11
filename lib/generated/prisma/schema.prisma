@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Request {
+  id             String        @id @default(cuid())
+  type           RequestType
+  content        String
+  language       String?
+  maxLength      Int?
+  minLength      Int?
+  summary        String?
+  error          String?
+  status         RequestStatus @default(PENDING)
+  processingTime Int?
+  modelUsed      String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+enum RequestType {
+  TEXT
+  IMAGE
+}
+
+enum RequestStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
