@@ -1,0 +1,30 @@
+{
+    "extends": "next/core-web-vitals",
+    "ignorePatterns": [
+        "lib/generated/prisma/**/*",
+        "node_modules/**/*"
+    ],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_",
+                "caughtErrorsIgnorePattern": "^_"
+            }
+        ],
+        "@typescript-eslint/no-require-imports": "off",
+        "@typescript-eslint/no-unused-expressions": "warn"
+    },
+    "overrides": [
+        {
+            "files": [
+                "lib/generated/prisma/**/*"
+            ],
+            "rules": {
+                "@typescript-eslint/no-unused-vars": "off",
+                "@typescript-eslint/no-require-imports": "off"
+            }
+        }
+    ]
+}
