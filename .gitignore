@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # Ignore Prisma generated files
-generated/
+lib/generated/prisma/
