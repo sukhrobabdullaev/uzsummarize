@@ -19,8 +19,8 @@ const openai = new OpenAI({
   timeout: 8000, // 8 seconds timeout to stay under Vercel's 10s limit
 });
 
-// Maximum file size (2MB) - reduced to help with processing time
-const MAX_FILE_SIZE = 2 * 1024 * 1024;
+// Maximum file size (5MB) - reduced to help with processing time
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 // Add AbortController for better timeout handling
 const controller = new AbortController();
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     // Validate file size
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { error: "Image size must be less than 2MB" },
+        { error: "Image size must be less than 5MB" },
         { status: 400 }
       );
     }

@@ -1,0 +1,177 @@
+:root {
+  --primary: #0f91f2;
+  --primary-light: rgba(15, 145, 242, 0.1);
+  --background: #ffffff;
+  --foreground: #252525;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.container {
+  padding: 1.5rem;
+}
+
+/* Logo styles */
+.header {
+  margin-bottom: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.logo-circle {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    rgba(15, 145, 242, 0.8),
+    rgba(15, 145, 242, 0.6)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo-circle:hover {
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+  transform: scale(1.05);
+}
+
+.logo-shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 70%
+  );
+  animation: shine 3s infinite ease-in-out;
+}
+
+.logo-text {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(
+    to right,
+    var(--primary),
+    #8b5cf6,
+    rgba(124, 58, 237, 0.7)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-subtitle {
+  font-size: 0.625rem;
+  color: rgba(2, 8, 23, 0.6);
+  margin-top: -0.25rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* Feature Cards */
+.feature-card {
+  background: var(--primary-light);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+}
+
+.feature-card strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.feature-card ul {
+  list-style: none;
+  margin-left: 0.5rem;
+}
+
+.feature-card li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.feature-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+.keyboard-shortcut {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  background: var(--primary);
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+  margin: 0 0.25rem;
+}
+
+.action-text {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+@keyframes shine {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
