@@ -4,6 +4,7 @@ import OpenAI from "openai";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  timeout: 10000, // 10 seconds timeout for OpenAI requests
 });
 
 // Validate input data
@@ -34,7 +35,6 @@ function validateInputData(data: any): { isValid: boolean; error?: string } {
 
 // POST - Create new flashcards
 export async function POST(request: NextRequest) {
-
   try {
     const data = await request.json();
 
@@ -60,13 +60,11 @@ export async function POST(request: NextRequest) {
             ]
         }`;
 
-
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
       model: "gpt-4o-mini",
       response_format: { type: "json_object" },
     });
-
 
     const responseContent = completion.choices[0].message.content;
 
@@ -101,7 +99,6 @@ export async function POST(request: NextRequest) {
       if (flashcardsData.length === 0) {
         throw new Error("No valid flashcards found in the response");
       }
-
     } catch (error) {
       const parseError = error as Error;
       console.error("Error parsing OpenAI response:", parseError);
