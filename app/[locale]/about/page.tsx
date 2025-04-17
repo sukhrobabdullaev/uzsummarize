@@ -7,7 +7,7 @@ const About = () => {
   const t = useTranslations('about');
 
   return (
-    <motion.div 
+    <motion.div
       className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-24"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -15,20 +15,20 @@ const About = () => {
     >
       <div className="space-y-8 sm:space-y-12 lg:space-y-16">
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary/90 to-primary/70 bg-clip-text text-transparent inline-block">
-            {t('title')}
+            {t('title')} 
           </h1>
           <div className="mt-3 sm:mt-4 w-12 sm:w-16 h-1 bg-primary/20 mx-auto rounded-full"></div>
         </motion.div>
 
         {/* Mission */}
-        <motion.section 
+        <motion.section
           className="space-y-2 sm:space-y-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -41,7 +41,7 @@ const About = () => {
         </motion.section>
 
         {/* How It Works */}
-        <motion.section 
+        <motion.section
           className="space-y-4 sm:space-y-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -75,7 +75,7 @@ const About = () => {
         </motion.section>
 
         {/* Features */}
-        <motion.section 
+        <motion.section
           className="space-y-4 sm:space-y-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -151,7 +151,7 @@ const About = () => {
         </motion.section>
 
         {/* Technology */}
-        <motion.section 
+        <motion.section
           className="space-y-2 sm:space-y-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -163,7 +163,7 @@ const About = () => {
           </p>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-6">
-            {["OpenAI", "React", "TailwindCSS", "Next.js", "Machine Learning"].map((tech, index) => (
+            {["OpenAI", "React", "TailwindCSS", "Next.js", "Prisma", "PostgreSQL", "Machine Learning"].map((tech, index) => (
               <span
                 key={index}
                 className="px-2 sm:px-3 py-1 bg-primary/5 text-primary/70 rounded-full text-xs sm:text-sm"
@@ -175,7 +175,7 @@ const About = () => {
         </motion.section>
 
         {/* Contact */}
-        <motion.section 
+        <motion.section
           className="mt-10 sm:mt-16 text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

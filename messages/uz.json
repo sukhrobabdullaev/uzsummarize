@@ -53,7 +53,7 @@
     }
   },
   "summarizer": {
-    "title": "AI Kontent Qisqartiruvchi",
+    "title": "AI Kontent Xulosachi",
     "description": "Qisqa xulosa yaratish yoki rasmni tahlil qilish uchun matn kiriting yoki fayl yuklang",
     "model": {
       "label": "AI Model",
@@ -88,12 +88,12 @@
   },
   "features": {
     "textSummarization": {
-      "title": "Matnni qisqartirish",
-      "description": "Uzun maqolalar, hujjatlar va matnlarni o'zbek tilida tezda qisqartiring."
+      "title": "Matndan xulosa olish",
+      "description": "Uzun maqolalar, hujjatlar va matnlarni o'zbek tilida tezda xulosasini oling."
     },
     "imageAnalysis": {
       "title": "Rasm tahlili",
-      "description": "O'zbek tilidagi matnli rasmlardan matnni ajratib oling va qisqartiring."
+      "description": "O'zbek tilidagi matnli rasmlardan matnni ajratib oling va xulosalang."
     },
     "pdfProcessing": {
       "title": "PDF fayllarni qayta ishlash",
@@ -257,7 +257,14 @@
     "remainingRequests": "Qolgan so'rovlar: {{count}}"
   },
   "footer": {
-    "copyright": "UzSummarize. Barcha huquqlar himoyalangan."
+    "copyright": "UzSummarize. Barcha huquqlar himoyalangan.",
+    "description": "Sun'iy intellekt yordamida ma'lumotni tushunishni osonlashtiramiz",
+    "newsletter": "Yangi o'zgarishlardan xabardor bo'lish",
+    "privacy": "Maxfiylik siyosati",
+    "about": "Biz haqimizda",
+    "contact": "Bog'lanish",
+    "socials": "Ijtimoiy tarmoqlar",
+    "links": "Havolalar"
   },
   "rateLimit": {
     "exceeded": "So'rovlar cheklovi: {{timeWindow}} soat ichida faqat {{maxRequests}} ta so'rov ruxsat etilgan. Iltimos, {{hoursLeft}} soat{{plural}} kuting va qayta urinib ko'ring.",
@@ -328,23 +335,73 @@
   "services": {
     "imageTextExtraction": {
       "name": "Rasmdan matn ajratib olish",
-      "description": "Rasm yoki screenshotdan matnni ajratib oling"
+      "description": "Rasm yoki screenshotdan matnni ajratib oling",
+      "title": "Rasmdan matn ajratib olish"
     },
     "imageDescription": {
       "name": "Rasm tavsifi",
-      "description": "Zamonaviy sun'iy intellekt texnologiyasi yordamida rasmlarning batafsil tavsifini oling"
+      "description": "Zamonaviy sun'iy intellekt texnologiyasi yordamida rasmlarning batafsil tavsifini oling",
+      "title": "Rasm tavsifi"
     },
     "pdfSummarization": {
       "name": "PDF xulosasi",
-      "description": "PDF fayllarni avtomatik ravishda qisqartirish"
+      "description": "PDF fayllarni avtomatik ravishda xulosa olish"
     },
     "studyNotes": {
-      "name": "O'rganishga yordam",
-      "description": "Sizning matningizdan o'rganishga yordamchi matn yaratish"
+      "name": "O'quv eslatmalar",
+      "description": "Biron mavzuyingiz bo'yicha o'quv eslatmalarini yarating.",
+      "title": "O'quv eslatmalar olish"
     },
     "conceptExplanation": {
       "name": "Tushuncha tushuntirish",
       "description": "Murakkab tushunchalarni soddalashtirilgan tushuntirish"
+    },
+    "mindmap": {
+      "name": "Mindmap",
+      "description": "Matningizdan mindmap yaratish",
+      "title": "Mindmap yaratish"
+    },
+    "flashcards": {
+      "name": "Flashcard",
+      "description": "Matningizdan flashcardlar yaratish",
+      "title": "Flashcard yaratish"
+    },
+    "urlSummarizer": {
+      "name": "URL xulosasi",
+      "description": "URL larni avtomatik ravishda qisqartirish",
+      "title": "URL xulosasi"
+    }
+  },
+  "privacy": {
+    "title": "Maxfiylik siyosati",
+    "introduction": {
+      "title": "Kirish",
+      "content": "UzSummarize-da biz sizning maxfiyligingizni jiddiy qabul qilamiz. Ushbu Maxfiylik siyosati bizning xizmatlarimizdan foydalanganda qanday qilib shaxsiy ma'lumotlaringizni to'playmiz, ishlatamiz va himoya qilishimizni tushuntiradi."
+    },
+    "dataCollection": {
+      "title": "Ma'lumotlarni to'plash",
+      "content": "Biz quyidagi turdagi ma'lumotlarni to'playmiz:",
+      "points": [
+        "Sizning qisqartirish xizmatlarimizdan foydalanganda taqdim etgan ma'lumotlaringiz",
+        "Xizmatlarimizni yaxshilash uchun foydalanish ma'lumotlari va tahlillar",
+        "Qurilmangiz va brauzeringiz haqidagi texnik ma'lumotlar"
+      ]
+    },
+    "dataUsage": {
+      "title": "Ma'lumotlaringizdan qanday foydalanamiz",
+      "content": "Biz to'plangan ma'lumotlardan xizmatlarimizni taqdim etish va yaxshilash, xavfsizlikni ta'minlash va foydalanuvchi tajribasini yaxshilash uchun foydalanamiz. Biz sizning shaxsiy ma'lumotlaringizni uchinchi shaxslarga sotmaymiz."
+    },
+    "dataProtection": {
+      "title": "Ma'lumotlarni himoya qilish",
+      "content": "Biz sizning shaxsiy ma'lumotlaringizni himoya qilish uchun tegishli xavfsizlik choralarini qo'llaymiz. Biroq, internet orqali uzatishning hech qanday usuli 100% xavfsiz emas."
+    },
+    "userRights": {
+      "title": "Sizning huquqlaringiz",
+      "content": "Siz o'zingizning shaxsiy ma'lumotlaringizga kirish, tuzatish yoki o'chirish huquqiga egasiz. Shuningdek, ma'lum ma'lumotlarni to'plash amaliyotlaridan voz kechishingiz mumkin."
+    },
+    "contact": {
+      "title": "Biz bilan bog'laning",
+      "content": "Agar ushbu Maxfiylik siyosati haqida savollaringiz bo'lsa, iltimos, support@uzsummarize.com manziliga murojaat qiling"
     }
   }
 }

@@ -14,10 +14,25 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Mindmap
+ * 
+ */
+export type Mindmap = $Result.DefaultSelection<Prisma.$MindmapPayload>
+/**
+ * Model MindmapNode
+ * 
+ */
+export type MindmapNode = $Result.DefaultSelection<Prisma.$MindmapNodePayload>
+/**
  * Model Request
  * 
  */
 export type Request = $Result.DefaultSelection<Prisma.$RequestPayload>
+/**
+ * Model Flashcard
+ * 
+ */
+export type Flashcard = $Result.DefaultSelection<Prisma.$FlashcardPayload>
 
 /**
  * Enums
@@ -56,8 +71,8 @@ export const RequestStatus: typeof $Enums.RequestStatus
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Requests
- * const requests = await prisma.request.findMany()
+ * // Fetch zero or more Mindmaps
+ * const mindmaps = await prisma.mindmap.findMany()
  * ```
  *
  *
@@ -77,8 +92,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Requests
-   * const requests = await prisma.request.findMany()
+   * // Fetch zero or more Mindmaps
+   * const mindmaps = await prisma.mindmap.findMany()
    * ```
    *
    *
@@ -175,6 +190,26 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.mindmap`: Exposes CRUD operations for the **Mindmap** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mindmaps
+    * const mindmaps = await prisma.mindmap.findMany()
+    * ```
+    */
+  get mindmap(): Prisma.MindmapDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mindmapNode`: Exposes CRUD operations for the **MindmapNode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MindmapNodes
+    * const mindmapNodes = await prisma.mindmapNode.findMany()
+    * ```
+    */
+  get mindmapNode(): Prisma.MindmapNodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.request`: Exposes CRUD operations for the **Request** model.
     * Example usage:
     * ```ts
@@ -183,6 +218,16 @@ export class PrismaClient<
     * ```
     */
   get request(): Prisma.RequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flashcard`: Exposes CRUD operations for the **Flashcard** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Flashcards
+    * const flashcards = await prisma.flashcard.findMany()
+    * ```
+    */
+  get flashcard(): Prisma.FlashcardDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -623,7 +668,10 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Request: 'Request'
+    Mindmap: 'Mindmap',
+    MindmapNode: 'MindmapNode',
+    Request: 'Request',
+    Flashcard: 'Flashcard'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -642,10 +690,158 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "request"
+      modelProps: "mindmap" | "mindmapNode" | "request" | "flashcard"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Mindmap: {
+        payload: Prisma.$MindmapPayload<ExtArgs>
+        fields: Prisma.MindmapFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MindmapFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MindmapFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>
+          }
+          findFirst: {
+            args: Prisma.MindmapFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MindmapFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>
+          }
+          findMany: {
+            args: Prisma.MindmapFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>[]
+          }
+          create: {
+            args: Prisma.MindmapCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>
+          }
+          createMany: {
+            args: Prisma.MindmapCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MindmapCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>[]
+          }
+          delete: {
+            args: Prisma.MindmapDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>
+          }
+          update: {
+            args: Prisma.MindmapUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>
+          }
+          deleteMany: {
+            args: Prisma.MindmapDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MindmapUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MindmapUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>[]
+          }
+          upsert: {
+            args: Prisma.MindmapUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapPayload>
+          }
+          aggregate: {
+            args: Prisma.MindmapAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMindmap>
+          }
+          groupBy: {
+            args: Prisma.MindmapGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MindmapGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MindmapCountArgs<ExtArgs>
+            result: $Utils.Optional<MindmapCountAggregateOutputType> | number
+          }
+        }
+      }
+      MindmapNode: {
+        payload: Prisma.$MindmapNodePayload<ExtArgs>
+        fields: Prisma.MindmapNodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MindmapNodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MindmapNodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>
+          }
+          findFirst: {
+            args: Prisma.MindmapNodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MindmapNodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>
+          }
+          findMany: {
+            args: Prisma.MindmapNodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>[]
+          }
+          create: {
+            args: Prisma.MindmapNodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>
+          }
+          createMany: {
+            args: Prisma.MindmapNodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MindmapNodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>[]
+          }
+          delete: {
+            args: Prisma.MindmapNodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>
+          }
+          update: {
+            args: Prisma.MindmapNodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>
+          }
+          deleteMany: {
+            args: Prisma.MindmapNodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MindmapNodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MindmapNodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>[]
+          }
+          upsert: {
+            args: Prisma.MindmapNodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MindmapNodePayload>
+          }
+          aggregate: {
+            args: Prisma.MindmapNodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMindmapNode>
+          }
+          groupBy: {
+            args: Prisma.MindmapNodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MindmapNodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MindmapNodeCountArgs<ExtArgs>
+            result: $Utils.Optional<MindmapNodeCountAggregateOutputType> | number
+          }
+        }
+      }
       Request: {
         payload: Prisma.$RequestPayload<ExtArgs>
         fields: Prisma.RequestFieldRefs
@@ -717,6 +913,80 @@ export namespace Prisma {
           count: {
             args: Prisma.RequestCountArgs<ExtArgs>
             result: $Utils.Optional<RequestCountAggregateOutputType> | number
+          }
+        }
+      }
+      Flashcard: {
+        payload: Prisma.$FlashcardPayload<ExtArgs>
+        fields: Prisma.FlashcardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlashcardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlashcardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>
+          }
+          findFirst: {
+            args: Prisma.FlashcardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlashcardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>
+          }
+          findMany: {
+            args: Prisma.FlashcardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>[]
+          }
+          create: {
+            args: Prisma.FlashcardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>
+          }
+          createMany: {
+            args: Prisma.FlashcardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FlashcardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>[]
+          }
+          delete: {
+            args: Prisma.FlashcardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>
+          }
+          update: {
+            args: Prisma.FlashcardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>
+          }
+          deleteMany: {
+            args: Prisma.FlashcardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlashcardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FlashcardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>[]
+          }
+          upsert: {
+            args: Prisma.FlashcardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashcardPayload>
+          }
+          aggregate: {
+            args: Prisma.FlashcardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlashcard>
+          }
+          groupBy: {
+            args: Prisma.FlashcardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlashcardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlashcardCountArgs<ExtArgs>
+            result: $Utils.Optional<FlashcardCountAggregateOutputType> | number
           }
         }
       }
@@ -804,7 +1074,10 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    mindmap?: MindmapOmit
+    mindmapNode?: MindmapNodeOmit
     request?: RequestOmit
+    flashcard?: FlashcardOmit
   }
 
   /* Types for Logging */
@@ -894,10 +1167,2245 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type MindmapCountOutputType
+   */
+
+  export type MindmapCountOutputType = {
+    nodes: number
+  }
+
+  export type MindmapCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nodes?: boolean | MindmapCountOutputTypeCountNodesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MindmapCountOutputType without action
+   */
+  export type MindmapCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapCountOutputType
+     */
+    select?: MindmapCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MindmapCountOutputType without action
+   */
+  export type MindmapCountOutputTypeCountNodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MindmapNodeWhereInput
+  }
+
 
   /**
    * Models
    */
+
+  /**
+   * Model Mindmap
+   */
+
+  export type AggregateMindmap = {
+    _count: MindmapCountAggregateOutputType | null
+    _min: MindmapMinAggregateOutputType | null
+    _max: MindmapMaxAggregateOutputType | null
+  }
+
+  export type MindmapMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    topic: string | null
+    difficulty: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MindmapMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    topic: string | null
+    difficulty: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MindmapCountAggregateOutputType = {
+    id: number
+    title: number
+    topic: number
+    difficulty: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MindmapMinAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    difficulty?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MindmapMaxAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    difficulty?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MindmapCountAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    difficulty?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MindmapAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Mindmap to aggregate.
+     */
+    where?: MindmapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mindmaps to fetch.
+     */
+    orderBy?: MindmapOrderByWithRelationInput | MindmapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MindmapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mindmaps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mindmaps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Mindmaps
+    **/
+    _count?: true | MindmapCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MindmapMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MindmapMaxAggregateInputType
+  }
+
+  export type GetMindmapAggregateType<T extends MindmapAggregateArgs> = {
+        [P in keyof T & keyof AggregateMindmap]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMindmap[P]>
+      : GetScalarType<T[P], AggregateMindmap[P]>
+  }
+
+
+
+
+  export type MindmapGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MindmapWhereInput
+    orderBy?: MindmapOrderByWithAggregationInput | MindmapOrderByWithAggregationInput[]
+    by: MindmapScalarFieldEnum[] | MindmapScalarFieldEnum
+    having?: MindmapScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MindmapCountAggregateInputType | true
+    _min?: MindmapMinAggregateInputType
+    _max?: MindmapMaxAggregateInputType
+  }
+
+  export type MindmapGroupByOutputType = {
+    id: string
+    title: string
+    topic: string
+    difficulty: string
+    createdAt: Date
+    updatedAt: Date
+    _count: MindmapCountAggregateOutputType | null
+    _min: MindmapMinAggregateOutputType | null
+    _max: MindmapMaxAggregateOutputType | null
+  }
+
+  type GetMindmapGroupByPayload<T extends MindmapGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MindmapGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MindmapGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MindmapGroupByOutputType[P]>
+            : GetScalarType<T[P], MindmapGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MindmapSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    nodes?: boolean | Mindmap$nodesArgs<ExtArgs>
+    _count?: boolean | MindmapCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mindmap"]>
+
+  export type MindmapSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["mindmap"]>
+
+  export type MindmapSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["mindmap"]>
+
+  export type MindmapSelectScalar = {
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MindmapOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "topic" | "difficulty" | "createdAt" | "updatedAt", ExtArgs["result"]["mindmap"]>
+  export type MindmapInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nodes?: boolean | Mindmap$nodesArgs<ExtArgs>
+    _count?: boolean | MindmapCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MindmapIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MindmapIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $MindmapPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Mindmap"
+    objects: {
+      nodes: Prisma.$MindmapNodePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      topic: string
+      difficulty: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mindmap"]>
+    composites: {}
+  }
+
+  type MindmapGetPayload<S extends boolean | null | undefined | MindmapDefaultArgs> = $Result.GetResult<Prisma.$MindmapPayload, S>
+
+  type MindmapCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MindmapFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MindmapCountAggregateInputType | true
+    }
+
+  export interface MindmapDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Mindmap'], meta: { name: 'Mindmap' } }
+    /**
+     * Find zero or one Mindmap that matches the filter.
+     * @param {MindmapFindUniqueArgs} args - Arguments to find a Mindmap
+     * @example
+     * // Get one Mindmap
+     * const mindmap = await prisma.mindmap.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MindmapFindUniqueArgs>(args: SelectSubset<T, MindmapFindUniqueArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Mindmap that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MindmapFindUniqueOrThrowArgs} args - Arguments to find a Mindmap
+     * @example
+     * // Get one Mindmap
+     * const mindmap = await prisma.mindmap.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MindmapFindUniqueOrThrowArgs>(args: SelectSubset<T, MindmapFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Mindmap that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapFindFirstArgs} args - Arguments to find a Mindmap
+     * @example
+     * // Get one Mindmap
+     * const mindmap = await prisma.mindmap.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MindmapFindFirstArgs>(args?: SelectSubset<T, MindmapFindFirstArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Mindmap that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapFindFirstOrThrowArgs} args - Arguments to find a Mindmap
+     * @example
+     * // Get one Mindmap
+     * const mindmap = await prisma.mindmap.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MindmapFindFirstOrThrowArgs>(args?: SelectSubset<T, MindmapFindFirstOrThrowArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Mindmaps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mindmaps
+     * const mindmaps = await prisma.mindmap.findMany()
+     * 
+     * // Get first 10 Mindmaps
+     * const mindmaps = await prisma.mindmap.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mindmapWithIdOnly = await prisma.mindmap.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MindmapFindManyArgs>(args?: SelectSubset<T, MindmapFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Mindmap.
+     * @param {MindmapCreateArgs} args - Arguments to create a Mindmap.
+     * @example
+     * // Create one Mindmap
+     * const Mindmap = await prisma.mindmap.create({
+     *   data: {
+     *     // ... data to create a Mindmap
+     *   }
+     * })
+     * 
+     */
+    create<T extends MindmapCreateArgs>(args: SelectSubset<T, MindmapCreateArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Mindmaps.
+     * @param {MindmapCreateManyArgs} args - Arguments to create many Mindmaps.
+     * @example
+     * // Create many Mindmaps
+     * const mindmap = await prisma.mindmap.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MindmapCreateManyArgs>(args?: SelectSubset<T, MindmapCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Mindmaps and returns the data saved in the database.
+     * @param {MindmapCreateManyAndReturnArgs} args - Arguments to create many Mindmaps.
+     * @example
+     * // Create many Mindmaps
+     * const mindmap = await prisma.mindmap.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Mindmaps and only return the `id`
+     * const mindmapWithIdOnly = await prisma.mindmap.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MindmapCreateManyAndReturnArgs>(args?: SelectSubset<T, MindmapCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Mindmap.
+     * @param {MindmapDeleteArgs} args - Arguments to delete one Mindmap.
+     * @example
+     * // Delete one Mindmap
+     * const Mindmap = await prisma.mindmap.delete({
+     *   where: {
+     *     // ... filter to delete one Mindmap
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MindmapDeleteArgs>(args: SelectSubset<T, MindmapDeleteArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Mindmap.
+     * @param {MindmapUpdateArgs} args - Arguments to update one Mindmap.
+     * @example
+     * // Update one Mindmap
+     * const mindmap = await prisma.mindmap.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MindmapUpdateArgs>(args: SelectSubset<T, MindmapUpdateArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Mindmaps.
+     * @param {MindmapDeleteManyArgs} args - Arguments to filter Mindmaps to delete.
+     * @example
+     * // Delete a few Mindmaps
+     * const { count } = await prisma.mindmap.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MindmapDeleteManyArgs>(args?: SelectSubset<T, MindmapDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mindmaps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mindmaps
+     * const mindmap = await prisma.mindmap.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MindmapUpdateManyArgs>(args: SelectSubset<T, MindmapUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mindmaps and returns the data updated in the database.
+     * @param {MindmapUpdateManyAndReturnArgs} args - Arguments to update many Mindmaps.
+     * @example
+     * // Update many Mindmaps
+     * const mindmap = await prisma.mindmap.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Mindmaps and only return the `id`
+     * const mindmapWithIdOnly = await prisma.mindmap.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MindmapUpdateManyAndReturnArgs>(args: SelectSubset<T, MindmapUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Mindmap.
+     * @param {MindmapUpsertArgs} args - Arguments to update or create a Mindmap.
+     * @example
+     * // Update or create a Mindmap
+     * const mindmap = await prisma.mindmap.upsert({
+     *   create: {
+     *     // ... data to create a Mindmap
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mindmap we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MindmapUpsertArgs>(args: SelectSubset<T, MindmapUpsertArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Mindmaps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapCountArgs} args - Arguments to filter Mindmaps to count.
+     * @example
+     * // Count the number of Mindmaps
+     * const count = await prisma.mindmap.count({
+     *   where: {
+     *     // ... the filter for the Mindmaps we want to count
+     *   }
+     * })
+    **/
+    count<T extends MindmapCountArgs>(
+      args?: Subset<T, MindmapCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MindmapCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mindmap.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MindmapAggregateArgs>(args: Subset<T, MindmapAggregateArgs>): Prisma.PrismaPromise<GetMindmapAggregateType<T>>
+
+    /**
+     * Group by Mindmap.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MindmapGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MindmapGroupByArgs['orderBy'] }
+        : { orderBy?: MindmapGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MindmapGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMindmapGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Mindmap model
+   */
+  readonly fields: MindmapFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Mindmap.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MindmapClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    nodes<T extends Mindmap$nodesArgs<ExtArgs> = {}>(args?: Subset<T, Mindmap$nodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Mindmap model
+   */
+  interface MindmapFieldRefs {
+    readonly id: FieldRef<"Mindmap", 'String'>
+    readonly title: FieldRef<"Mindmap", 'String'>
+    readonly topic: FieldRef<"Mindmap", 'String'>
+    readonly difficulty: FieldRef<"Mindmap", 'String'>
+    readonly createdAt: FieldRef<"Mindmap", 'DateTime'>
+    readonly updatedAt: FieldRef<"Mindmap", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Mindmap findUnique
+   */
+  export type MindmapFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * Filter, which Mindmap to fetch.
+     */
+    where: MindmapWhereUniqueInput
+  }
+
+  /**
+   * Mindmap findUniqueOrThrow
+   */
+  export type MindmapFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * Filter, which Mindmap to fetch.
+     */
+    where: MindmapWhereUniqueInput
+  }
+
+  /**
+   * Mindmap findFirst
+   */
+  export type MindmapFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * Filter, which Mindmap to fetch.
+     */
+    where?: MindmapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mindmaps to fetch.
+     */
+    orderBy?: MindmapOrderByWithRelationInput | MindmapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Mindmaps.
+     */
+    cursor?: MindmapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mindmaps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mindmaps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Mindmaps.
+     */
+    distinct?: MindmapScalarFieldEnum | MindmapScalarFieldEnum[]
+  }
+
+  /**
+   * Mindmap findFirstOrThrow
+   */
+  export type MindmapFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * Filter, which Mindmap to fetch.
+     */
+    where?: MindmapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mindmaps to fetch.
+     */
+    orderBy?: MindmapOrderByWithRelationInput | MindmapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Mindmaps.
+     */
+    cursor?: MindmapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mindmaps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mindmaps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Mindmaps.
+     */
+    distinct?: MindmapScalarFieldEnum | MindmapScalarFieldEnum[]
+  }
+
+  /**
+   * Mindmap findMany
+   */
+  export type MindmapFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * Filter, which Mindmaps to fetch.
+     */
+    where?: MindmapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mindmaps to fetch.
+     */
+    orderBy?: MindmapOrderByWithRelationInput | MindmapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Mindmaps.
+     */
+    cursor?: MindmapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mindmaps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mindmaps.
+     */
+    skip?: number
+    distinct?: MindmapScalarFieldEnum | MindmapScalarFieldEnum[]
+  }
+
+  /**
+   * Mindmap create
+   */
+  export type MindmapCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Mindmap.
+     */
+    data: XOR<MindmapCreateInput, MindmapUncheckedCreateInput>
+  }
+
+  /**
+   * Mindmap createMany
+   */
+  export type MindmapCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Mindmaps.
+     */
+    data: MindmapCreateManyInput | MindmapCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Mindmap createManyAndReturn
+   */
+  export type MindmapCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * The data used to create many Mindmaps.
+     */
+    data: MindmapCreateManyInput | MindmapCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Mindmap update
+   */
+  export type MindmapUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Mindmap.
+     */
+    data: XOR<MindmapUpdateInput, MindmapUncheckedUpdateInput>
+    /**
+     * Choose, which Mindmap to update.
+     */
+    where: MindmapWhereUniqueInput
+  }
+
+  /**
+   * Mindmap updateMany
+   */
+  export type MindmapUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Mindmaps.
+     */
+    data: XOR<MindmapUpdateManyMutationInput, MindmapUncheckedUpdateManyInput>
+    /**
+     * Filter which Mindmaps to update
+     */
+    where?: MindmapWhereInput
+    /**
+     * Limit how many Mindmaps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mindmap updateManyAndReturn
+   */
+  export type MindmapUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * The data used to update Mindmaps.
+     */
+    data: XOR<MindmapUpdateManyMutationInput, MindmapUncheckedUpdateManyInput>
+    /**
+     * Filter which Mindmaps to update
+     */
+    where?: MindmapWhereInput
+    /**
+     * Limit how many Mindmaps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mindmap upsert
+   */
+  export type MindmapUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Mindmap to update in case it exists.
+     */
+    where: MindmapWhereUniqueInput
+    /**
+     * In case the Mindmap found by the `where` argument doesn't exist, create a new Mindmap with this data.
+     */
+    create: XOR<MindmapCreateInput, MindmapUncheckedCreateInput>
+    /**
+     * In case the Mindmap was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MindmapUpdateInput, MindmapUncheckedUpdateInput>
+  }
+
+  /**
+   * Mindmap delete
+   */
+  export type MindmapDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+    /**
+     * Filter which Mindmap to delete.
+     */
+    where: MindmapWhereUniqueInput
+  }
+
+  /**
+   * Mindmap deleteMany
+   */
+  export type MindmapDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Mindmaps to delete
+     */
+    where?: MindmapWhereInput
+    /**
+     * Limit how many Mindmaps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mindmap.nodes
+   */
+  export type Mindmap$nodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    where?: MindmapNodeWhereInput
+    orderBy?: MindmapNodeOrderByWithRelationInput | MindmapNodeOrderByWithRelationInput[]
+    cursor?: MindmapNodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MindmapNodeScalarFieldEnum | MindmapNodeScalarFieldEnum[]
+  }
+
+  /**
+   * Mindmap without action
+   */
+  export type MindmapDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mindmap
+     */
+    select?: MindmapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mindmap
+     */
+    omit?: MindmapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MindmapNode
+   */
+
+  export type AggregateMindmapNode = {
+    _count: MindmapNodeCountAggregateOutputType | null
+    _avg: MindmapNodeAvgAggregateOutputType | null
+    _sum: MindmapNodeSumAggregateOutputType | null
+    _min: MindmapNodeMinAggregateOutputType | null
+    _max: MindmapNodeMaxAggregateOutputType | null
+  }
+
+  export type MindmapNodeAvgAggregateOutputType = {
+    positionX: number | null
+    positionY: number | null
+  }
+
+  export type MindmapNodeSumAggregateOutputType = {
+    positionX: number | null
+    positionY: number | null
+  }
+
+  export type MindmapNodeMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    content: string | null
+    parentId: string | null
+    positionX: number | null
+    positionY: number | null
+    mindmapId: string | null
+  }
+
+  export type MindmapNodeMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    content: string | null
+    parentId: string | null
+    positionX: number | null
+    positionY: number | null
+    mindmapId: string | null
+  }
+
+  export type MindmapNodeCountAggregateOutputType = {
+    id: number
+    title: number
+    content: number
+    parentId: number
+    positionX: number
+    positionY: number
+    mindmapId: number
+    _all: number
+  }
+
+
+  export type MindmapNodeAvgAggregateInputType = {
+    positionX?: true
+    positionY?: true
+  }
+
+  export type MindmapNodeSumAggregateInputType = {
+    positionX?: true
+    positionY?: true
+  }
+
+  export type MindmapNodeMinAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    parentId?: true
+    positionX?: true
+    positionY?: true
+    mindmapId?: true
+  }
+
+  export type MindmapNodeMaxAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    parentId?: true
+    positionX?: true
+    positionY?: true
+    mindmapId?: true
+  }
+
+  export type MindmapNodeCountAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    parentId?: true
+    positionX?: true
+    positionY?: true
+    mindmapId?: true
+    _all?: true
+  }
+
+  export type MindmapNodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MindmapNode to aggregate.
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MindmapNodes to fetch.
+     */
+    orderBy?: MindmapNodeOrderByWithRelationInput | MindmapNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MindmapNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MindmapNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MindmapNodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MindmapNodes
+    **/
+    _count?: true | MindmapNodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MindmapNodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MindmapNodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MindmapNodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MindmapNodeMaxAggregateInputType
+  }
+
+  export type GetMindmapNodeAggregateType<T extends MindmapNodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateMindmapNode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMindmapNode[P]>
+      : GetScalarType<T[P], AggregateMindmapNode[P]>
+  }
+
+
+
+
+  export type MindmapNodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MindmapNodeWhereInput
+    orderBy?: MindmapNodeOrderByWithAggregationInput | MindmapNodeOrderByWithAggregationInput[]
+    by: MindmapNodeScalarFieldEnum[] | MindmapNodeScalarFieldEnum
+    having?: MindmapNodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MindmapNodeCountAggregateInputType | true
+    _avg?: MindmapNodeAvgAggregateInputType
+    _sum?: MindmapNodeSumAggregateInputType
+    _min?: MindmapNodeMinAggregateInputType
+    _max?: MindmapNodeMaxAggregateInputType
+  }
+
+  export type MindmapNodeGroupByOutputType = {
+    id: string
+    title: string
+    content: string
+    parentId: string | null
+    positionX: number
+    positionY: number
+    mindmapId: string
+    _count: MindmapNodeCountAggregateOutputType | null
+    _avg: MindmapNodeAvgAggregateOutputType | null
+    _sum: MindmapNodeSumAggregateOutputType | null
+    _min: MindmapNodeMinAggregateOutputType | null
+    _max: MindmapNodeMaxAggregateOutputType | null
+  }
+
+  type GetMindmapNodeGroupByPayload<T extends MindmapNodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MindmapNodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MindmapNodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MindmapNodeGroupByOutputType[P]>
+            : GetScalarType<T[P], MindmapNodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MindmapNodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    parentId?: boolean
+    positionX?: boolean
+    positionY?: boolean
+    mindmapId?: boolean
+    mindmap?: boolean | MindmapDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mindmapNode"]>
+
+  export type MindmapNodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    parentId?: boolean
+    positionX?: boolean
+    positionY?: boolean
+    mindmapId?: boolean
+    mindmap?: boolean | MindmapDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mindmapNode"]>
+
+  export type MindmapNodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    parentId?: boolean
+    positionX?: boolean
+    positionY?: boolean
+    mindmapId?: boolean
+    mindmap?: boolean | MindmapDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mindmapNode"]>
+
+  export type MindmapNodeSelectScalar = {
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    parentId?: boolean
+    positionX?: boolean
+    positionY?: boolean
+    mindmapId?: boolean
+  }
+
+  export type MindmapNodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "parentId" | "positionX" | "positionY" | "mindmapId", ExtArgs["result"]["mindmapNode"]>
+  export type MindmapNodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mindmap?: boolean | MindmapDefaultArgs<ExtArgs>
+  }
+  export type MindmapNodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mindmap?: boolean | MindmapDefaultArgs<ExtArgs>
+  }
+  export type MindmapNodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mindmap?: boolean | MindmapDefaultArgs<ExtArgs>
+  }
+
+  export type $MindmapNodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MindmapNode"
+    objects: {
+      mindmap: Prisma.$MindmapPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      content: string
+      parentId: string | null
+      positionX: number
+      positionY: number
+      mindmapId: string
+    }, ExtArgs["result"]["mindmapNode"]>
+    composites: {}
+  }
+
+  type MindmapNodeGetPayload<S extends boolean | null | undefined | MindmapNodeDefaultArgs> = $Result.GetResult<Prisma.$MindmapNodePayload, S>
+
+  type MindmapNodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MindmapNodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MindmapNodeCountAggregateInputType | true
+    }
+
+  export interface MindmapNodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MindmapNode'], meta: { name: 'MindmapNode' } }
+    /**
+     * Find zero or one MindmapNode that matches the filter.
+     * @param {MindmapNodeFindUniqueArgs} args - Arguments to find a MindmapNode
+     * @example
+     * // Get one MindmapNode
+     * const mindmapNode = await prisma.mindmapNode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MindmapNodeFindUniqueArgs>(args: SelectSubset<T, MindmapNodeFindUniqueArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MindmapNode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MindmapNodeFindUniqueOrThrowArgs} args - Arguments to find a MindmapNode
+     * @example
+     * // Get one MindmapNode
+     * const mindmapNode = await prisma.mindmapNode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MindmapNodeFindUniqueOrThrowArgs>(args: SelectSubset<T, MindmapNodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MindmapNode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeFindFirstArgs} args - Arguments to find a MindmapNode
+     * @example
+     * // Get one MindmapNode
+     * const mindmapNode = await prisma.mindmapNode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MindmapNodeFindFirstArgs>(args?: SelectSubset<T, MindmapNodeFindFirstArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MindmapNode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeFindFirstOrThrowArgs} args - Arguments to find a MindmapNode
+     * @example
+     * // Get one MindmapNode
+     * const mindmapNode = await prisma.mindmapNode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MindmapNodeFindFirstOrThrowArgs>(args?: SelectSubset<T, MindmapNodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MindmapNodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MindmapNodes
+     * const mindmapNodes = await prisma.mindmapNode.findMany()
+     * 
+     * // Get first 10 MindmapNodes
+     * const mindmapNodes = await prisma.mindmapNode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mindmapNodeWithIdOnly = await prisma.mindmapNode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MindmapNodeFindManyArgs>(args?: SelectSubset<T, MindmapNodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MindmapNode.
+     * @param {MindmapNodeCreateArgs} args - Arguments to create a MindmapNode.
+     * @example
+     * // Create one MindmapNode
+     * const MindmapNode = await prisma.mindmapNode.create({
+     *   data: {
+     *     // ... data to create a MindmapNode
+     *   }
+     * })
+     * 
+     */
+    create<T extends MindmapNodeCreateArgs>(args: SelectSubset<T, MindmapNodeCreateArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MindmapNodes.
+     * @param {MindmapNodeCreateManyArgs} args - Arguments to create many MindmapNodes.
+     * @example
+     * // Create many MindmapNodes
+     * const mindmapNode = await prisma.mindmapNode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MindmapNodeCreateManyArgs>(args?: SelectSubset<T, MindmapNodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MindmapNodes and returns the data saved in the database.
+     * @param {MindmapNodeCreateManyAndReturnArgs} args - Arguments to create many MindmapNodes.
+     * @example
+     * // Create many MindmapNodes
+     * const mindmapNode = await prisma.mindmapNode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MindmapNodes and only return the `id`
+     * const mindmapNodeWithIdOnly = await prisma.mindmapNode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MindmapNodeCreateManyAndReturnArgs>(args?: SelectSubset<T, MindmapNodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MindmapNode.
+     * @param {MindmapNodeDeleteArgs} args - Arguments to delete one MindmapNode.
+     * @example
+     * // Delete one MindmapNode
+     * const MindmapNode = await prisma.mindmapNode.delete({
+     *   where: {
+     *     // ... filter to delete one MindmapNode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MindmapNodeDeleteArgs>(args: SelectSubset<T, MindmapNodeDeleteArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MindmapNode.
+     * @param {MindmapNodeUpdateArgs} args - Arguments to update one MindmapNode.
+     * @example
+     * // Update one MindmapNode
+     * const mindmapNode = await prisma.mindmapNode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MindmapNodeUpdateArgs>(args: SelectSubset<T, MindmapNodeUpdateArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MindmapNodes.
+     * @param {MindmapNodeDeleteManyArgs} args - Arguments to filter MindmapNodes to delete.
+     * @example
+     * // Delete a few MindmapNodes
+     * const { count } = await prisma.mindmapNode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MindmapNodeDeleteManyArgs>(args?: SelectSubset<T, MindmapNodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MindmapNodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MindmapNodes
+     * const mindmapNode = await prisma.mindmapNode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MindmapNodeUpdateManyArgs>(args: SelectSubset<T, MindmapNodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MindmapNodes and returns the data updated in the database.
+     * @param {MindmapNodeUpdateManyAndReturnArgs} args - Arguments to update many MindmapNodes.
+     * @example
+     * // Update many MindmapNodes
+     * const mindmapNode = await prisma.mindmapNode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MindmapNodes and only return the `id`
+     * const mindmapNodeWithIdOnly = await prisma.mindmapNode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MindmapNodeUpdateManyAndReturnArgs>(args: SelectSubset<T, MindmapNodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MindmapNode.
+     * @param {MindmapNodeUpsertArgs} args - Arguments to update or create a MindmapNode.
+     * @example
+     * // Update or create a MindmapNode
+     * const mindmapNode = await prisma.mindmapNode.upsert({
+     *   create: {
+     *     // ... data to create a MindmapNode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MindmapNode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MindmapNodeUpsertArgs>(args: SelectSubset<T, MindmapNodeUpsertArgs<ExtArgs>>): Prisma__MindmapNodeClient<$Result.GetResult<Prisma.$MindmapNodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MindmapNodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeCountArgs} args - Arguments to filter MindmapNodes to count.
+     * @example
+     * // Count the number of MindmapNodes
+     * const count = await prisma.mindmapNode.count({
+     *   where: {
+     *     // ... the filter for the MindmapNodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MindmapNodeCountArgs>(
+      args?: Subset<T, MindmapNodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MindmapNodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MindmapNode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MindmapNodeAggregateArgs>(args: Subset<T, MindmapNodeAggregateArgs>): Prisma.PrismaPromise<GetMindmapNodeAggregateType<T>>
+
+    /**
+     * Group by MindmapNode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MindmapNodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MindmapNodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MindmapNodeGroupByArgs['orderBy'] }
+        : { orderBy?: MindmapNodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MindmapNodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMindmapNodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MindmapNode model
+   */
+  readonly fields: MindmapNodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MindmapNode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MindmapNodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    mindmap<T extends MindmapDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MindmapDefaultArgs<ExtArgs>>): Prisma__MindmapClient<$Result.GetResult<Prisma.$MindmapPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MindmapNode model
+   */
+  interface MindmapNodeFieldRefs {
+    readonly id: FieldRef<"MindmapNode", 'String'>
+    readonly title: FieldRef<"MindmapNode", 'String'>
+    readonly content: FieldRef<"MindmapNode", 'String'>
+    readonly parentId: FieldRef<"MindmapNode", 'String'>
+    readonly positionX: FieldRef<"MindmapNode", 'Float'>
+    readonly positionY: FieldRef<"MindmapNode", 'Float'>
+    readonly mindmapId: FieldRef<"MindmapNode", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MindmapNode findUnique
+   */
+  export type MindmapNodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which MindmapNode to fetch.
+     */
+    where: MindmapNodeWhereUniqueInput
+  }
+
+  /**
+   * MindmapNode findUniqueOrThrow
+   */
+  export type MindmapNodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which MindmapNode to fetch.
+     */
+    where: MindmapNodeWhereUniqueInput
+  }
+
+  /**
+   * MindmapNode findFirst
+   */
+  export type MindmapNodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which MindmapNode to fetch.
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MindmapNodes to fetch.
+     */
+    orderBy?: MindmapNodeOrderByWithRelationInput | MindmapNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MindmapNodes.
+     */
+    cursor?: MindmapNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MindmapNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MindmapNodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MindmapNodes.
+     */
+    distinct?: MindmapNodeScalarFieldEnum | MindmapNodeScalarFieldEnum[]
+  }
+
+  /**
+   * MindmapNode findFirstOrThrow
+   */
+  export type MindmapNodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which MindmapNode to fetch.
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MindmapNodes to fetch.
+     */
+    orderBy?: MindmapNodeOrderByWithRelationInput | MindmapNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MindmapNodes.
+     */
+    cursor?: MindmapNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MindmapNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MindmapNodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MindmapNodes.
+     */
+    distinct?: MindmapNodeScalarFieldEnum | MindmapNodeScalarFieldEnum[]
+  }
+
+  /**
+   * MindmapNode findMany
+   */
+  export type MindmapNodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which MindmapNodes to fetch.
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MindmapNodes to fetch.
+     */
+    orderBy?: MindmapNodeOrderByWithRelationInput | MindmapNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MindmapNodes.
+     */
+    cursor?: MindmapNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MindmapNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MindmapNodes.
+     */
+    skip?: number
+    distinct?: MindmapNodeScalarFieldEnum | MindmapNodeScalarFieldEnum[]
+  }
+
+  /**
+   * MindmapNode create
+   */
+  export type MindmapNodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MindmapNode.
+     */
+    data: XOR<MindmapNodeCreateInput, MindmapNodeUncheckedCreateInput>
+  }
+
+  /**
+   * MindmapNode createMany
+   */
+  export type MindmapNodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MindmapNodes.
+     */
+    data: MindmapNodeCreateManyInput | MindmapNodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MindmapNode createManyAndReturn
+   */
+  export type MindmapNodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many MindmapNodes.
+     */
+    data: MindmapNodeCreateManyInput | MindmapNodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MindmapNode update
+   */
+  export type MindmapNodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MindmapNode.
+     */
+    data: XOR<MindmapNodeUpdateInput, MindmapNodeUncheckedUpdateInput>
+    /**
+     * Choose, which MindmapNode to update.
+     */
+    where: MindmapNodeWhereUniqueInput
+  }
+
+  /**
+   * MindmapNode updateMany
+   */
+  export type MindmapNodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MindmapNodes.
+     */
+    data: XOR<MindmapNodeUpdateManyMutationInput, MindmapNodeUncheckedUpdateManyInput>
+    /**
+     * Filter which MindmapNodes to update
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * Limit how many MindmapNodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MindmapNode updateManyAndReturn
+   */
+  export type MindmapNodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * The data used to update MindmapNodes.
+     */
+    data: XOR<MindmapNodeUpdateManyMutationInput, MindmapNodeUncheckedUpdateManyInput>
+    /**
+     * Filter which MindmapNodes to update
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * Limit how many MindmapNodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MindmapNode upsert
+   */
+  export type MindmapNodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MindmapNode to update in case it exists.
+     */
+    where: MindmapNodeWhereUniqueInput
+    /**
+     * In case the MindmapNode found by the `where` argument doesn't exist, create a new MindmapNode with this data.
+     */
+    create: XOR<MindmapNodeCreateInput, MindmapNodeUncheckedCreateInput>
+    /**
+     * In case the MindmapNode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MindmapNodeUpdateInput, MindmapNodeUncheckedUpdateInput>
+  }
+
+  /**
+   * MindmapNode delete
+   */
+  export type MindmapNodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+    /**
+     * Filter which MindmapNode to delete.
+     */
+    where: MindmapNodeWhereUniqueInput
+  }
+
+  /**
+   * MindmapNode deleteMany
+   */
+  export type MindmapNodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MindmapNodes to delete
+     */
+    where?: MindmapNodeWhereInput
+    /**
+     * Limit how many MindmapNodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MindmapNode without action
+   */
+  export type MindmapNodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MindmapNode
+     */
+    select?: MindmapNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MindmapNode
+     */
+    omit?: MindmapNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MindmapNodeInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Request
@@ -2041,6 +4549,1027 @@ export namespace Prisma {
 
 
   /**
+   * Model Flashcard
+   */
+
+  export type AggregateFlashcard = {
+    _count: FlashcardCountAggregateOutputType | null
+    _min: FlashcardMinAggregateOutputType | null
+    _max: FlashcardMaxAggregateOutputType | null
+  }
+
+  export type FlashcardMinAggregateOutputType = {
+    id: string | null
+    front: string | null
+    back: string | null
+    topic: string | null
+    difficulty: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FlashcardMaxAggregateOutputType = {
+    id: string | null
+    front: string | null
+    back: string | null
+    topic: string | null
+    difficulty: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FlashcardCountAggregateOutputType = {
+    id: number
+    front: number
+    back: number
+    topic: number
+    difficulty: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FlashcardMinAggregateInputType = {
+    id?: true
+    front?: true
+    back?: true
+    topic?: true
+    difficulty?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FlashcardMaxAggregateInputType = {
+    id?: true
+    front?: true
+    back?: true
+    topic?: true
+    difficulty?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FlashcardCountAggregateInputType = {
+    id?: true
+    front?: true
+    back?: true
+    topic?: true
+    difficulty?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FlashcardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Flashcard to aggregate.
+     */
+    where?: FlashcardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Flashcards to fetch.
+     */
+    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlashcardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Flashcards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Flashcards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Flashcards
+    **/
+    _count?: true | FlashcardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlashcardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlashcardMaxAggregateInputType
+  }
+
+  export type GetFlashcardAggregateType<T extends FlashcardAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlashcard]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlashcard[P]>
+      : GetScalarType<T[P], AggregateFlashcard[P]>
+  }
+
+
+
+
+  export type FlashcardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashcardWhereInput
+    orderBy?: FlashcardOrderByWithAggregationInput | FlashcardOrderByWithAggregationInput[]
+    by: FlashcardScalarFieldEnum[] | FlashcardScalarFieldEnum
+    having?: FlashcardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlashcardCountAggregateInputType | true
+    _min?: FlashcardMinAggregateInputType
+    _max?: FlashcardMaxAggregateInputType
+  }
+
+  export type FlashcardGroupByOutputType = {
+    id: string
+    front: string
+    back: string
+    topic: string
+    difficulty: string
+    createdAt: Date
+    updatedAt: Date
+    _count: FlashcardCountAggregateOutputType | null
+    _min: FlashcardMinAggregateOutputType | null
+    _max: FlashcardMaxAggregateOutputType | null
+  }
+
+  type GetFlashcardGroupByPayload<T extends FlashcardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlashcardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlashcardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlashcardGroupByOutputType[P]>
+            : GetScalarType<T[P], FlashcardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlashcardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    front?: boolean
+    back?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["flashcard"]>
+
+  export type FlashcardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    front?: boolean
+    back?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["flashcard"]>
+
+  export type FlashcardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    front?: boolean
+    back?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["flashcard"]>
+
+  export type FlashcardSelectScalar = {
+    id?: boolean
+    front?: boolean
+    back?: boolean
+    topic?: boolean
+    difficulty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FlashcardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "front" | "back" | "topic" | "difficulty" | "createdAt" | "updatedAt", ExtArgs["result"]["flashcard"]>
+
+  export type $FlashcardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Flashcard"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      front: string
+      back: string
+      topic: string
+      difficulty: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["flashcard"]>
+    composites: {}
+  }
+
+  type FlashcardGetPayload<S extends boolean | null | undefined | FlashcardDefaultArgs> = $Result.GetResult<Prisma.$FlashcardPayload, S>
+
+  type FlashcardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlashcardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlashcardCountAggregateInputType | true
+    }
+
+  export interface FlashcardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Flashcard'], meta: { name: 'Flashcard' } }
+    /**
+     * Find zero or one Flashcard that matches the filter.
+     * @param {FlashcardFindUniqueArgs} args - Arguments to find a Flashcard
+     * @example
+     * // Get one Flashcard
+     * const flashcard = await prisma.flashcard.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlashcardFindUniqueArgs>(args: SelectSubset<T, FlashcardFindUniqueArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Flashcard that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlashcardFindUniqueOrThrowArgs} args - Arguments to find a Flashcard
+     * @example
+     * // Get one Flashcard
+     * const flashcard = await prisma.flashcard.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlashcardFindUniqueOrThrowArgs>(args: SelectSubset<T, FlashcardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Flashcard that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardFindFirstArgs} args - Arguments to find a Flashcard
+     * @example
+     * // Get one Flashcard
+     * const flashcard = await prisma.flashcard.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlashcardFindFirstArgs>(args?: SelectSubset<T, FlashcardFindFirstArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Flashcard that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardFindFirstOrThrowArgs} args - Arguments to find a Flashcard
+     * @example
+     * // Get one Flashcard
+     * const flashcard = await prisma.flashcard.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlashcardFindFirstOrThrowArgs>(args?: SelectSubset<T, FlashcardFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Flashcards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Flashcards
+     * const flashcards = await prisma.flashcard.findMany()
+     * 
+     * // Get first 10 Flashcards
+     * const flashcards = await prisma.flashcard.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const flashcardWithIdOnly = await prisma.flashcard.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FlashcardFindManyArgs>(args?: SelectSubset<T, FlashcardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Flashcard.
+     * @param {FlashcardCreateArgs} args - Arguments to create a Flashcard.
+     * @example
+     * // Create one Flashcard
+     * const Flashcard = await prisma.flashcard.create({
+     *   data: {
+     *     // ... data to create a Flashcard
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlashcardCreateArgs>(args: SelectSubset<T, FlashcardCreateArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Flashcards.
+     * @param {FlashcardCreateManyArgs} args - Arguments to create many Flashcards.
+     * @example
+     * // Create many Flashcards
+     * const flashcard = await prisma.flashcard.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlashcardCreateManyArgs>(args?: SelectSubset<T, FlashcardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Flashcards and returns the data saved in the database.
+     * @param {FlashcardCreateManyAndReturnArgs} args - Arguments to create many Flashcards.
+     * @example
+     * // Create many Flashcards
+     * const flashcard = await prisma.flashcard.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Flashcards and only return the `id`
+     * const flashcardWithIdOnly = await prisma.flashcard.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FlashcardCreateManyAndReturnArgs>(args?: SelectSubset<T, FlashcardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Flashcard.
+     * @param {FlashcardDeleteArgs} args - Arguments to delete one Flashcard.
+     * @example
+     * // Delete one Flashcard
+     * const Flashcard = await prisma.flashcard.delete({
+     *   where: {
+     *     // ... filter to delete one Flashcard
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlashcardDeleteArgs>(args: SelectSubset<T, FlashcardDeleteArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Flashcard.
+     * @param {FlashcardUpdateArgs} args - Arguments to update one Flashcard.
+     * @example
+     * // Update one Flashcard
+     * const flashcard = await prisma.flashcard.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlashcardUpdateArgs>(args: SelectSubset<T, FlashcardUpdateArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Flashcards.
+     * @param {FlashcardDeleteManyArgs} args - Arguments to filter Flashcards to delete.
+     * @example
+     * // Delete a few Flashcards
+     * const { count } = await prisma.flashcard.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlashcardDeleteManyArgs>(args?: SelectSubset<T, FlashcardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Flashcards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Flashcards
+     * const flashcard = await prisma.flashcard.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlashcardUpdateManyArgs>(args: SelectSubset<T, FlashcardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Flashcards and returns the data updated in the database.
+     * @param {FlashcardUpdateManyAndReturnArgs} args - Arguments to update many Flashcards.
+     * @example
+     * // Update many Flashcards
+     * const flashcard = await prisma.flashcard.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Flashcards and only return the `id`
+     * const flashcardWithIdOnly = await prisma.flashcard.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FlashcardUpdateManyAndReturnArgs>(args: SelectSubset<T, FlashcardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Flashcard.
+     * @param {FlashcardUpsertArgs} args - Arguments to update or create a Flashcard.
+     * @example
+     * // Update or create a Flashcard
+     * const flashcard = await prisma.flashcard.upsert({
+     *   create: {
+     *     // ... data to create a Flashcard
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Flashcard we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlashcardUpsertArgs>(args: SelectSubset<T, FlashcardUpsertArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Flashcards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardCountArgs} args - Arguments to filter Flashcards to count.
+     * @example
+     * // Count the number of Flashcards
+     * const count = await prisma.flashcard.count({
+     *   where: {
+     *     // ... the filter for the Flashcards we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlashcardCountArgs>(
+      args?: Subset<T, FlashcardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlashcardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Flashcard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlashcardAggregateArgs>(args: Subset<T, FlashcardAggregateArgs>): Prisma.PrismaPromise<GetFlashcardAggregateType<T>>
+
+    /**
+     * Group by Flashcard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashcardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlashcardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlashcardGroupByArgs['orderBy'] }
+        : { orderBy?: FlashcardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlashcardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlashcardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Flashcard model
+   */
+  readonly fields: FlashcardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Flashcard.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlashcardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Flashcard model
+   */
+  interface FlashcardFieldRefs {
+    readonly id: FieldRef<"Flashcard", 'String'>
+    readonly front: FieldRef<"Flashcard", 'String'>
+    readonly back: FieldRef<"Flashcard", 'String'>
+    readonly topic: FieldRef<"Flashcard", 'String'>
+    readonly difficulty: FieldRef<"Flashcard", 'String'>
+    readonly createdAt: FieldRef<"Flashcard", 'DateTime'>
+    readonly updatedAt: FieldRef<"Flashcard", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Flashcard findUnique
+   */
+  export type FlashcardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Filter, which Flashcard to fetch.
+     */
+    where: FlashcardWhereUniqueInput
+  }
+
+  /**
+   * Flashcard findUniqueOrThrow
+   */
+  export type FlashcardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Filter, which Flashcard to fetch.
+     */
+    where: FlashcardWhereUniqueInput
+  }
+
+  /**
+   * Flashcard findFirst
+   */
+  export type FlashcardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Filter, which Flashcard to fetch.
+     */
+    where?: FlashcardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Flashcards to fetch.
+     */
+    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Flashcards.
+     */
+    cursor?: FlashcardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Flashcards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Flashcards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Flashcards.
+     */
+    distinct?: FlashcardScalarFieldEnum | FlashcardScalarFieldEnum[]
+  }
+
+  /**
+   * Flashcard findFirstOrThrow
+   */
+  export type FlashcardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Filter, which Flashcard to fetch.
+     */
+    where?: FlashcardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Flashcards to fetch.
+     */
+    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Flashcards.
+     */
+    cursor?: FlashcardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Flashcards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Flashcards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Flashcards.
+     */
+    distinct?: FlashcardScalarFieldEnum | FlashcardScalarFieldEnum[]
+  }
+
+  /**
+   * Flashcard findMany
+   */
+  export type FlashcardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Filter, which Flashcards to fetch.
+     */
+    where?: FlashcardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Flashcards to fetch.
+     */
+    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Flashcards.
+     */
+    cursor?: FlashcardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Flashcards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Flashcards.
+     */
+    skip?: number
+    distinct?: FlashcardScalarFieldEnum | FlashcardScalarFieldEnum[]
+  }
+
+  /**
+   * Flashcard create
+   */
+  export type FlashcardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Flashcard.
+     */
+    data: XOR<FlashcardCreateInput, FlashcardUncheckedCreateInput>
+  }
+
+  /**
+   * Flashcard createMany
+   */
+  export type FlashcardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Flashcards.
+     */
+    data: FlashcardCreateManyInput | FlashcardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Flashcard createManyAndReturn
+   */
+  export type FlashcardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * The data used to create many Flashcards.
+     */
+    data: FlashcardCreateManyInput | FlashcardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Flashcard update
+   */
+  export type FlashcardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Flashcard.
+     */
+    data: XOR<FlashcardUpdateInput, FlashcardUncheckedUpdateInput>
+    /**
+     * Choose, which Flashcard to update.
+     */
+    where: FlashcardWhereUniqueInput
+  }
+
+  /**
+   * Flashcard updateMany
+   */
+  export type FlashcardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Flashcards.
+     */
+    data: XOR<FlashcardUpdateManyMutationInput, FlashcardUncheckedUpdateManyInput>
+    /**
+     * Filter which Flashcards to update
+     */
+    where?: FlashcardWhereInput
+    /**
+     * Limit how many Flashcards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Flashcard updateManyAndReturn
+   */
+  export type FlashcardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * The data used to update Flashcards.
+     */
+    data: XOR<FlashcardUpdateManyMutationInput, FlashcardUncheckedUpdateManyInput>
+    /**
+     * Filter which Flashcards to update
+     */
+    where?: FlashcardWhereInput
+    /**
+     * Limit how many Flashcards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Flashcard upsert
+   */
+  export type FlashcardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Flashcard to update in case it exists.
+     */
+    where: FlashcardWhereUniqueInput
+    /**
+     * In case the Flashcard found by the `where` argument doesn't exist, create a new Flashcard with this data.
+     */
+    create: XOR<FlashcardCreateInput, FlashcardUncheckedCreateInput>
+    /**
+     * In case the Flashcard was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlashcardUpdateInput, FlashcardUncheckedUpdateInput>
+  }
+
+  /**
+   * Flashcard delete
+   */
+  export type FlashcardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Filter which Flashcard to delete.
+     */
+    where: FlashcardWhereUniqueInput
+  }
+
+  /**
+   * Flashcard deleteMany
+   */
+  export type FlashcardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Flashcards to delete
+     */
+    where?: FlashcardWhereInput
+    /**
+     * Limit how many Flashcards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Flashcard without action
+   */
+  export type FlashcardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -2052,6 +5581,31 @@ export namespace Prisma {
   };
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const MindmapScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    topic: 'topic',
+    difficulty: 'difficulty',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MindmapScalarFieldEnum = (typeof MindmapScalarFieldEnum)[keyof typeof MindmapScalarFieldEnum]
+
+
+  export const MindmapNodeScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    content: 'content',
+    parentId: 'parentId',
+    positionX: 'positionX',
+    positionY: 'positionY',
+    mindmapId: 'mindmapId'
+  };
+
+  export type MindmapNodeScalarFieldEnum = (typeof MindmapNodeScalarFieldEnum)[keyof typeof MindmapNodeScalarFieldEnum]
 
 
   export const RequestScalarFieldEnum: {
@@ -2071,6 +5625,19 @@ export namespace Prisma {
   };
 
   export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
+
+
+  export const FlashcardScalarFieldEnum: {
+    id: 'id',
+    front: 'front',
+    back: 'back',
+    topic: 'topic',
+    difficulty: 'difficulty',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2117,6 +5684,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'RequestType'
    */
   export type EnumRequestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RequestType'>
@@ -2156,38 +5751,137 @@ export namespace Prisma {
    */
   export type ListEnumRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RequestStatus[]'>
     
-
-
-  /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
   /**
    * Deep Input Types
    */
 
+
+  export type MindmapWhereInput = {
+    AND?: MindmapWhereInput | MindmapWhereInput[]
+    OR?: MindmapWhereInput[]
+    NOT?: MindmapWhereInput | MindmapWhereInput[]
+    id?: StringFilter<"Mindmap"> | string
+    title?: StringFilter<"Mindmap"> | string
+    topic?: StringFilter<"Mindmap"> | string
+    difficulty?: StringFilter<"Mindmap"> | string
+    createdAt?: DateTimeFilter<"Mindmap"> | Date | string
+    updatedAt?: DateTimeFilter<"Mindmap"> | Date | string
+    nodes?: MindmapNodeListRelationFilter
+  }
+
+  export type MindmapOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    nodes?: MindmapNodeOrderByRelationAggregateInput
+  }
+
+  export type MindmapWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MindmapWhereInput | MindmapWhereInput[]
+    OR?: MindmapWhereInput[]
+    NOT?: MindmapWhereInput | MindmapWhereInput[]
+    title?: StringFilter<"Mindmap"> | string
+    topic?: StringFilter<"Mindmap"> | string
+    difficulty?: StringFilter<"Mindmap"> | string
+    createdAt?: DateTimeFilter<"Mindmap"> | Date | string
+    updatedAt?: DateTimeFilter<"Mindmap"> | Date | string
+    nodes?: MindmapNodeListRelationFilter
+  }, "id">
+
+  export type MindmapOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MindmapCountOrderByAggregateInput
+    _max?: MindmapMaxOrderByAggregateInput
+    _min?: MindmapMinOrderByAggregateInput
+  }
+
+  export type MindmapScalarWhereWithAggregatesInput = {
+    AND?: MindmapScalarWhereWithAggregatesInput | MindmapScalarWhereWithAggregatesInput[]
+    OR?: MindmapScalarWhereWithAggregatesInput[]
+    NOT?: MindmapScalarWhereWithAggregatesInput | MindmapScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Mindmap"> | string
+    title?: StringWithAggregatesFilter<"Mindmap"> | string
+    topic?: StringWithAggregatesFilter<"Mindmap"> | string
+    difficulty?: StringWithAggregatesFilter<"Mindmap"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Mindmap"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Mindmap"> | Date | string
+  }
+
+  export type MindmapNodeWhereInput = {
+    AND?: MindmapNodeWhereInput | MindmapNodeWhereInput[]
+    OR?: MindmapNodeWhereInput[]
+    NOT?: MindmapNodeWhereInput | MindmapNodeWhereInput[]
+    id?: StringFilter<"MindmapNode"> | string
+    title?: StringFilter<"MindmapNode"> | string
+    content?: StringFilter<"MindmapNode"> | string
+    parentId?: StringNullableFilter<"MindmapNode"> | string | null
+    positionX?: FloatFilter<"MindmapNode"> | number
+    positionY?: FloatFilter<"MindmapNode"> | number
+    mindmapId?: StringFilter<"MindmapNode"> | string
+    mindmap?: XOR<MindmapScalarRelationFilter, MindmapWhereInput>
+  }
+
+  export type MindmapNodeOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    positionX?: SortOrder
+    positionY?: SortOrder
+    mindmapId?: SortOrder
+    mindmap?: MindmapOrderByWithRelationInput
+  }
+
+  export type MindmapNodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MindmapNodeWhereInput | MindmapNodeWhereInput[]
+    OR?: MindmapNodeWhereInput[]
+    NOT?: MindmapNodeWhereInput | MindmapNodeWhereInput[]
+    title?: StringFilter<"MindmapNode"> | string
+    content?: StringFilter<"MindmapNode"> | string
+    parentId?: StringNullableFilter<"MindmapNode"> | string | null
+    positionX?: FloatFilter<"MindmapNode"> | number
+    positionY?: FloatFilter<"MindmapNode"> | number
+    mindmapId?: StringFilter<"MindmapNode"> | string
+    mindmap?: XOR<MindmapScalarRelationFilter, MindmapWhereInput>
+  }, "id">
+
+  export type MindmapNodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    positionX?: SortOrder
+    positionY?: SortOrder
+    mindmapId?: SortOrder
+    _count?: MindmapNodeCountOrderByAggregateInput
+    _avg?: MindmapNodeAvgOrderByAggregateInput
+    _max?: MindmapNodeMaxOrderByAggregateInput
+    _min?: MindmapNodeMinOrderByAggregateInput
+    _sum?: MindmapNodeSumOrderByAggregateInput
+  }
+
+  export type MindmapNodeScalarWhereWithAggregatesInput = {
+    AND?: MindmapNodeScalarWhereWithAggregatesInput | MindmapNodeScalarWhereWithAggregatesInput[]
+    OR?: MindmapNodeScalarWhereWithAggregatesInput[]
+    NOT?: MindmapNodeScalarWhereWithAggregatesInput | MindmapNodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MindmapNode"> | string
+    title?: StringWithAggregatesFilter<"MindmapNode"> | string
+    content?: StringWithAggregatesFilter<"MindmapNode"> | string
+    parentId?: StringNullableWithAggregatesFilter<"MindmapNode"> | string | null
+    positionX?: FloatWithAggregatesFilter<"MindmapNode"> | number
+    positionY?: FloatWithAggregatesFilter<"MindmapNode"> | number
+    mindmapId?: StringWithAggregatesFilter<"MindmapNode"> | string
+  }
 
   export type RequestWhereInput = {
     AND?: RequestWhereInput | RequestWhereInput[]
@@ -2281,6 +5975,204 @@ export namespace Prisma {
     modelUsed?: StringNullableWithAggregatesFilter<"Request"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Request"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Request"> | Date | string
+  }
+
+  export type FlashcardWhereInput = {
+    AND?: FlashcardWhereInput | FlashcardWhereInput[]
+    OR?: FlashcardWhereInput[]
+    NOT?: FlashcardWhereInput | FlashcardWhereInput[]
+    id?: StringFilter<"Flashcard"> | string
+    front?: StringFilter<"Flashcard"> | string
+    back?: StringFilter<"Flashcard"> | string
+    topic?: StringFilter<"Flashcard"> | string
+    difficulty?: StringFilter<"Flashcard"> | string
+    createdAt?: DateTimeFilter<"Flashcard"> | Date | string
+    updatedAt?: DateTimeFilter<"Flashcard"> | Date | string
+  }
+
+  export type FlashcardOrderByWithRelationInput = {
+    id?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FlashcardWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FlashcardWhereInput | FlashcardWhereInput[]
+    OR?: FlashcardWhereInput[]
+    NOT?: FlashcardWhereInput | FlashcardWhereInput[]
+    front?: StringFilter<"Flashcard"> | string
+    back?: StringFilter<"Flashcard"> | string
+    topic?: StringFilter<"Flashcard"> | string
+    difficulty?: StringFilter<"Flashcard"> | string
+    createdAt?: DateTimeFilter<"Flashcard"> | Date | string
+    updatedAt?: DateTimeFilter<"Flashcard"> | Date | string
+  }, "id">
+
+  export type FlashcardOrderByWithAggregationInput = {
+    id?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FlashcardCountOrderByAggregateInput
+    _max?: FlashcardMaxOrderByAggregateInput
+    _min?: FlashcardMinOrderByAggregateInput
+  }
+
+  export type FlashcardScalarWhereWithAggregatesInput = {
+    AND?: FlashcardScalarWhereWithAggregatesInput | FlashcardScalarWhereWithAggregatesInput[]
+    OR?: FlashcardScalarWhereWithAggregatesInput[]
+    NOT?: FlashcardScalarWhereWithAggregatesInput | FlashcardScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Flashcard"> | string
+    front?: StringWithAggregatesFilter<"Flashcard"> | string
+    back?: StringWithAggregatesFilter<"Flashcard"> | string
+    topic?: StringWithAggregatesFilter<"Flashcard"> | string
+    difficulty?: StringWithAggregatesFilter<"Flashcard"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Flashcard"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Flashcard"> | Date | string
+  }
+
+  export type MindmapCreateInput = {
+    id?: string
+    title: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nodes?: MindmapNodeCreateNestedManyWithoutMindmapInput
+  }
+
+  export type MindmapUncheckedCreateInput = {
+    id?: string
+    title: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nodes?: MindmapNodeUncheckedCreateNestedManyWithoutMindmapInput
+  }
+
+  export type MindmapUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nodes?: MindmapNodeUpdateManyWithoutMindmapNestedInput
+  }
+
+  export type MindmapUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nodes?: MindmapNodeUncheckedUpdateManyWithoutMindmapNestedInput
+  }
+
+  export type MindmapCreateManyInput = {
+    id?: string
+    title: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MindmapUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MindmapUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MindmapNodeCreateInput = {
+    id?: string
+    title: string
+    content: string
+    parentId?: string | null
+    positionX: number
+    positionY: number
+    mindmap: MindmapCreateNestedOneWithoutNodesInput
+  }
+
+  export type MindmapNodeUncheckedCreateInput = {
+    id?: string
+    title: string
+    content: string
+    parentId?: string | null
+    positionX: number
+    positionY: number
+    mindmapId: string
+  }
+
+  export type MindmapNodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
+    mindmap?: MindmapUpdateOneRequiredWithoutNodesNestedInput
+  }
+
+  export type MindmapNodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
+    mindmapId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MindmapNodeCreateManyInput = {
+    id?: string
+    title: string
+    content: string
+    parentId?: string | null
+    positionX: number
+    positionY: number
+    mindmapId: string
+  }
+
+  export type MindmapNodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MindmapNodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
+    mindmapId?: StringFieldUpdateOperationsInput | string
   }
 
   export type RequestCreateInput = {
@@ -2395,6 +6287,76 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FlashcardCreateInput = {
+    id?: string
+    front: string
+    back: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlashcardUncheckedCreateInput = {
+    id?: string
+    front: string
+    back: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlashcardUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashcardUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashcardCreateManyInput = {
+    id?: string
+    front: string
+    back: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlashcardUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashcardUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2410,11 +6372,84 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type EnumRequestTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRequestTypeFilter<$PrismaModel> | $Enums.RequestType
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type MindmapNodeListRelationFilter = {
+    every?: MindmapNodeWhereInput
+    some?: MindmapNodeWhereInput
+    none?: MindmapNodeWhereInput
+  }
+
+  export type MindmapNodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MindmapCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MindmapMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MindmapMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -2430,6 +6465,108 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type MindmapScalarRelationFilter = {
+    is?: MindmapWhereInput
+    isNot?: MindmapWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type MindmapNodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    parentId?: SortOrder
+    positionX?: SortOrder
+    positionY?: SortOrder
+    mindmapId?: SortOrder
+  }
+
+  export type MindmapNodeAvgOrderByAggregateInput = {
+    positionX?: SortOrder
+    positionY?: SortOrder
+  }
+
+  export type MindmapNodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    parentId?: SortOrder
+    positionX?: SortOrder
+    positionY?: SortOrder
+    mindmapId?: SortOrder
+  }
+
+  export type MindmapNodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    parentId?: SortOrder
+    positionX?: SortOrder
+    positionY?: SortOrder
+    mindmapId?: SortOrder
+  }
+
+  export type MindmapNodeSumOrderByAggregateInput = {
+    positionX?: SortOrder
+    positionY?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type EnumRequestTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRequestTypeFilter<$PrismaModel> | $Enums.RequestType
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -2448,22 +6585,6 @@ export namespace Prisma {
     in?: $Enums.RequestStatus[] | ListEnumRequestStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.RequestStatus[] | ListEnumRequestStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumRequestStatusFilter<$PrismaModel> | $Enums.RequestStatus
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type RequestCountOrderByAggregateInput = {
@@ -2526,24 +6647,6 @@ export namespace Prisma {
     processingTime?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type EnumRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
     in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
@@ -2552,24 +6655,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRequestTypeFilter<$PrismaModel>
     _max?: NestedEnumRequestTypeFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -2598,30 +6683,114 @@ export namespace Prisma {
     _max?: NestedEnumRequestStatusFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type FlashcardCountOrderByAggregateInput = {
+    id?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FlashcardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FlashcardMinOrderByAggregateInput = {
+    id?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    topic?: SortOrder
+    difficulty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MindmapNodeCreateNestedManyWithoutMindmapInput = {
+    create?: XOR<MindmapNodeCreateWithoutMindmapInput, MindmapNodeUncheckedCreateWithoutMindmapInput> | MindmapNodeCreateWithoutMindmapInput[] | MindmapNodeUncheckedCreateWithoutMindmapInput[]
+    connectOrCreate?: MindmapNodeCreateOrConnectWithoutMindmapInput | MindmapNodeCreateOrConnectWithoutMindmapInput[]
+    createMany?: MindmapNodeCreateManyMindmapInputEnvelope
+    connect?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+  }
+
+  export type MindmapNodeUncheckedCreateNestedManyWithoutMindmapInput = {
+    create?: XOR<MindmapNodeCreateWithoutMindmapInput, MindmapNodeUncheckedCreateWithoutMindmapInput> | MindmapNodeCreateWithoutMindmapInput[] | MindmapNodeUncheckedCreateWithoutMindmapInput[]
+    connectOrCreate?: MindmapNodeCreateOrConnectWithoutMindmapInput | MindmapNodeCreateOrConnectWithoutMindmapInput[]
+    createMany?: MindmapNodeCreateManyMindmapInputEnvelope
+    connect?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type EnumRequestTypeFieldUpdateOperationsInput = {
-    set?: $Enums.RequestType
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type MindmapNodeUpdateManyWithoutMindmapNestedInput = {
+    create?: XOR<MindmapNodeCreateWithoutMindmapInput, MindmapNodeUncheckedCreateWithoutMindmapInput> | MindmapNodeCreateWithoutMindmapInput[] | MindmapNodeUncheckedCreateWithoutMindmapInput[]
+    connectOrCreate?: MindmapNodeCreateOrConnectWithoutMindmapInput | MindmapNodeCreateOrConnectWithoutMindmapInput[]
+    upsert?: MindmapNodeUpsertWithWhereUniqueWithoutMindmapInput | MindmapNodeUpsertWithWhereUniqueWithoutMindmapInput[]
+    createMany?: MindmapNodeCreateManyMindmapInputEnvelope
+    set?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    disconnect?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    delete?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    connect?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    update?: MindmapNodeUpdateWithWhereUniqueWithoutMindmapInput | MindmapNodeUpdateWithWhereUniqueWithoutMindmapInput[]
+    updateMany?: MindmapNodeUpdateManyWithWhereWithoutMindmapInput | MindmapNodeUpdateManyWithWhereWithoutMindmapInput[]
+    deleteMany?: MindmapNodeScalarWhereInput | MindmapNodeScalarWhereInput[]
+  }
+
+  export type MindmapNodeUncheckedUpdateManyWithoutMindmapNestedInput = {
+    create?: XOR<MindmapNodeCreateWithoutMindmapInput, MindmapNodeUncheckedCreateWithoutMindmapInput> | MindmapNodeCreateWithoutMindmapInput[] | MindmapNodeUncheckedCreateWithoutMindmapInput[]
+    connectOrCreate?: MindmapNodeCreateOrConnectWithoutMindmapInput | MindmapNodeCreateOrConnectWithoutMindmapInput[]
+    upsert?: MindmapNodeUpsertWithWhereUniqueWithoutMindmapInput | MindmapNodeUpsertWithWhereUniqueWithoutMindmapInput[]
+    createMany?: MindmapNodeCreateManyMindmapInputEnvelope
+    set?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    disconnect?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    delete?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    connect?: MindmapNodeWhereUniqueInput | MindmapNodeWhereUniqueInput[]
+    update?: MindmapNodeUpdateWithWhereUniqueWithoutMindmapInput | MindmapNodeUpdateWithWhereUniqueWithoutMindmapInput[]
+    updateMany?: MindmapNodeUpdateManyWithWhereWithoutMindmapInput | MindmapNodeUpdateManyWithWhereWithoutMindmapInput[]
+    deleteMany?: MindmapNodeScalarWhereInput | MindmapNodeScalarWhereInput[]
+  }
+
+  export type MindmapCreateNestedOneWithoutNodesInput = {
+    create?: XOR<MindmapCreateWithoutNodesInput, MindmapUncheckedCreateWithoutNodesInput>
+    connectOrCreate?: MindmapCreateOrConnectWithoutNodesInput
+    connect?: MindmapWhereUniqueInput
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type MindmapUpdateOneRequiredWithoutNodesNestedInput = {
+    create?: XOR<MindmapCreateWithoutNodesInput, MindmapUncheckedCreateWithoutNodesInput>
+    connectOrCreate?: MindmapCreateOrConnectWithoutNodesInput
+    upsert?: MindmapUpsertWithoutNodesInput
+    connect?: MindmapWhereUniqueInput
+    update?: XOR<XOR<MindmapUpdateToOneWithWhereWithoutNodesInput, MindmapUpdateWithoutNodesInput>, MindmapUncheckedUpdateWithoutNodesInput>
+  }
+
+  export type EnumRequestTypeFieldUpdateOperationsInput = {
+    set?: $Enums.RequestType
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -2636,10 +6805,6 @@ export namespace Prisma {
     set?: $Enums.RequestStatus
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2652,45 +6817,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedEnumRequestTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRequestTypeFilter<$PrismaModel> | $Enums.RequestType
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumRequestStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.RequestStatus | EnumRequestStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.RequestStatus[] | ListEnumRequestStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RequestStatus[] | ListEnumRequestStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumRequestStatusFilter<$PrismaModel> | $Enums.RequestStatus
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2732,14 +6858,43 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.RequestType
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRequestTypeFilter<$PrismaModel>
-    _max?: NestedEnumRequestTypeFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -2757,6 +6912,57 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRequestTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRequestTypeFilter<$PrismaModel> | $Enums.RequestType
+  }
+
+  export type NestedEnumRequestStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RequestStatus | EnumRequestStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RequestStatus[] | ListEnumRequestStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RequestStatus[] | ListEnumRequestStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRequestStatusFilter<$PrismaModel> | $Enums.RequestStatus
+  }
+
+  export type NestedEnumRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RequestType | EnumRequestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RequestType[] | ListEnumRequestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.RequestType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRequestTypeFilter<$PrismaModel>
+    _max?: NestedEnumRequestTypeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -2796,18 +7002,149 @@ export namespace Prisma {
     _max?: NestedEnumRequestStatusFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type MindmapNodeCreateWithoutMindmapInput = {
+    id?: string
+    title: string
+    content: string
+    parentId?: string | null
+    positionX: number
+    positionY: number
+  }
+
+  export type MindmapNodeUncheckedCreateWithoutMindmapInput = {
+    id?: string
+    title: string
+    content: string
+    parentId?: string | null
+    positionX: number
+    positionY: number
+  }
+
+  export type MindmapNodeCreateOrConnectWithoutMindmapInput = {
+    where: MindmapNodeWhereUniqueInput
+    create: XOR<MindmapNodeCreateWithoutMindmapInput, MindmapNodeUncheckedCreateWithoutMindmapInput>
+  }
+
+  export type MindmapNodeCreateManyMindmapInputEnvelope = {
+    data: MindmapNodeCreateManyMindmapInput | MindmapNodeCreateManyMindmapInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MindmapNodeUpsertWithWhereUniqueWithoutMindmapInput = {
+    where: MindmapNodeWhereUniqueInput
+    update: XOR<MindmapNodeUpdateWithoutMindmapInput, MindmapNodeUncheckedUpdateWithoutMindmapInput>
+    create: XOR<MindmapNodeCreateWithoutMindmapInput, MindmapNodeUncheckedCreateWithoutMindmapInput>
+  }
+
+  export type MindmapNodeUpdateWithWhereUniqueWithoutMindmapInput = {
+    where: MindmapNodeWhereUniqueInput
+    data: XOR<MindmapNodeUpdateWithoutMindmapInput, MindmapNodeUncheckedUpdateWithoutMindmapInput>
+  }
+
+  export type MindmapNodeUpdateManyWithWhereWithoutMindmapInput = {
+    where: MindmapNodeScalarWhereInput
+    data: XOR<MindmapNodeUpdateManyMutationInput, MindmapNodeUncheckedUpdateManyWithoutMindmapInput>
+  }
+
+  export type MindmapNodeScalarWhereInput = {
+    AND?: MindmapNodeScalarWhereInput | MindmapNodeScalarWhereInput[]
+    OR?: MindmapNodeScalarWhereInput[]
+    NOT?: MindmapNodeScalarWhereInput | MindmapNodeScalarWhereInput[]
+    id?: StringFilter<"MindmapNode"> | string
+    title?: StringFilter<"MindmapNode"> | string
+    content?: StringFilter<"MindmapNode"> | string
+    parentId?: StringNullableFilter<"MindmapNode"> | string | null
+    positionX?: FloatFilter<"MindmapNode"> | number
+    positionY?: FloatFilter<"MindmapNode"> | number
+    mindmapId?: StringFilter<"MindmapNode"> | string
+  }
+
+  export type MindmapCreateWithoutNodesInput = {
+    id?: string
+    title: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MindmapUncheckedCreateWithoutNodesInput = {
+    id?: string
+    title: string
+    topic: string
+    difficulty: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MindmapCreateOrConnectWithoutNodesInput = {
+    where: MindmapWhereUniqueInput
+    create: XOR<MindmapCreateWithoutNodesInput, MindmapUncheckedCreateWithoutNodesInput>
+  }
+
+  export type MindmapUpsertWithoutNodesInput = {
+    update: XOR<MindmapUpdateWithoutNodesInput, MindmapUncheckedUpdateWithoutNodesInput>
+    create: XOR<MindmapCreateWithoutNodesInput, MindmapUncheckedCreateWithoutNodesInput>
+    where?: MindmapWhereInput
+  }
+
+  export type MindmapUpdateToOneWithWhereWithoutNodesInput = {
+    where?: MindmapWhereInput
+    data: XOR<MindmapUpdateWithoutNodesInput, MindmapUncheckedUpdateWithoutNodesInput>
+  }
+
+  export type MindmapUpdateWithoutNodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MindmapUncheckedUpdateWithoutNodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MindmapNodeCreateManyMindmapInput = {
+    id?: string
+    title: string
+    content: string
+    parentId?: string | null
+    positionX: number
+    positionY: number
+  }
+
+  export type MindmapNodeUpdateWithoutMindmapInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MindmapNodeUncheckedUpdateWithoutMindmapInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MindmapNodeUncheckedUpdateManyWithoutMindmapInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    positionX?: FloatFieldUpdateOperationsInput | number
+    positionY?: FloatFieldUpdateOperationsInput | number
   }
 
 

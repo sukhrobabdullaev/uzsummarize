@@ -47,9 +47,9 @@ export function UrlSummarizer() {
     return (
         <Card className="w-full max-w-2xl mx-auto">
             <CardHeader>
-                <CardTitle>URL Summarizer</CardTitle>
+                <CardTitle>URL xulosasi</CardTitle>
                 <CardDescription>
-                    Enter a URL and choose an AI model to generate a summary of the content
+                    URL ni kiriting va AI modelini tanlang
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -57,7 +57,7 @@ export function UrlSummarizer() {
                     <div className="flex gap-2">
                         <Input
                             type="url"
-                            placeholder="Enter URL to summarize"
+                            placeholder="URL ni kiriting"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                             required
@@ -77,10 +77,10 @@ export function UrlSummarizer() {
                         {loading ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Summarizing...
+                                Xulosa olinyapti...
                             </>
                         ) : (
-                            'Summarize'
+                            'Xulosa olish'
                         )}
                     </Button>
                 </form>
@@ -93,7 +93,7 @@ export function UrlSummarizer() {
 
                 {summary && (
                     <div className="mt-6">
-                        <h3 className="text-lg font-semibold mb-2">Summary</h3>
+                        <h3 className="text-lg font-semibold mb-2">Xulosa Natijasi</h3>
                         <div className="p-4 bg-gray-50 rounded-md">
                             {summary}
                         </div>

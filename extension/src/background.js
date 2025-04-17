@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // Create context menu item
   chrome.contextMenus.create({
     id: "summarizeSelection",
-    title: "UzSummarize: Summarize Selection",
+    title: "UzSummarize: Xulosa olish",
     contexts: ["selection"],
   });
 

@@ -6,16 +6,16 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN!,
 });
 
-// Custom rate limiter for URL summarization
+// Custom rate limiter for flashcards
 // 2 requests per 12 hours
-const urlRateLimiter = new Ratelimit({
+const flashcardRateLimiter = new Ratelimit({
   redis,
   limiter: Ratelimit.fixedWindow(2, "6h"), // 2 requests per 6 hours
   analytics: true,
 });
 
-export const urlRateLimit = async (ip: string) => {
-  const { success, reset } = await urlRateLimiter.limit(ip);
+export const flashcardRateLimit = async (ip: string) => {
+  const { success, reset } = await flashcardRateLimiter.limit(ip);
 
   if (!success) {
     const resetTime = new Date(reset).toLocaleString("en-US", {

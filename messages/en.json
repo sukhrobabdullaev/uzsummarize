@@ -82,7 +82,6 @@
     "summarize": "Generate Summary"
   },
 
-
   "summaryResult": {
     "title": "Summary Result",
     "copySuccess": "Summary copied to clipboard",
@@ -256,7 +255,14 @@
     "remainingRequests": "Remaining requests: {{count}}"
   },
   "footer": {
-    "copyright": "UzSummarize. All rights reserved."
+    "copyright": "UzSummarize. All rights reserved.",
+    "description": "Empowering content understanding through AI-driven summarization",
+    "newsletter": "Subscribe to our newsletter",
+    "privacy": "Privacy Policy",
+    "about": "About Us",
+    "contact": "Contact",
+    "socials": "Social Media",
+    "links": "Links"
   },
   "rateLimit": {
     "exceeded": "Rate limit exceeded: Only {{maxRequests}} requests allowed per {{timeWindow}} hours. Please wait {{hoursLeft}} hour{{plural}} and try again.",
@@ -327,11 +333,13 @@
   "services": {
     "imageTextExtraction": {
       "name": "Image Text Extraction",
-      "description": "Extract text from images or screenshots"
+      "description": "Extract text from images or screenshots",
+      "title": "Image Text Extraction"
     },
     "imageDescription": {
       "name": "Image Description",
-      "description": "Get AI-generated descriptions of images"
+      "description": "Get AI-generated descriptions of images",
+      "title": "Image Description"
     },
     "pdfSummarization": {
       "name": "PDF Summarization",
@@ -339,11 +347,59 @@
     },
     "studyNotes": {
       "name": "Study Notes",
-      "description": "Generate study notes from your content"
+      "description": "Generate study notes from your content or topic",
+      "title": "Study Notes Generator"
     },
     "conceptExplanation": {
       "name": "Concept Explanation",
       "description": "Get simple explanations of complex topics"
+    },
+    "mindmap": {
+      "name": "Mindmap",
+      "description": "Generate mindmaps from your content",
+      "title": "Mindmap Generator"
+    },
+    "flashcards": {
+      "name": "Flashcards",
+      "description": "Generate flashcards from your content",
+      "title": "Flashcards Generator"
+    },
+    "urlSummarizer": {
+      "name": "URL Summarizer",
+      "description": "Summarize URLs automatically",
+      "title": "URL Summarizer"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "introduction": {
+      "title": "Introduction",
+      "content": "At UzSummarize, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal information when you use our services."
+    },
+    "dataCollection": {
+      "title": "Data Collection",
+      "content": "We collect the following types of information:",
+      "points": [
+        "Information you provide when using our summarization services",
+        "Usage data and analytics to improve our services",
+        "Technical information about your device and browser"
+      ]
+    },
+    "dataUsage": {
+      "title": "How We Use Your Data",
+      "content": "We use the collected data to provide and improve our services, ensure security, and enhance user experience. We do not sell your personal information to third parties."
+    },
+    "dataProtection": {
+      "title": "Data Protection",
+      "content": "We implement appropriate security measures to protect your personal information. However, no method of transmission over the internet is 100% secure."
+    },
+    "userRights": {
+      "title": "Your Rights",
+      "content": "You have the right to access, correct, or delete your personal information. You can also opt-out of certain data collection practices."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "content": "If you have any questions about this Privacy Policy, please contact us at support@uzsummarize.com"
     }
   }
 }

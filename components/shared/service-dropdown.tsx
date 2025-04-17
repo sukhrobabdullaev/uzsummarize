@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, FileText, ImageIcon, FileSearch, BookOpen, Lightbulb, Clock } from "lucide-react"
+import { ChevronDown, FileText, ImageIcon, FileSearch, BookOpen, Lightbulb, Clock, Flashlight, Link as LinkIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 
 export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
@@ -20,6 +20,7 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
             icon: ImageIcon,
             path: `/${locale}/services/image-extraction`,
             color: "from-blue-500 to-cyan-400",
+            comingSoon: false
         },
         {
             name: t("services.imageDescription.name"),
@@ -27,13 +28,15 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
             icon: FileText,
             path: `/${locale}/services/image-description`,
             color: "from-violet-500 to-purple-400",
+            comingSoon: false
         },
         {
-            name: t("services.pdfSummarization.name"),
-            description: t("services.pdfSummarization.description"),
-            icon: FileSearch,
-            path: `/${locale}/services/pdf-summarization`,
-            color: "from-rose-500 to-pink-400",
+            name: t("services.urlSummarizer.name"),
+            description: t("services.urlSummarizer.description"),
+            icon: LinkIcon,
+            path: `/${locale}/services/url-summarizer`,
+            color: "from-orange-500 to-red-400",
+            comingSoon: false
         },
         {
             name: t("services.studyNotes.name"),
@@ -41,14 +44,30 @@ export function ServicesDropdown({ isMobile = false }: { isMobile?: boolean }) {
             icon: BookOpen,
             path: `/${locale}/services/study-notes`,
             color: "from-emerald-500 to-green-400",
-            comingSoon: true
+            comingSoon: false
         },
         {
-            name: t("services.conceptExplanation.name"),
-            description: t("services.conceptExplanation.description"),
+            name: t("services.mindmap.name"),
+            description: t("services.mindmap.description"),
             icon: Lightbulb,
-            path: `/${locale}/services/concept-explanation`,
+            path: `/${locale}/services/mindmap`,
             color: "from-amber-500 to-yellow-400",
+            comingSoon: false
+        },
+        {
+            name: t("services.flashcards.name"),
+            description: t("services.flashcards.description"),
+            icon: Flashlight,
+            path: `/${locale}/services/flashcards`,
+            color: "from-indigo-500 to-blue-400",
+            comingSoon: false
+        },
+        {
+            name: t("services.pdfSummarization.name"),
+            description: t("services.pdfSummarization.description"),
+            icon: FileSearch,
+            path: `/${locale}/services/pdf-summarization`,
+            color: "from-rose-500 to-pink-400",
             comingSoon: true
         },
     ], [locale, t])

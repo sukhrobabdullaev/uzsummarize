@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "UzSummarize",
   "version": "1.0.0",
-  "description": "Veb-sahifadagi matnlarni o'zbek tilida qisqacha xulosa olish",
+  "description": "Veb-sahifadagi matnlardan o'zbek tilida qisqacha xulosa olish",
   "permissions": ["activeTab", "scripting", "storage", "tabs", "contextMenus"],
   "host_permissions": [
     "https://uzsummarize.uz/*",
