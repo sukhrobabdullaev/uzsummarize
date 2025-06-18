@@ -9,6 +9,7 @@ import { LanguageSwitcher } from "@/components/shared/language-switcher"
 import { useLocale, useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 import { ServicesDropdown } from "@/components/shared/service-dropdown"
+import { ProductsDropdown } from "@/components/shared/products-dropdown"
 
 const Navbar = () => {
   const t = useTranslations()
@@ -39,6 +40,7 @@ const Navbar = () => {
   const navItems = [
     { name: t("navigation.home"), path: `/${locale}` },
     { name: t("navigation.services"), component: <ServicesDropdown /> },
+    { name: t("navigation.products"), component: <ProductsDropdown /> },
     { name: t("navigation.about"), path: `/${locale}/about` },
     { name: t("navigation.changelog"), path: `/${locale}/changelog` }
   ]
@@ -84,7 +86,7 @@ const Navbar = () => {
             <div className="mr-5 bg-accent/40 backdrop-blur-md rounded-full px-1.5 py-1.5 flex items-center border border-white/5 shadow-sm">
               {navItems.map((item) => {
                 if (item.component) {
-                  return <div key="services">{item.component}</div>
+                  return <div key={item.name}>{item.component}</div>
                 }
 
                 const isActive = activeItem === item.path
@@ -177,12 +179,18 @@ const Navbar = () => {
                   if (item.component) {
                     return (
                       <motion.div
-                        key="services"
+                        key={item.name}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1, duration: 0.3 }}
                       >
-                        <ServicesDropdown isMobile={true} />
+                        {item.name === t("navigation.services") ? (
+                          <ServicesDropdown isMobile={true} />
+                        ) : item.name === t("navigation.products") ? (
+                          <ProductsDropdown isMobile={true} />
+                        ) : (
+                          item.component
+                        )}
                       </motion.div>
                     )
                   }

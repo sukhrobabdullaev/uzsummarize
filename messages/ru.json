@@ -23,16 +23,17 @@
   },
   "navigation": {
     "home": "Главная",
-    "services": "Услуги",
+    "services": "Сервисы",
+    "products": "Продукты",
     "about": "О нас",
     "contact": "Контакты",
-    "changelog": "История изменений",
+    "changelog": "Изменения",
     "voiceAssistant": "Голосовой помощник",
-    "tagline": "УЗБЕКСКИЙ ИИ-СУММАТОР",
+    "tagline": "УЗБЕКСКИЙ ИИ СУММАРИЗАТОР",
     "openMenu": "Открыть меню",
     "closeMenu": "Закрыть меню",
     "language": "Язык",
-    "tryNow": "Попробуйте UzSummarize сейчас"
+    "tryNow": "Попробовать UzSummarize сейчас"
   },
   "auth": {
     "login": "Вход",
