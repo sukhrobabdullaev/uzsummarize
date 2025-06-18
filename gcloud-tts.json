@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "audiosharingproject",
+  "private_key_id": "90f978c274999e2a9dceccca16ccf0dccd4047a2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDcF8omBxvH7SM8\nlkFkRDSPafN/zi81sOR4xt8QrXGh+C5Y9Wgyb/Z4DjkfI/COsBGEhGlcGisSZIqX\nWkKk6ejHVBz7xcyOAxLxO97DDK9Uyh4Cx8GiYd9dzM+tgXWQuryveaMa3eR0B4VP\nmVXp0CTVRe9LBKU+QOh2KWMdhM00RoYITYcXlBQCSatU/CW08TtKoCkV04DX5/a1\nKHyRmE9JZsw/tYQP3JhEN2MSnR+zdSpTkweTtDlpCjFVRw+m4dcdc2lX0H83VAs3\nZ3E/CO/RM6xRKi8kc6DFMA5dNOaJAeDs3hG6E+oUO/SdUBp46Bu2ed0c2k5YFJnn\n8vlUWYQzAgMBAAECggEABgo3F3URe5qT4XlEISLICHmBX6wCWqhYlMHsZDJGUIoV\nh4ZwjhXJf0Dwq1yaoOfPC0Jw+8CSFwagUQf+lTUAGNxDkVs7wlfuQKWCdvrVou+L\nBEuEElc6QII63smTNt4RCIW/hqC5QL/mFimglHKMWDf7maTuffddCcUX/brjwL/z\nqeBhS1X6b6IymQggqir1HGgef/Cd5LXKjm/luSG0+rZyYq1itheNd0wxX16IheJx\nnNawcMzuIzu1tgRfpXTYEKt2unG4W474NkwQx/4Ct4cLJmvbMZDOsLlCLKU5QB6D\nobyuSmlIQxocaCCXfGKbZQBiDKXSDMML0PW79pqpEQKBgQD4o7nMngxtxmsMdYkh\nkpmO9gdxms2NafJ4rlmlcC8AEtVxxQsGKZ60Dl1Sf6oTiNvWNch+ffQoEM6zA1YJ\nyyYWRekXQ8ZqRyFMDQG3GPXrgR+uvgmVifqfGL12R2++kfxiJHN+s5l2AnmBksQS\nXA9PB7mIohSlkBp71JzYHsHyQwKBgQDim7pZgoecU0QBaUY41FKCW/csVX/18fQs\nXJMtPhpdmdxsnCYPO4mbx7qDFBDiHcsBhLtWIN8JIwTFdU0YGia4KD5TOufghGZO\niTpfimIOssEfdPM/g0VfHa/i5hm4rUBRROuH+xSnrzTj4jGO13FHJsa6ZCiO3Qeg\n9QK6msdfUQKBgD5rtCiHgS1KA/PzygKQsFZws7u0lmgrMgFUHBNpj5MgJ0/RnQvm\nBP7FIG6muEcBM9eaVwRSkKpCVfIhI0eAJcavtG3vyO9Dfjt+hHC4Jn0CRLb05KkT\nI8UvS9lW49nfApKM/iXP5vX2dxStiOXnELzRfqWrsy1BeTSfUuT7C8vLAoGBAJoA\n0Z1hWz4/TFlVLVcT3NshGxMzLBp+i73WUGOP8CUqmqXpXOg/Qx7ulu/cJDk3nC51\nAUfgYRN5jBWRyYoWw7emCe1QfCOWd1zqYBRsHIX2r87sESBZ2zxwFYezb0mV3L8e\ngp9QYNIw/VXd9GYqPp7nWGl2BiZJSpT1zhv5coNxAoGAQrPixsJHZ8dkCr+YmEpq\nC9o57QU/fvS7vtfjyRiQLPgBZuXA7Uz8MR+AfJ2ecMLqjMZ7aaYniFDmE91qoRbr\nbyffvU9Z99AmmetCg33drj+vDMRP9DQGOZ7f+D29xYYdSip3/Pbo6XuQwyUAotHu\nOcrIsjKAAy1FS6NG+QD2Gco=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tts-service-account@audiosharingproject.iam.gserviceaccount.com",
+  "client_id": "117124289122718563871",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tts-service-account%40audiosharingproject.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
