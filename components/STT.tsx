@@ -180,6 +180,16 @@ export default function STT() {
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
 
+            // Remove streaming for Uzbek, use direct JSON
+            if (selectedLanguage === 'uz') {
+                const data = await response.json();
+                setTranscription(data.transcription || "")
+                setIsStreaming(false)
+                setIsProcessing(false)
+                return;
+            }
+
+            // Streaming logic for other languages
             const reader = response.body?.getReader()
             if (!reader) throw new Error("No response body")
 
@@ -704,7 +714,8 @@ export default function STT() {
 
                                     <div className="bg-background/50 rounded-lg p-4 border border-white/5">
                                         <p className="text-foreground/90 whitespace-pre-wrap leading-relaxed">
-                                            {streamingText || transcription}
+                                            {/* Always show transcription for Uzbek, otherwise show streamingText or transcription */}
+                                            {selectedLanguage === 'uz' ? transcription : (streamingText || transcription)}
                                             {isStreaming && (
                                                 <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1" />
                                             )}
