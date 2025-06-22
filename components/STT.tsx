@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useRef, useCallback, useEffect } from "react"
-import { Mic, MicOff, Upload, Play, Square, Download, Copy, Check, Globe } from "lucide-react"
+import { Mic, MicOff, Upload, Play, Square, Download, Copy, Check, Globe, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { useTranslations } from "next-intl"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -51,6 +52,9 @@ function Waveform({ isRecording }: { isRecording: boolean }) {
     )
 }
 
+const playbackSpeeds = [0.5, 1, 1.5, 2]
+
+
 export default function STT() {
     const t = useTranslations()
     const [isRecording, setIsRecording] = useState(false)
@@ -64,6 +68,9 @@ export default function STT() {
     const [error, setError] = useState<string | null>(null)
     const [recordingTime, setRecordingTime] = useState(0)
     const [selectedLanguage, setSelectedLanguage] = useState<Language>("uz")
+    const [playbackSpeedIndex, setPlaybackSpeedIndex] = useState(1)
+
+    const [audioFileName, setAudioFileName] = useState<string>("recorded_audio")
 
     const mediaRecorderRef = useRef<MediaRecorder | null>(null)
     const audioChunksRef = useRef<Blob[]>([])
@@ -110,6 +117,7 @@ export default function STT() {
                 setAudioBlob(blob)
                 setAudioUrl(URL.createObjectURL(blob))
                 stream.getTracks().forEach(track => track.stop())
+                setAudioFileName("recorded_audio")
             }
 
             mediaRecorderRef.current.start()
@@ -147,6 +155,7 @@ export default function STT() {
                 setAudioBlob(file)
                 setAudioUrl(URL.createObjectURL(file))
                 setError(null)
+                setAudioFileName(file.name)
             } else {
                 setError("Please select an audio file")
             }
@@ -285,6 +294,13 @@ export default function STT() {
         return cleanup
     }, [cleanup])
 
+    useEffect(() => {
+        const audio = document.getElementById('audio-player') as HTMLAudioElement;
+        if (audio) {
+            audio.playbackRate = playbackSpeeds[playbackSpeedIndex];
+        }
+    }, [playbackSpeedIndex, audioUrl]);
+
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="space-y-8">
@@ -311,6 +327,12 @@ export default function STT() {
                                 <SelectContent>
                                     <SelectItem value="uz">O'zbekcha</SelectItem>
                                     <SelectItem value="en">English</SelectItem>
+                                    <SelectItem value="kaa" disabled>
+                                        <span className="flex items-center gap-2">
+                                            <Clock className="w-4 h-4 text-muted-foreground" />
+                                            Qoraqalpoqcha <span className="ml-1 text-xs text-muted-foreground">~soon</span>
+                                        </span>
+                                    </SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -434,7 +456,7 @@ export default function STT() {
                                                 </svg>
                                             </div>
                                             <div>
-                                                <p className="font-semibold text-foreground">Recorded Audio</p>
+                                                <p className="font-semibold text-foreground">{audioFileName}</p>
                                                 <p className="text-sm text-foreground/60">Duration: {formatTime(recordingTime)}</p>
                                             </div>
                                         </div>
@@ -593,22 +615,31 @@ export default function STT() {
                                         </svg>
                                         Restart
                                     </Button>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="rounded-full"
-                                        onClick={() => {
-                                            const audio = document.getElementById('audio-player') as HTMLAudioElement;
-                                            if (audio) {
-                                                audio.playbackRate = audio.playbackRate === 1 ? 1.5 : 1;
-                                            }
-                                        }}
-                                    >
-                                        <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M13 6.99h3c.55 0 1-.45 1-1s-.45-1-1-1h-3c-.55 0-1 .45-1 1s.45 1 1 1zm0 3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3c-.55 0-1 .45-1 1s.45 1 1 1zm0 3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3c-.55 0-1 .45-1 1s.45 1 1 1z" />
-                                        </svg>
-                                        Speed
-                                    </Button>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                className="rounded-full"
+                                            >
+                                                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M13 6.99h3c.55 0 1-.45 1-1s-.45-1-1-1h-3c-.55 0-1 .45-1 1s.45 1 1 1zm0 3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3c-.55 0-1 .45-1 1s.45 1 1 1zm0 3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3c-.55 0-1 .45-1 1s.45 1 1 1z" />
+                                                </svg>
+                                                {playbackSpeeds[playbackSpeedIndex]}x
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            {playbackSpeeds.map((speed, idx) => (
+                                                <DropdownMenuItem
+                                                    key={speed}
+                                                    onClick={() => setPlaybackSpeedIndex(idx)}
+                                                    className={playbackSpeedIndex === idx ? 'font-bold text-primary' : ''}
+                                                >
+                                                    {speed}x
+                                                </DropdownMenuItem>
+                                            ))}
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 </div>
                             </div>
                         </Card>
