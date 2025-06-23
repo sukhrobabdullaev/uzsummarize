@@ -17,7 +17,6 @@ interface Voice {
     language: string
     gender: "male" | "female"
     description: string
-    avatar: string
     preview?: string
 }
 
@@ -48,64 +47,56 @@ export default function TTS() {
             name: "Dildora",
             language: "uz",
             gender: "female",
-            description: "Warm and friendly Uzbek voice",
-            avatar: "👩‍🦰"
+            description: "Warm and friendly Uzbek voice"
         },
         {
             id: "elmira",
             name: "Elmira",
             language: "uz",
             gender: "female",
-            description: "Clear and professional Uzbek voice",
-            avatar: "👩‍💼"
+            description: "Clear and professional Uzbek voice"
         },
         {
-            id: "aziza",
-            name: "Aziza",
+            id: "maftuna",
+            name: "Maftuna",
             language: "uz",
             gender: "female",
-            description: "Young and energetic Uzbek voice",
-            avatar: "👩‍🎓"
+            description: "Young and energetic Uzbek voice"
         },
         {
-            id: "marhabo",
-            name: "Marhabo",
+            id: "sadoat",
+            name: "Sadoat",
             language: "uz",
             gender: "female",
-            description: "Mature and wise Uzbek voice",
-            avatar: "👩‍🦳"
+            description: "Mature and wise Uzbek voice"
         },
         {
-            id: "rustam",
-            name: "Rustam",
+            id: "zebo",
+            name: "Zebo",
             language: "uz",
-            gender: "male",
-            description: "Strong and confident Uzbek voice",
-            avatar: "👨‍💼"
+            gender: "female",
+            description: "Strong and confident Uzbek voice"
         },
         {
-            id: "jamshid",
-            name: "Jamshid",
+            id: "nozima",
+            name: "Nozima",
             language: "uz",
-            gender: "male",
-            description: "Friendly and approachable Uzbek voice",
-            avatar: "👨‍🦱"
+            gender: "female",
+            description: "Friendly and approachable Uzbek voice"
         },
         {
-            id: "umar",
-            name: "Umar",
+            id: "husnora",
+            name: "Husnora",
             language: "uz",
-            gender: "male",
-            description: "Young and dynamic Uzbek voice",
-            avatar: "👨‍🎓"
+            gender: "female",
+            description: "Young and dynamic Uzbek voice"
         },
         {
-            id: "abdullah",
-            name: "Abdullah",
+            id: "sadoqat",
+            name: "Sadoqat",
             language: "uz",
-            gender: "male",
-            description: "Traditional and respectful Uzbek voice",
-            avatar: "👨‍🦳"
+            gender: "female",
+            description: "Traditional and respectful Uzbek voice"
         },
         // Karakalpak voices
         {
@@ -113,16 +104,14 @@ export default function TTS() {
             name: "Araylim",
             language: "kaa",
             gender: "female",
-            description: "Melodic Karakalpak voice",
-            avatar: "👩‍🦰"
+            description: "Melodic Karakalpak voice"
         },
         {
             id: "sevinch",
             name: "Sevinch",
             language: "kaa",
             gender: "female",
-            description: "Clear Karakalpak voice",
-            avatar: "👩‍💼"
+            description: "Clear Karakalpak voice"
         },
         // English voices
         {
@@ -130,32 +119,28 @@ export default function TTS() {
             name: "Sarah",
             language: "en",
             gender: "female",
-            description: "Clear American English voice",
-            avatar: "👩‍🦰"
+            description: "Clear American English voice"
         },
         {
             id: "emma",
             name: "Emma",
             language: "en",
             gender: "female",
-            description: "Warm British English voice",
-            avatar: "👩‍💼"
+            description: "Warm British English voice"
         },
         {
             id: "michael",
             name: "Michael",
             language: "en",
             gender: "male",
-            description: "Professional American English voice",
-            avatar: "👨‍💼"
+            description: "Professional American English voice"
         },
         {
             id: "james",
             name: "James",
             language: "en",
             gender: "male",
-            description: "Friendly British English voice",
-            avatar: "👨‍🦱"
+            description: "Friendly British English voice"
         }
     ]
 
@@ -282,32 +267,32 @@ export default function TTS() {
     }
 
     return (
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="space-y-8">
+        <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-8 py-6 sm:py-8">
+            <div className="space-y-6 sm:space-y-8">
                 {/* Header */}
                 <div className="text-center">
-                    <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-transparent mb-4">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-transparent mb-2 sm:mb-4">
                         Text-to-Speech
                     </h1>
-                    <p className="text-lg text-foreground/70">
+                    <p className="text-base sm:text-lg text-foreground/70">
                         Convert your text into natural-sounding speech with multiple voices
                     </p>
                 </div>
 
-                <div className="grid lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
                     {/* Left Column - Text Input & Controls */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-2 space-y-4 sm:space-y-6">
                         {/* Language & Voice Selection */}
-                        <Card className="p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-3 mb-4">
+                        <Card className="p-4 sm:p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
+                            <div className="space-y-4 sm:space-y-6">
+                                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
                                     <Globe className="h-5 w-5 text-foreground/60" />
                                     <span className="text-sm font-medium text-foreground/80">Language & Voice Selection</span>
                                 </div>
 
-                                <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     {/* Language Selection */}
-                                    <div className="space-y-2">
+                                    <div className="space-y-1 sm:space-y-2">
                                         <label className="text-sm font-medium text-foreground/70">Language</label>
                                         <Select value={selectedLanguage} onValueChange={(value: Language) => setSelectedLanguage(value)}>
                                             <SelectTrigger className="bg-background/50 border-white/10">
@@ -322,20 +307,24 @@ export default function TTS() {
                                     </div>
 
                                     {/* Voice Selection */}
-                                    <div className="space-y-2">
+                                    <div className="space-y-1 sm:space-y-2">
                                         <label className="text-sm font-medium text-foreground/70">Voice</label>
                                         <Select value={selectedVoice} onValueChange={setSelectedVoice}>
                                             <SelectTrigger className="bg-background/50 border-white/10">
-                                                <SelectValue />
+                                                {voices.find(v => v.id === selectedVoice)?.name || <SelectValue />}
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {availableVoices.map((voice) => (
                                                     <SelectItem key={voice.id} value={voice.id}>
                                                         <div className="flex items-center gap-2">
-                                                            <span className="text-lg">{voice.avatar}</span>
+                                                            <Volume2 className="h-5 w-5 text-foreground/60" />
                                                             <div>
-                                                                <div className="font-medium">{voice.name}</div>
-                                                                <div className="text-xs text-foreground/60">{voice.description}</div>
+                                                                <div className="font-medium flex items-center gap-2 flex-wrap">
+                                                                    {voice.name}
+                                                                    <span className={`text-xs px-2 py-0.5 rounded-full ${voice.gender === 'female' ? 'bg-pink-200 text-pink-700' : 'bg-blue-200 text-blue-700'}`}>{voice.gender === 'female' ? 'Female' : 'Male'}</span>
+                                                                    <span className="text-xs bg-gray-100 text-gray-600 rounded px-1 ml-1">{getLanguageName(voice.language as Language)}</span>
+                                                                </div>
+                                                                <div className="text-xs text-foreground/60 break-words max-w-[180px]">{voice.description}</div>
                                                             </div>
                                                         </div>
                                                     </SelectItem>
@@ -350,16 +339,16 @@ export default function TTS() {
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="bg-background/30 rounded-lg p-4 border border-white/5"
+                                        className="bg-background/30 rounded-lg p-3 sm:p-4 border border-white/5"
                                     >
-                                        <div className="flex items-center gap-3">
-                                            <div className="text-3xl">{selectedVoiceObj.avatar}</div>
+                                        <div className="flex items-center gap-2 sm:gap-3">
+                                            <Volume2 className="text-2xl sm:text-3xl text-foreground/60" />
                                             <div>
-                                                <h3 className="font-semibold text-foreground">{selectedVoiceObj.name}</h3>
-                                                <p className="text-sm text-foreground/60">{selectedVoiceObj.description}</p>
-                                                <span className="inline-block mt-1 text-xs px-2 py-1 rounded-full bg-primary/10 text-primary">
-                                                    {selectedVoiceObj.gender === 'female' ? 'Female' : 'Male'}
-                                                </span>
+                                                <h3 className="font-semibold text-foreground flex items-center gap-2 flex-wrap">{selectedVoiceObj.name}
+                                                    <span className={`text-xs px-2 py-0.5 rounded-full ${selectedVoiceObj.gender === 'female' ? 'bg-pink-200 text-pink-700' : 'bg-blue-200 text-blue-700'}`}>{selectedVoiceObj.gender === 'female' ? 'Female' : 'Male'}</span>
+                                                    <span className="text-xs bg-gray-100 text-gray-600 rounded px-1 ml-1">{getLanguageName(selectedVoiceObj.language as Language)}</span>
+                                                </h3>
+                                                <p className="text-xs sm:text-sm text-foreground/60 break-words max-w-[220px]">{selectedVoiceObj.description}</p>
                                             </div>
                                         </div>
                                     </motion.div>
@@ -368,8 +357,8 @@ export default function TTS() {
                         </Card>
 
                         {/* Text Input */}
-                        <Card className="p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
-                            <div className="space-y-4">
+                        <Card className="p-4 sm:p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
+                            <div className="space-y-3 sm:space-y-4">
                                 <div className="flex items-center justify-between">
                                     <label className="text-sm font-medium text-foreground/70">Text to Convert</label>
                                     <Button
@@ -390,11 +379,11 @@ export default function TTS() {
                                     value={text}
                                     onChange={(e) => setText(e.target.value)}
                                     placeholder={`Enter your text in ${getLanguageName(selectedLanguage)}...`}
-                                    className="min-h-[200px] bg-background/50 border-white/10 resize-none"
+                                    className="min-h-[120px] sm:min-h-[200px] bg-background/50 border-white/10 resize-none text-sm"
                                     maxLength={1000}
                                 />
 
-                                <div className="flex justify-between text-sm text-foreground/60">
+                                <div className="flex justify-between text-xs sm:text-sm text-foreground/60">
                                     <span>{text.length}/1000 characters</span>
                                     <span>{getLanguageName(selectedLanguage)}</span>
                                 </div>
@@ -402,16 +391,16 @@ export default function TTS() {
                         </Card>
 
                         {/* Voice Settings */}
-                        <Card className="p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
-                            <div className="space-y-6">
+                        <Card className="p-4 sm:p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
+                            <div className="space-y-4 sm:space-y-6">
                                 <div className="flex items-center gap-2">
                                     <Settings className="h-5 w-5 text-foreground/60" />
                                     <span className="text-sm font-medium text-foreground/80">Voice Settings</span>
                                 </div>
 
-                                <div className="grid sm:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                                     {/* Speech Rate */}
-                                    <div className="space-y-3">
+                                    <div className="space-y-2 sm:space-y-3">
                                         <label className="text-sm font-medium text-foreground/70">Speech Rate</label>
                                         <Slider
                                             value={speechRate}
@@ -425,7 +414,7 @@ export default function TTS() {
                                     </div>
 
                                     {/* Pitch */}
-                                    <div className="space-y-3">
+                                    <div className="space-y-2 sm:space-y-3">
                                         <label className="text-sm font-medium text-foreground/70">Pitch</label>
                                         <Slider
                                             value={pitch}
@@ -439,7 +428,7 @@ export default function TTS() {
                                     </div>
 
                                     {/* Volume */}
-                                    <div className="space-y-3">
+                                    <div className="space-y-2 sm:space-y-3">
                                         <label className="text-sm font-medium text-foreground/70">Volume</label>
                                         <Slider
                                             value={volume}
@@ -460,7 +449,7 @@ export default function TTS() {
                             <Button
                                 onClick={generateSpeech}
                                 disabled={isGenerating || !text.trim()}
-                                className="w-full py-6 bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 rounded-xl text-lg font-semibold shadow-lg"
+                                className="w-full py-4 sm:py-6 bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 rounded-xl text-base sm:text-lg font-semibold shadow-lg"
                             >
                                 {isGenerating ? (
                                     <>
@@ -477,8 +466,8 @@ export default function TTS() {
                         </motion.div>
                     </div>
 
-                    {/* Right Column - Audio Player */}
-                    <div className="space-y-6">
+                    {/* Right Column - Audio Player & Voice Gallery */}
+                    <div className="space-y-4 sm:space-y-6">
                         {/* Audio Player */}
                         <AnimatePresence>
                             {audioUrl && (
@@ -487,24 +476,24 @@ export default function TTS() {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 20 }}
                                 >
-                                    <Card className="p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
-                                        <div className="space-y-6">
+                                    <Card className="p-4 sm:p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
+                                        <div className="space-y-4 sm:space-y-6">
                                             <div className="text-center">
-                                                <h3 className="text-lg font-semibold bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-transparent mb-2">
+                                                <h3 className="text-base sm:text-lg font-semibold bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-transparent mb-1 sm:mb-2">
                                                     Generated Audio
                                                 </h3>
-                                                <p className="text-sm text-foreground/60">
+                                                <p className="text-xs sm:text-sm text-foreground/60">
                                                     Listen to your text-to-speech output
                                                 </p>
                                             </div>
 
                                             {/* Audio Controls */}
-                                            <div className="space-y-4">
-                                                <div className="flex items-center justify-center gap-4">
+                                            <div className="space-y-2 sm:space-y-4">
+                                                <div className="flex items-center justify-center gap-2 sm:gap-4">
                                                     <Button
                                                         variant="outline"
                                                         size="sm"
-                                                        className="rounded-full w-12 h-12 p-0"
+                                                        className="rounded-full w-10 h-10 sm:w-12 sm:h-12 p-0"
                                                         onClick={stopAudio}
                                                     >
                                                         <Square className="h-4 w-4" />
@@ -512,7 +501,7 @@ export default function TTS() {
 
                                                     <motion.button
                                                         onClick={playAudio}
-                                                        className="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 flex items-center justify-center shadow-lg"
+                                                        className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 flex items-center justify-center shadow-lg"
                                                         whileHover={{ scale: 1.05 }}
                                                         whileTap={{ scale: 0.95 }}
                                                     >
@@ -548,33 +537,6 @@ export default function TTS() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-
-                        {/* Voice Gallery */}
-                        <Card className="p-6 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-xl">
-                            <div className="space-y-4">
-                                <h3 className="text-lg font-semibold text-center">Available Voices</h3>
-                                <div className="grid grid-cols-2 gap-3">
-                                    {availableVoices.map((voice) => (
-                                        <motion.div
-                                            key={voice.id}
-                                            className={`p-3 rounded-lg border cursor-pointer transition-all ${selectedVoice === voice.id
-                                                ? 'bg-primary/10 border-primary/30'
-                                                : 'bg-background/30 border-white/5 hover:bg-background/50'
-                                                }`}
-                                            onClick={() => setSelectedVoice(voice.id)}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                        >
-                                            <div className="text-center">
-                                                <div className="text-2xl mb-1">{voice.avatar}</div>
-                                                <div className="text-sm font-medium">{voice.name}</div>
-                                                <div className="text-xs text-foreground/60">{voice.gender}</div>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-                        </Card>
                     </div>
                 </div>
 
@@ -585,7 +547,7 @@ export default function TTS() {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-400"
+                            className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 sm:p-4 text-red-400 text-xs sm:text-base"
                         >
                             {error}
                         </motion.div>
