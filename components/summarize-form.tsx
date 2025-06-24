@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { toast } from "sonner"
 import SummaryResult from "@/components/summarize-result"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -10,22 +10,35 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, Sparkles, Bot, Eraser, BrainCircuit } from "lucide-react"
+import { Loader2, Sparkles, Bot, Eraser, BrainCircuit, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
+import { useDispatch, useSelector } from "react-redux"
+import { setSummary } from "@/store/summarySlice"
+import { useRouter } from "next/navigation"
 
 const SummaryForm = () => {
   const t = useTranslations()
   const [text, setText] = useState("")
-  const [summary, setSummary] = useState("")
   const [model, setModel] = useState("GEMINI")
   const [isLoading, setIsLoading] = useState(false)
+  const [showVideo, setShowVideo] = useState(false)
 
   const MIN_CHARS = 300
   const MAX_CHARS = 4000
   const charCount = text.length
   const progress = Math.min((charCount / MIN_CHARS) * 100, 100)
   const isValid = charCount >= MIN_CHARS && charCount <= MAX_CHARS
+
+  const dispatch = useDispatch()
+  const summary = useSelector((state: any) => state.summary.value)
+  const router = useRouter()
+
+  // Show video popup when summary appears
+  useEffect(() => {
+    if (summary) setShowVideo(true)
+    else setShowVideo(false)
+  }, [summary])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -53,8 +66,9 @@ const SummaryForm = () => {
         return
       }
       if (res.ok) {
-        setSummary(data.summary)
+        dispatch(setSummary(data.summary))
         toast.success(t("summarizer.success.summaryGenerated"))
+        if (summary && !showVideo) setShowVideo(true)
       } else {
         toast.error(data.error || t("summarizer.errors.processingFailed"))
       }
@@ -68,7 +82,8 @@ const SummaryForm = () => {
 
   const handleClear = () => {
     setText("")
-    setSummary("")
+    dispatch(setSummary(""))
+    setShowVideo(false)
   }
 
   const getProgressColor = () => {
@@ -177,11 +192,39 @@ const SummaryForm = () => {
             <Card className="border-none shadow-lg overflow-hidden">
               <CardContent>
                 <SummaryResult summary={summary} />
+                <div className="flex justify-center mt-6">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-full px-8 cursor-pointer"
+                    onClick={() => router.push("/products/uzsumlm")}
+                  >
+                    {t("summarizer.tryAdvancedFeatures", { defaultValue: "Try advanced video & audio features" })}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Video Popup */}
+      {showVideo && (
+        <div className="fixed bottom-20 right-6 z-50">
+          <div className="relative bg-background rounded-xl shadow-lg p-2 flex flex-col items-center" style={{ width: 250, height: 220 }}>
+            <button
+              className="absolute top-0 right-0 text-gray-500 hover:text-gray-800 cursor-pointer"
+              onClick={() => setShowVideo(false)}
+              aria-label="Close video"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <video controls width={250} height={200} style={{ width: 250, height: 200, objectFit: 'cover', borderRadius: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+              <source src="/video_demo.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

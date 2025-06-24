@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ClientProviders from "../../components/ClientProviders";
 
 import Footer from '@/components/shared/footer';
 import { Toaster } from "@/components/ui/sonner"
@@ -52,12 +53,14 @@ export default async function LocaleLayout({
       <body
         className={`${inter.variable} antialiased`}
       >
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <Navbar />
-          {children}
-          <Toaster />
-          <Footer />
-        </NextIntlClientProvider>
+        <ClientProviders>
+          <NextIntlClientProvider messages={messages} locale={locale}>
+            <Navbar />
+            {children}
+            <Toaster />
+            <Footer />
+          </NextIntlClientProvider>
+        </ClientProviders>
       </body>
     </html>
   );
