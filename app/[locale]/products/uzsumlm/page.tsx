@@ -94,19 +94,19 @@ export default function UzSumLMPage() {
                             <span className="font-semibold">Step 2: Upload or select an image</span>
                             <Info className="h-4 w-4 text-muted-foreground ml-1" aria-label="Your image will be used as the face in the generated video." />
                         </div>
-                        <div className="flex flex-row w-full items-center justify-between gap-8">
+                        <div className="">
                             <div className="flex flex-col items-center">
                                 <Image src={imagePreview} alt="Preview" width={160} height={160} className="rounded-xl border shadow" />
                                 <input type="file" accept="image/*" onChange={handleImageChange} className="block mt-2" />
                                 <div className="text-xs text-muted-foreground mt-1">Default image is used if none uploaded.</div>
                             </div>
-                            <div className="flex flex-col items-center">
+                            {/* <div className="flex flex-col items-center">
                                 <video controls width={160} height={160} style={{ width: 160, height: 160, objectFit: 'cover', borderRadius: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
                                     <source src="/video_demo.mov" type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                                 <div className="text-xs text-muted-foreground mt-1">Demo video preview</div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
@@ -158,7 +158,7 @@ export default function UzSumLMPage() {
                 </div>
 
                 {/* Demo Videos Section */}
-                <div className="flex flex-col items-center gap-8 mb-16">
+                {/* <div className="flex flex-col items-center gap-8 mb-16">
                     <div className="w-full max-w-xl">
                         <video width={500} height={600} className="rounded-xl shadow-lg border w-full" loop muted autoPlay>
                             <source src={concatVideo} type="video/mp4" />
@@ -166,7 +166,7 @@ export default function UzSumLMPage() {
                         </video>
                         <div className="text-xs text-muted-foreground mt-1 mb-4 text-center">Concatenated image and cloned video demo</div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Call to Action */}
                 <div className="flex flex-col items-center gap-4">
