@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2, Sparkles, Bot, Eraser, BrainCircuit } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
@@ -90,33 +90,7 @@ const SummaryForm = () => {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <div className="w-full sm:w-auto space-y-2">
-                <Label htmlFor="model" className="text-sm font-medium">
-                  {t("summarizer.model.label")}
-                </Label>
-                <Select value={model} onValueChange={setModel}>
-                  <SelectTrigger className="w-full sm:w-[180px] transition-all">
-                    <SelectValue placeholder={t("summarizer.model.placeholder")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="GPT" className="flex items-center">
-                      <div className="flex items-center gap-2">
-                        <BrainCircuit className="h-4 w-4 text-emerald-500" />
-                        <span>{t("summarizer.model.gpt")}</span>
-                      </div>
-                    </SelectItem>
-                    <SelectItem value="GEMINI">
-                      <div className="flex items-center gap-2">
-                        <Bot className="h-4 w-4 text-violet-500" />
-                        <span>{t("summarizer.model.gemini")}</span>
-                      </div>
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
               <div className="flex-1 hidden sm:block"></div>
-
               <Button
                 type="button"
                 variant="outline"
