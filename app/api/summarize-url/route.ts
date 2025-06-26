@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { urlRateLimit } from "@/lib/url-rate-limit";
 import { prisma } from "@/lib/prisma";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
@@ -13,21 +12,6 @@ function truncateText(text: string, maxTokens: number = 15000): string {
 }
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for") || "unknown";
-
-  const { success, resetAt } = await urlRateLimit(ip);
-
-  if (!success) {
-    return NextResponse.json(
-      {
-        error: `After 2 requests, your limit will reset at ${resetAt}.`,
-      },
-      {
-        status: 429,
-      }
-    );
-  }
-
   const { url } = await req.json();
 
   if (!url) {

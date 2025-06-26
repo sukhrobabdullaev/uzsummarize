@@ -262,8 +262,8 @@ export async function POST(req: NextRequest) {
           // Create the prompt based on language
           const languagePrompt =
             language === "uz"
-              ? "Please transcribe this audio file in Uzbek language. Provide a clear, accurate transcription with proper punctuation and formatting. If there are multiple speakers, indicate them clearly. If the audio is unclear or contains background noise, note this in the transcription."
-              : "Please transcribe this audio file in English. Provide a clear, accurate transcription with proper punctuation and formatting. If there are multiple speakers, indicate them clearly. If the audio is unclear or contains background noise, note this in the transcription.";
+              ? "Transcribe the following audio file in Uzbek. Output ONLY the transcription text, with proper punctuation and formatting. Do not include any introductory or explanatory sentences. If there are multiple speakers, indicate them clearly. If the audio is unclear or contains background noise, note this in the transcription."
+              : "Transcribe the following audio file in English. Output ONLY the transcription text, with proper punctuation and formatting. Do not include any introductory or explanatory sentences. If there are multiple speakers, indicate them clearly. If the audio is unclear or contains background noise, note this in the transcription.";
 
           const prompt = `${languagePrompt}
 

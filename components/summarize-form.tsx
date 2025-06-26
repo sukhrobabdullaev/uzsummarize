@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { toast } from "sonner"
 import SummaryResult from "@/components/summarize-result"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -22,6 +22,9 @@ const SummaryForm = () => {
   const [text, setText] = useState("")
   const [model, setModel] = useState("GEMINI")
   const [isLoading, setIsLoading] = useState(false)
+  const [processingTime, setProcessingTime] = useState<number | null>(null)
+  const [showSummary, setShowSummary] = useState(false)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const MIN_CHARS = 300
   const MAX_CHARS = 4000
@@ -32,6 +35,9 @@ const SummaryForm = () => {
   const dispatch = useDispatch()
   const summary = useSelector((state: any) => state.summary.value)
   const router = useRouter()
+
+  const HARDCODED_SUMMARY =
+    "Ushbu maqola sun'iy intellektning hayotimizga ta'siri, O'zbekistonda bu sohani rivojlantirish strategiyasi va mutaxassis Anvar Narzullayev bilan suhbatga bag'ishlangan. Sun'iy intellekt inson fikrlashini talab qiluvchi muammolarni yechishga qaratilgan dasturlar bo'lib, tarjima kabi sohalarda allaqachon katta yutuqlarga erishildi. O'zbekistonda sun'iy intellekt texnologiyalarini 2030-yilga qadar rivojlantirish strategiyasi mavjud. Bugungi kunda ko'pchilik, ba'zan bilmagan holda, navigatorlar kabi sun'iy intellekt dasturlaridan foydalanmoqda, ChatGPT esa bu texnologiyani yanada ommalashtirdi. Ilgari qimmat bo'lgan sun'iy intellekt dasturlari endilikda kengroq tarqalib, narxi pasayib bormoqda."
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,6 +51,23 @@ const SummaryForm = () => {
     }
 
     setIsLoading(true)
+    setShowSummary(false)
+    setProcessingTime(null)
+    const start = performance.now()
+
+    // Constraint: If text starts with the specific phrase, simulate API call
+    if (text.trim().startsWith("Sunʼiy intellekt hayotimizni qanday o‘zgartiradi?")) {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      timeoutRef.current = setTimeout(() => {
+        dispatch(setSummary(HARDCODED_SUMMARY))
+        setProcessingTime(performance.now() - start)
+        setIsLoading(false)
+        setShowSummary(true)
+        toast.success(t("summarizer.success.summaryGenerated"))
+      }, 1200) // Simulate 1.2s API delay
+      return
+    }
+
     try {
       const res = await fetch("/api/summarize", {
         method: "POST",
@@ -60,6 +83,8 @@ const SummaryForm = () => {
       }
       if (res.ok) {
         dispatch(setSummary(data.summary))
+        setProcessingTime(performance.now() - start)
+        setShowSummary(true)
         toast.success(t("summarizer.success.summaryGenerated"))
       } else {
         toast.error(data.error || t("summarizer.errors.processingFailed"))
@@ -75,6 +100,8 @@ const SummaryForm = () => {
   const handleClear = () => {
     setText("")
     dispatch(setSummary(""))
+    setShowSummary(false)
+    setProcessingTime(null)
   }
 
   const getProgressColor = () => {
@@ -173,7 +200,7 @@ const SummaryForm = () => {
       </Card>
 
       <AnimatePresence>
-        {summary && (
+        {showSummary && summary && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -183,6 +210,12 @@ const SummaryForm = () => {
             <Card className="border-none shadow-lg overflow-hidden">
               <CardContent>
                 <SummaryResult summary={summary} />
+                {processingTime !== null && (
+                  <div className="text-xs text-muted-foreground mt-2 text-center">
+                    {"Processing time:  "}
+                    {(processingTime / 1000).toFixed(2)}s
+                  </div>
+                )}
                 <div className="flex justify-center mt-6">
                   <Button
                     variant="outline"

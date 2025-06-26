@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { rateLimit } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
 
 const MODELS = {
@@ -17,18 +16,6 @@ const MODELS = {
 };
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for") || "unknown";
-  const { success, resetAt } = await rateLimit(ip);
-  if (!success) {
-    return NextResponse.json(
-      {
-        error: `After 2 requests, your limit will reset at ${resetAt}.`,
-      },
-      {
-        status: 429,
-      }
-    );
-  }
   const { text } = await req.json();
   if (!text) {
     return NextResponse.json({ error: "No text provided" }, { status: 400 });

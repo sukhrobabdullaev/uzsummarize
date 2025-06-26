@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 
-// If using Node.js 18+, fetch is global. Otherwise, uncomment below:
-// import fetch from "node-fetch";
-
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
 export async function POST(req: Request) {
   try {
@@ -23,26 +20,32 @@ export async function POST(req: Request) {
 
     const userMessage = `Difficulty: ${difficulty}\nContent: ${content}`;
 
-    const geminiRequestBody = {
-      contents: [
-        { role: "user", parts: [{ text: `${systemMessage.trim()}\n${userMessage}` }] }
-      ]
+    const openaiRequestBody = {
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: systemMessage.trim() },
+        { role: "user", content: userMessage },
+      ],
+      temperature: 0.7,
     };
 
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(OPENAI_API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(geminiRequestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify(openaiRequestBody),
     });
 
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.statusText}`);
+      throw new Error(`OpenAI API error: ${response.statusText}`);
     }
 
     const data = await response.json();
 
-    // Gemini's response is in data.candidates[0].content.parts[0].text
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    // OpenAI's response is in data.choices[0].message.content
+    const text = data?.choices?.[0]?.message?.content || "{}";
     const notes = JSON.parse(text);
 
     return NextResponse.json(notes);

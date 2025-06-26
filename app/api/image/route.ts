@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
-import { rateLimit } from "@/lib/rate-limit";
+// import { rateLimit } from "@/lib/rate-limit"; // Removed rate-limit import
 import { prisma } from "@/lib/prisma";
 
 // Initialize Gemini with timeout
@@ -27,20 +27,20 @@ const controller = new AbortController();
 const timeout = setTimeout(() => controller.abort(), 8000);
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for") || "unknown";
+  // const ip = request.headers.get("x-forwarded-for") || "unknown";
 
-  const { success, resetAt } = await rateLimit(ip);
+  // const { success, resetAt } = await rateLimit(ip);
 
-  if (!success) {
-    return NextResponse.json(
-      {
-        error: `After 2 requests, your limit will reset at ${resetAt}.`,
-      },
-      {
-        status: 429,
-      }
-    );
-  }
+  // if (!success) {
+  //   return NextResponse.json(
+  //     {
+  //       error: `After 2 requests, your limit will reset at ${resetAt}.`,
+  //     },
+  //     {
+  //       status: 429,
+  //     }
+  //   );
+  // }
 
   let dbRequest;
   try {
