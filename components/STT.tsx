@@ -302,45 +302,43 @@ export default function STT() {
     }, [playbackSpeedIndex, audioUrl]);
 
     return (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
             <div className="space-y-8">
                 {/* Header */}
-                <div className="text-center">
-                    <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent mb-4">
+                <div className="text-center px-2">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent mb-3 sm:mb-4">
                         Speech-to-Text
                     </h1>
-                    <p className="text-lg text-foreground/70">
+                    <p className="text-base sm:text-lg text-foreground/70">
                         Convert your voice to text with high accuracy using AI
                     </p>
                 </div>
 
                 {/* Language Selection */}
-                <Card className="p-6 bg-accent/20 backdrop-blur-sm border-white/10">
-                    <div className="flex items-center justify-center">
-                        <div className="flex items-center gap-3">
-                            <Globe className="h-5 w-5 text-foreground/60" />
-                            <span className="text-sm font-medium text-foreground/80">Transcription Language:</span>
-                            <Select value={selectedLanguage} onValueChange={(value: Language) => setSelectedLanguage(value)}>
-                                <SelectTrigger className="w-40 bg-background/50 border-white/10">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="uz">O'zbekcha</SelectItem>
-                                    <SelectItem value="en">English</SelectItem>
-                                    <SelectItem value="kaa" disabled>
-                                        <span className="flex items-center gap-2">
-                                            <Clock className="w-4 h-4 text-muted-foreground" />
-                                            Qoraqalpoqcha <span className="ml-1 text-xs text-muted-foreground">~soon</span>
-                                        </span>
-                                    </SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
+                <Card className="p-4 sm:p-6 bg-accent/20 backdrop-blur-sm border-white/10">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <Globe className="h-5 w-5 text-foreground/60" />
+                        <span className="text-sm font-medium text-foreground/80">Transcription Language:</span>
+                        <Select value={selectedLanguage} onValueChange={(value: Language) => setSelectedLanguage(value)}>
+                            <SelectTrigger className="w-32 sm:w-40 bg-background/50 border-white/10">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="uz">O'zbekcha</SelectItem>
+                                <SelectItem value="en">English</SelectItem>
+                                <SelectItem value="kaa" disabled>
+                                    <span className="flex items-center gap-2">
+                                        <Clock className="w-4 h-4 text-muted-foreground" />
+                                        Qoraqalpoqcha <span className="ml-1 text-xs text-muted-foreground">~soon</span>
+                                    </span>
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </Card>
 
                 {/* Recording Section */}
-                <Card className="p-8 bg-background/60 backdrop-blur-2xl border border-white/10 shadow-xl relative overflow-hidden">
+                <Card className="p-4 sm:p-8 bg-background/60 backdrop-blur-2xl border border-white/10 shadow-xl relative overflow-hidden">
                     {/* Animated background particles */}
                     <motion.div
                         className="absolute inset-0 pointer-events-none"
@@ -358,12 +356,12 @@ export default function STT() {
                             <rect width="100%" height="100%" fill="url(#bg-grad)" />
                         </svg>
                     </motion.div>
-                    <div className="relative z-10 flex flex-col items-center gap-6">
+                    <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6">
                         {/* Glowing animated mic button */}
                         <motion.button
                             type="button"
                             onClick={isRecording ? stopRecording : startRecording}
-                            className={`rounded-full w-24 h-24 flex items-center justify-center shadow-lg transition-all border-4 border-white/10 ${isRecording
+                            className={`rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center shadow-lg transition-all border-4 border-white/10 ${isRecording
                                 ? 'bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 animate-pulse'
                                 : 'bg-gradient-to-br from-blue-500 to-cyan-400'
                                 }`}
@@ -435,8 +433,8 @@ export default function STT() {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex justify-center"
                     >
-                        <Card className="p-8 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-2xl max-w-2xl w-full">
-                            <div className="space-y-6">
+                        <Card className="p-4 sm:p-8 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl border border-white/10 shadow-2xl max-w-full sm:max-w-2xl w-full">
+                            <div className="space-y-4 sm:space-y-6">
                                 <div className="text-center">
                                     <h3 className="text-xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent mb-2">
                                         Audio Preview
@@ -447,8 +445,8 @@ export default function STT() {
                                 </div>
 
                                 {/* Modern Audio Player */}
-                                <div className="bg-background/50 rounded-xl p-6 border border-white/5">
-                                    <div className="flex items-center justify-between mb-4">
+                                <div className="bg-background/50 rounded-xl p-4 sm:p-6 border border-white/5">
+                                    <div className="flex flex-col sm:flex-row items-center justify-between mb-4 gap-2">
                                         <div className="flex items-center gap-3">
                                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
                                                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -656,7 +654,7 @@ export default function STT() {
                         <Button
                             onClick={processAudio}
                             disabled={isProcessing}
-                            className="bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 rounded-full px-8 py-4 text-lg font-semibold shadow-lg"
+                            className="w-full sm:w-auto bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 rounded-full px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg"
                         >
                             {isProcessing ? (
                                 <>
@@ -760,4 +758,4 @@ export default function STT() {
             </div>
         </div>
     )
-} 
+}

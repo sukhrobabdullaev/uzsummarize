@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Typewriter } from "react-simple-typewriter"
 import { useTranslations } from "next-intl"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 const Hero = () => {
   const t = useTranslations()
-  
+  const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const [isHovering, setIsHovering] = useState(false)
@@ -173,6 +174,7 @@ const Hero = () => {
               variant="outline"
               size="lg"
               className="rounded-full px-6 sm:px-8 py-2.5 border-primary/20 hover:bg-primary/5 transition-all duration-300 w-full sm:w-auto text-sm sm:text-base backdrop-blur-md group"
+              onClick={() => router.push(`en/about`)}
             >
               <span>{t("common.learnMore")}</span>
               <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1 opacity-70 group-hover:translate-x-1 transition-transform" />
