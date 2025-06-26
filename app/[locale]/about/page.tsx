@@ -3,214 +3,189 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
-const About = () => {
+
+const services = [
+  { key: "summarize", label: "Text Summarization", desc: "AI-powered summarization for Uzbek text, articles, and documents." },
+  { key: "mindmap", label: "Mindmap Generator", desc: "Visualize topics and concepts with interactive mindmaps." },
+  { key: "flashcards", label: "Flashcards", desc: "Create and study flashcards for effective learning." },
+  { key: "study-notes", label: "Study Notes", desc: "Generate structured study notes at various difficulty levels." },
+  { key: "image-description", label: "Image Description", desc: "Get AI-generated descriptions for images." },
+  { key: "image-extraction", label: "Image Extraction", desc: "Extract text and information from images." },
+  { key: "url-summarizer", label: "URL Summarizer", desc: "Summarize news, articles, and web pages by URL." },
+  { key: "pdf-summarizer", label: "PDF Summarizer", desc: "Summarize PDF documents in Uzbek." },
+];
+
+const products = [
+  { key: "uzsumlm", label: "UzSumLM", desc: "Next-gen Uzbek Summarization Language Model: text-to-summary, image-to-video, and more." },
+  { key: "tts", label: "TTS (Text-to-Speech)", desc: "Natural-sounding Uzbek text-to-speech with multiple voices." },
+  { key: "stt", label: "STT (Speech-to-Text)", desc: "High-accuracy Uzbek speech recognition and transcription." },
+  { key: "u-chat-pdf", label: "U-chat-pdf", desc: "Chat with your PDF documents in Uzbek (coming soon)." },
+];
+
+const missions = [
+  {
+    key: "empower-uzbek",
+    title: "Empower Uzbek Language AI",
+    desc: "Advance AI technologies tailored for the Uzbek language, making them accessible and beneficial for everyone."
+  },
+  {
+    key: "education",
+    title: "Enhance Education",
+    desc: "Provide innovative tools for students, educators, and researchers to simplify learning and boost productivity."
+  },
+  {
+    key: "innovation",
+    title: "Drive Innovation",
+    desc: "Continuously develop state-of-the-art AI solutions for summarization, language processing, and knowledge extraction."
+  },
+  {
+    key: "accessibility",
+    title: "Promote Accessibility",
+    desc: "Break language barriers and make information more accessible to Uzbek speakers worldwide."
+  }
+];
+
+const gradientText = "bg-gradient-to-r from-primary via-violet-500 to-cyan-400 bg-clip-text text-transparent";
+const glass = "backdrop-blur-lg bg-background/70 border border-primary/10 shadow-xl";
+
+export default function About() {
   const t = useTranslations('about');
 
   return (
     <motion.div
-      className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-24"
+      className="relative max-w-5xl mx-auto px-4 sm:px-8 pt-24 pb-20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.7 }}
     >
-      <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+      {/* Futuristic background glow */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-gradient-to-br from-primary/30 via-violet-500/20 to-cyan-400/10 rounded-full blur-3xl opacity-60" />
+        <div className="absolute bottom-[-10%] right-0 w-[30vw] h-[30vw] bg-gradient-to-tr from-cyan-400/20 to-primary/10 rounded-full blur-2xl opacity-40" />
+      </div>
+
+      <div className="relative z-10 space-y-16">
         {/* Header */}
-        <motion.div
+        <motion.header
           className="text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <h1 className={`text-5xl sm:text-6xl font-extrabold ${gradientText} tracking-tight drop-shadow-lg`}>
+            {"About Us"}
+          </h1>
+          <div className="mt-5 flex justify-center">
+            <span className="inline-block px-6 py-2 rounded-full bg-primary/10 text-primary font-semibold text-base tracking-wide shadow-md backdrop-blur">
+              The Future of Uzbek AI
+            </span>
+          </div>
+          <p className="mt-6 text-xl text-foreground/80 max-w-2xl mx-auto font-light">
+            { "UzSummarize is a futuristic AI platform for summarization, learning, and productivity in the Uzbek language."}
+          </p>
+        </motion.header>
+
+        {/* Missions & Purposes */}
+        <motion.section
+          className={`relative ${glass} rounded-3xl px-8 py-10`}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary/90 to-primary/70 bg-clip-text text-transparent inline-block">
-            {t('title')} 
-          </h1>
-          <div className="mt-3 sm:mt-4 w-12 sm:w-16 h-1 bg-primary/20 mx-auto rounded-full"></div>
-        </motion.div>
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-primary/30 to-violet-400/20 rounded-full blur-2xl opacity-50 pointer-events-none" />
+          <h2 className={`text-3xl font-bold mb-6 ${gradientText}`}>Our Mission & Purpose</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold text-primary mb-2">{missions[0].title}</h3>
+              <p className="text-foreground/70 mb-4">{missions[0].desc}</p>
+              <h3 className="text-xl font-semibold text-primary mb-2">{missions[1].title}</h3>
+              <p className="text-foreground/70">{missions[1].desc}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-primary mb-2">{missions[2].title}</h3>
+              <p className="text-foreground/70 mb-4">{missions[2].desc}</p>
+              <h3 className="text-xl font-semibold text-primary mb-2">{missions[3].title}</h3>
+              <p className="text-foreground/70">{missions[3].desc}</p>
+            </div>
+          </div>
+        </motion.section>
 
-        {/* Mission */}
+        {/* Services & Products - Modern/Futuristic Layout */}
         <motion.section
-          className="space-y-2 sm:space-y-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="relative"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary/80">{t('mission.title')}</h2>
-          <p className="text-foreground/70 leading-relaxed text-sm sm:text-base lg:text-lg">
-            {t('mission.description')}
-          </p>
-        </motion.section>
-
-        {/* How It Works */}
-        <motion.section
-          className="space-y-4 sm:space-y-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary/80">{t('howItWorks.title')}</h2>
-          <p className="text-foreground/70 leading-relaxed text-sm sm:text-base lg:text-lg">
-            {t('howItWorks.description')}
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 mt-6 sm:mt-8">
-            {[
-              { key: 'input', step: t('howItWorks.steps.input.step'), title: t('howItWorks.steps.input.title'), description: t('howItWorks.steps.input.description') },
-              { key: 'analyze', step: t('howItWorks.steps.analyze.step'), title: t('howItWorks.steps.analyze.title'), description: t('howItWorks.steps.analyze.description') },
-              { key: 'identify', step: t('howItWorks.steps.identify.step'), title: t('howItWorks.steps.identify.title'), description: t('howItWorks.steps.identify.description') },
-              { key: 'refine', step: t('howItWorks.steps.refine.step'), title: t('howItWorks.steps.refine.title'), description: t('howItWorks.steps.refine.description') },
-              { key: 'deliver', step: t('howItWorks.steps.deliver.step'), title: t('howItWorks.steps.deliver.title'), description: t('howItWorks.steps.deliver.description') },
-            ].map((item) => (
-              <div
-                key={item.key}
-                className="group p-3 sm:p-4 lg:p-6 rounded-xl border border-primary/5 hover:border-primary/20 transition-all duration-300 bg-background/50 backdrop-blur-sm"
-              >
-                <div className="text-xs sm:text-sm font-medium text-primary/40 mb-1 sm:mb-2 group-hover:text-primary/60 transition-colors">
-                  {item.step}
+          <div className="absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-cyan-400/20 to-primary/10 rounded-full blur-2xl opacity-40 pointer-events-none" />
+          <h2 className={`text-3xl font-bold mb-8 ${gradientText}`}>What We Offer</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Services */}
+            <div className={`${glass} rounded-2xl p-8 flex flex-col gap-6`}>
+              <h3 className="text-xl font-bold text-primary mb-2">AI Services</h3>
+              <ul className="space-y-4">
+                <li>
+                  <span className="font-semibold text-foreground">Summarization Suite:</span>
+                  <span className="block text-foreground/70 ml-2">
+                    {services[0].desc}
+                    <span className="block text-xs text-foreground/50">PDF, URL, and image-based summarization included.</span>
+                  </span>
+                </li>
+                <li>
+                  <span className="font-semibold text-foreground">Learning Tools:</span>
+                  <span className="block text-foreground/70 ml-2">
+                    {services[2].desc} &amp; {services[3].desc}
+                  </span>
+                </li>
+                <li>
+                  <span className="font-semibold text-foreground">Visual & Extraction:</span>
+                  <span className="block text-foreground/70 ml-2">
+                    {services[1].desc}, {services[4].desc}, {services[5].desc}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            {/* Products */}
+            <div className="flex flex-col gap-6">
+              <div className={`${glass} rounded-2xl p-8`}>
+                <h3 className="text-xl font-bold text-primary mb-2">{products[0].label}</h3>
+                <p className="text-foreground/70">{products[0].desc}</p>
+              </div>
+              <div className="flex gap-4">
+                <div className={`${glass} flex-1 rounded-2xl p-5`}>
+                  <h4 className="font-semibold text-primary">{products[1].label}</h4>
+                  <p className="text-xs text-foreground/60">{products[1].desc}</p>
                 </div>
-                <h3 className="font-medium text-sm sm:text-base lg:text-lg mb-1">{item.title}</h3>
-                <p className="text-foreground/60 text-xs sm:text-sm">{item.description}</p>
+                <div className={`${glass} flex-1 rounded-2xl p-5`}>
+                  <h4 className="font-semibold text-primary">{products[2].label}</h4>
+                  <p className="text-xs text-foreground/60">{products[2].desc}</p>
+                </div>
               </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Features */}
-        <motion.section
-          className="space-y-4 sm:space-y-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary/80">{t('features.title')}</h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <div className="p-4 sm:p-6 lg:p-8 rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 bg-background/50 backdrop-blur-sm group">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-all duration-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-primary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
+              <div className={`${glass} rounded-2xl p-5 text-xs text-foreground/60`}>
+                <span className="font-semibold">{products[3].label}:</span> {products[3].desc}
               </div>
-              <h3 className="font-semibold text-base sm:text-lg lg:text-xl mb-1 sm:mb-2">{t('features.pdfSummarization.title')}</h3>
-              <p className="text-foreground/70 text-xs sm:text-sm lg:text-base">
-                {t('features.pdfSummarization.description')}
-              </p>
             </div>
-
-            <div className="p-4 sm:p-6 lg:p-8 rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 bg-background/50 backdrop-blur-sm group">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-all duration-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-primary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-base sm:text-lg lg:text-xl mb-1 sm:mb-2">{t('features.imageAnalysis.title')}</h3>
-              <p className="text-foreground/70 text-xs sm:text-sm lg:text-base">
-                {t('features.imageAnalysis.description')}
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-6 lg:p-8 rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 bg-background/50 backdrop-blur-sm group sm:col-span-2 lg:col-span-1">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-all duration-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-primary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-base sm:text-lg lg:text-xl mb-1 sm:mb-2">{t('features.seamlessIntegration.title')}</h3>
-              <p className="text-foreground/70 text-xs sm:text-sm lg:text-base">
-                {t('features.seamlessIntegration.description')}
-              </p>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Technology */}
-        <motion.section
-          className="space-y-2 sm:space-y-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary/80">{t('technology.title')}</h2>
-          <p className="text-foreground/70 leading-relaxed text-sm sm:text-base lg:text-lg">
-            {t('technology.description')}
-          </p>
-
-          <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-6">
-            {["OpenAI", "React", "TailwindCSS", "Next.js", "Prisma", "PostgreSQL", "Machine Learning"].map((tech, index) => (
-              <span
-                key={index}
-                className="px-2 sm:px-3 py-1 bg-primary/5 text-primary/70 rounded-full text-xs sm:text-sm"
-              >
-                {tech}
-              </span>
-            ))}
           </div>
         </motion.section>
 
         {/* Contact */}
         <motion.section
-          className="mt-10 sm:mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+          className="relative text-center"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
         >
-          <div className="p-5 sm:p-8 lg:p-10 rounded-2xl border border-primary/10 bg-background/50 backdrop-blur-sm">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary/80 mb-3 sm:mb-4">{t('contact.title')}</h2>
-            <p className="text-foreground/70 leading-relaxed text-sm sm:text-base lg:text-lg mb-4 sm:mb-6">
-              {t('contact.description')}
-            </p>
-            <a
-              href="mailto:sukhrobabdullaevweb@gmail.com"
-              className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-full transition-all duration-300 text-sm sm:text-base"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 sm:h-5 sm:w-5 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              <span className="truncate max-w-[200px] sm:max-w-none">sukhrobabdullaevweb@gmail.com</span>
-            </a>
-          </div>
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-10 w-40 h-40 bg-gradient-to-tr from-primary/20 to-violet-400/10 rounded-full blur-2xl opacity-40 pointer-events-none" />
+          <h2 className={`text-2xl font-semibold mb-2 ${gradientText}`}>Contact</h2>
+          <p className="text-foreground/70 mb-4">For questions, feedback, or collaboration, email us:</p>
+          <a
+            href="mailto:sukhrobabdullaevweb@gmail.com"
+            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-primary to-violet-500 text-white rounded-full shadow-lg hover:scale-105 transition-all duration-300 text-base font-medium"
+          >
+            sukhrobtech@gmail.com
+          </a>
         </motion.section>
       </div>
     </motion.div>
-  )
+  );
 }
-
-export default About
