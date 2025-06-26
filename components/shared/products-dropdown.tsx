@@ -36,7 +36,7 @@ export function ProductsDropdown({ isMobile = false }: { isMobile?: boolean }) {
             icon: Brain,
             path: `/${locale}/products/uzsumlm`,
             color: "from-purple-500 to-violet-400",
-            comingSoon: true
+            comingSoon: false
         },
         {
             name: "U-chat-pdf",
@@ -44,7 +44,7 @@ export function ProductsDropdown({ isMobile = false }: { isMobile?: boolean }) {
             icon: MessageSquare,
             path: `/${locale}/products/u-chat-pdf`,
             color: "from-orange-500 to-red-400",
-            comingSoon: true
+            comingSoon: false
         },
     ], [locale])
 

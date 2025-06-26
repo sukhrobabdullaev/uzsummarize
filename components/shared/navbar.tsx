@@ -42,7 +42,7 @@ const Navbar = () => {
     { name: t("navigation.services"), component: <ServicesDropdown /> },
     { name: t("navigation.products"), component: <ProductsDropdown /> },
     { name: t("navigation.about"), path: `/${locale}/about` },
-    { name: t("navigation.changelog"), path: `/${locale}/changelog` }
+    // { name: t("navigation.changelog"), path: `/${locale}/changelog` }
   ]
 
   return (

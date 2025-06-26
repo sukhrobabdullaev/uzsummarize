@@ -22,7 +22,6 @@ const SummaryForm = () => {
   const [text, setText] = useState("")
   const [model, setModel] = useState("GEMINI")
   const [isLoading, setIsLoading] = useState(false)
-  const [showVideo, setShowVideo] = useState(false)
 
   const MIN_CHARS = 300
   const MAX_CHARS = 4000
@@ -33,12 +32,6 @@ const SummaryForm = () => {
   const dispatch = useDispatch()
   const summary = useSelector((state: any) => state.summary.value)
   const router = useRouter()
-
-  // Show video popup when summary appears
-  useEffect(() => {
-    if (summary) setShowVideo(true)
-    else setShowVideo(false)
-  }, [summary])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -68,7 +61,6 @@ const SummaryForm = () => {
       if (res.ok) {
         dispatch(setSummary(data.summary))
         toast.success(t("summarizer.success.summaryGenerated"))
-        if (summary && !showVideo) setShowVideo(true)
       } else {
         toast.error(data.error || t("summarizer.errors.processingFailed"))
       }
@@ -83,7 +75,6 @@ const SummaryForm = () => {
   const handleClear = () => {
     setText("")
     dispatch(setSummary(""))
-    setShowVideo(false)
   }
 
   const getProgressColor = () => {
@@ -207,24 +198,6 @@ const SummaryForm = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Video Popup */}
-      {showVideo && (
-        <div className="fixed bottom-20 right-6 z-50">
-          <div className="relative bg-background rounded-xl shadow-lg p-2 flex flex-col items-center" style={{ width: 250, height: 220 }}>
-            <button
-              className="absolute top-0 right-0 text-gray-500 hover:text-gray-800 cursor-pointer"
-              onClick={() => setShowVideo(false)}
-              aria-label="Close video"
-            >
-              <X className="h-6 w-6" />
-            </button>
-            <video controls width={250} height={200} style={{ width: 250, height: 200, objectFit: 'cover', borderRadius: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <source src="/video_demo.mov" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

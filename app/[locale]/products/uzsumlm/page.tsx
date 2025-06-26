@@ -43,7 +43,7 @@ export default function UzSumLMPage() {
     const cardClass = "bg-white/80 dark:bg-background/80 rounded-2xl shadow-lg border border-border p-6 flex flex-col items-center"
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/95 pt-10 pb-20">
+        <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/95 px-4 sm:px-6 lg:px-8 pt-20 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-24">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="flex flex-col items-center text-center mb-10">
