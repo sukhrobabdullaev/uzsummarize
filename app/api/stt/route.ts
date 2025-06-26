@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { rateLimit } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
 
 // Initialize Gemini AI
@@ -8,19 +7,6 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for") || "unknown";
-
-  const { success, resetAt } = await rateLimit(ip);
-
-  if (!success) {
-    return NextResponse.json(
-      {
-        error: `Rate limit exceeded. Please try again later.`,
-      },
-      {
-        status: 429,
-      }
-    );
-  }
 
   try {
     const formData = await req.formData();
