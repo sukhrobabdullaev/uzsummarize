@@ -168,7 +168,7 @@ export default function UzSumLMPage() {
                     </div>
                 </div> */}
 
-                {/* Call to Action */}
+                {/* Call to Action
                 <div className="flex flex-col items-center gap-4">
                     <Button
                         size="lg"
@@ -185,7 +185,7 @@ export default function UzSumLMPage() {
                     >
                         <Link href="/">Back to Home</Link>
                     </Button>
-                </div>
+                </div> */}
             </div>
         </div>
     )

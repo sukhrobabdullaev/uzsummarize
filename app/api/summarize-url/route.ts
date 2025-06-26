@@ -2,11 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { urlRateLimit } from "@/lib/url-rate-limit";
 import { prisma } from "@/lib/prisma";
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
@@ -33,7 +28,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { url, model = "gpt" } = await req.json();
+  const { url } = await req.json();
 
   if (!url) {
     return NextResponse.json({ error: "URL is required" }, { status: 400 });
@@ -66,42 +61,13 @@ export async function POST(req: NextRequest) {
 
     let summary = "";
 
-    if (model === "gpt") {
-      try {
-        const completion = await openai.chat.completions.create({
-          messages: [
-            {
-              role: "system",
-              content:
-                "You are a helpful assistant that summarizes web content concisely in Uzbek.",
-            },
-            {
-              role: "user",
-              content: `Please summarize the following content in Uzbek: ${truncatedText}`,
-            },
-          ],
-          model: "gpt-4o", // Using a more efficient model
-          max_tokens: 500, // Limit output tokens
-          temperature: 0.7,
-        });
-
-        summary = completion.choices[0].message.content || "";
-      } catch (error: any) {
-        if (error.response?.status === 429) {
-          throw new Error(
-            "The content is too long to process. Please try a shorter URL or use the Gemini model."
-          );
-        }
-        throw error;
-      }
-    } else if (model === "gemini") {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-      const result = await model.generateContent(
-        `Please summarize the following content in Uzbek: ${truncatedText}`
-      );
-      const response = await result.response;
-      summary = response.text();
-    }
+    // Only Gemini model is used now
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const result = await model.generateContent(
+      `Please summarize the following content in Uzbek: ${truncatedText}`
+    );
+    const geminiResponse = await result.response;
+    summary = geminiResponse.text();
 
     await prisma.request.update({
       where: { id: dbRequest.id },

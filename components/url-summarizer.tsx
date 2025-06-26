@@ -1,15 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Loader2 } from 'lucide-react';
 
 export function UrlSummarizer() {
     const [url, setUrl] = useState('');
-    const [model, setModel] = useState('gemini');
     const [summary, setSummary] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -26,7 +24,7 @@ export function UrlSummarizer() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ url, model }),
+                body: JSON.stringify({ url }),
             });
 
             if (!response.ok) {
@@ -49,7 +47,7 @@ export function UrlSummarizer() {
             <CardHeader>
                 <CardTitle>URL xulosasi</CardTitle>
                 <CardDescription>
-                    URL ni kiriting va AI modelini tanlang
+                    URL ni kiriting va xulosasini oling
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -63,15 +61,6 @@ export function UrlSummarizer() {
                             required
                             className="flex-1"
                         />
-                        <Select value={model} onValueChange={setModel}>
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="Select model" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="gpt">GPT</SelectItem>
-                                <SelectItem value="gemini">Gemini</SelectItem>
-                            </SelectContent>
-                        </Select>
                     </div>
                     <Button type="submit" disabled={loading} className="w-full">
                         {loading ? (
@@ -102,4 +91,4 @@ export function UrlSummarizer() {
             </CardContent>
         </Card>
     );
-} 
+}
