@@ -1,10 +1,9 @@
 "use client"
 
-import { useState, useRef, useCallback, useEffect } from "react"
+import React, { useState, useRef, useCallback, useEffect } from "react"
 import { Volume2, Play, Square, Download, Copy, Check, Globe, Mic, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Slider } from "@/components/ui/slider"
@@ -21,6 +20,21 @@ interface Voice {
 }
 
 type Language = "uz" | "en" | "kaa"
+
+const previewSamples = {
+    uz: [
+        { label: "Xafa", file: "/audios/uz/sad.wav" },
+        { label: "Betaraf", file: "/audios/uz/neutral.wav" },
+        { label: "Baxtli", file: "/audios/uz/happy.wav" },
+        { label: "Jahldor", file: "/audios/uz/angry.wav" },
+    ],
+    kaa: [
+        { label: "Sad", file: "/audios/kaa/Sad.m4a" },
+        { label: "Neutral", file: "/audios/kaa/Neutral.m4a" },
+        { label: "Happy", file: "/audios/kaa/Happy.m4a" },
+        { label: "Angry", file: "/audios/kaa/Angry.m4a" },
+    ],
+}
 
 export default function TTS() {
     const t = useTranslations()
@@ -43,11 +57,11 @@ export default function TTS() {
     const voices: Voice[] = [
         // Uzbek voices
         {
-            id: "dildora",
-            name: "Dildora",
+            id: "husnora",
+            name: "Husnora",
             language: "uz",
             gender: "female",
-            description: "Warm and friendly Uzbek voice"
+            description: "Young and dynamic Uzbek voice"
         },
         {
             id: "elmira",
@@ -85,11 +99,11 @@ export default function TTS() {
             description: "Friendly and approachable Uzbek voice"
         },
         {
-            id: "husnora",
-            name: "Husnora",
+            id: "dildora",
+            name: "Dildora",
             language: "uz",
             gender: "female",
-            description: "Young and dynamic Uzbek voice"
+            description: "Warm and friendly Uzbek voice"
         },
         {
             id: "sadoqat",
@@ -164,7 +178,7 @@ export default function TTS() {
         switch (lang) {
             case "uz": return "O'zbekcha"
             case "en": return "English"
-            case "kaa": return "Qoraqalpoqcha"
+            case "kaa": return "Qaraqalpaqsha"
             default: return "O'zbekcha"
         }
     }
@@ -267,7 +281,7 @@ export default function TTS() {
     }
 
     return (
-        <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-8 py-6 sm:py-8">
+        <div className="px-2 sm:px-4 lg:px-8 py-6 sm:py-8">
             <div className="space-y-6 sm:space-y-8">
                 {/* Header */}
                 <div className="text-center">
@@ -534,6 +548,20 @@ export default function TTS() {
                                             </div>
                                         </div>
                                     </Card>
+
+                                    {/* Preview Audios by Category for uz/kaa */}
+                                    {(selectedLanguage === "uz" || selectedLanguage === "kaa") && audioUrl && (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                            {previewSamples[selectedLanguage].map((audio, idx) => (
+                                                <PreviewCard
+                                                    key={audio.label}
+                                                    label={audio.label}
+                                                    file={audio.file}
+                                                    lang={selectedLanguage}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -556,4 +584,78 @@ export default function TTS() {
             </div>
         </div>
     )
-} 
+}
+
+// Helper component for previewing audio samples
+function PreviewCard({
+    label,
+    file,
+    lang,
+}: {
+    label: string
+    file: string
+    lang: "uz" | "kaa"
+}) {
+    const [isPlaying, setIsPlaying] = useState(false)
+    const audioRef = useRef<HTMLAudioElement>(null)
+
+    const handlePlay = () => {
+        if (audioRef.current) {
+            audioRef.current.play()
+            setIsPlaying(true)
+        }
+    }
+    const handleStop = () => {
+        if (audioRef.current) {
+            audioRef.current.pause()
+            audioRef.current.currentTime = 0
+            setIsPlaying(false)
+        }
+    }
+    const handleEnded = () => setIsPlaying(false)
+
+    return (
+        <Card className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white shadow-xl min-h-[320px]">
+            <h3 className="text-lg font-semibold bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-transparent mb-1">
+                {label}
+            </h3>
+            <p className="text-sm text-gray-500 mb-4 text-center">
+                {lang === "uz" ? "Ovoz namunasi" : "Dauys namunasý"}
+            </p>
+            <div className="flex items-center justify-center gap-4 mb-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full w-10 h-10 p-0"
+                    onClick={handleStop}
+                    disabled={!isPlaying}
+                >
+                    <Square className="h-4 w-4" />
+                </Button>
+                <Button
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 flex items-center justify-center shadow-lg"
+                    onClick={handlePlay}
+                    disabled={isPlaying}
+                >
+                    <Play className="h-6 w-6 text-white ml-1" />
+                </Button>
+            </div>
+            <audio
+                ref={audioRef}
+                src={file}
+                onEnded={handleEnded}
+                onPause={() => setIsPlaying(false)}
+            />
+            <Button
+                asChild
+                variant="outline"
+                className="w-full rounded-xl text-base font-medium"
+            >
+                <a href={file} download>
+                    <Download className="h-4 w-4 mr-2" />
+                    {/* {lang === "uz" ? "Yuklab olish" : "Köshirip alý"} */}
+                </a>
+            </Button>
+        </Card>
+    )
+}
