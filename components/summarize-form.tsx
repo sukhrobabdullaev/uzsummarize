@@ -221,7 +221,7 @@ const SummaryForm = () => {
                     variant="outline"
                     size="lg"
                     className="rounded-full px-8 cursor-pointer"
-                    onClick={() => router.push("/products/uzsumlm")}
+                    onClick={() => router.push("en/products/uzsumlm")}
                   >
                     {t("summarizer.tryAdvancedFeatures", { defaultValue: "Try advanced video & audio features" })}
                   </Button>
