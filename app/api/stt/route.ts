@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
 
         // Call external API
         const extRes = await fetch(
-          "https://3a75-211-206-66-162.ngrok-free.app/stt/",
+          "https://4e9e-211-206-66-162.ngrok-free.app/stt/",
           {
             method: "POST",
             body: extFormData,
