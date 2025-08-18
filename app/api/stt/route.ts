@@ -70,13 +70,10 @@ export async function POST(req: NextRequest) {
         extFormData.append("file", audioFile, audioFile.name);
 
         // Call external API
-        const extRes = await fetch(
-          "https://4e9e-211-206-66-162.ngrok-free.app/stt/",
-          {
-            method: "POST",
-            body: extFormData,
-          }
-        );
+        const extRes = await fetch("https://a582ee3c98ff.ngrok-free.app/stt/", {
+          method: "POST",
+          body: extFormData,
+        });
 
         if (!extRes.ok) {
           await prisma.request.update({
