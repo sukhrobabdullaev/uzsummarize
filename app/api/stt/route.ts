@@ -14,26 +14,17 @@ export async function POST(req: NextRequest) {
     const language = (formData.get("language") as string) || "uz";
 
     if (!audioFile) {
-      return NextResponse.json(
-        { error: "No audio file provided" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "No audio file provided" }, { status: 400 });
     }
 
     // Check file size (max 25MB for audio)
     if (audioFile.size > 25 * 1024 * 1024) {
-      return NextResponse.json(
-        { error: "Audio file too large. Maximum size is 25MB." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Audio file too large. Maximum size is 25MB." }, { status: 400 });
     }
 
     // Check file type
     if (!audioFile.type.startsWith("audio/")) {
-      return NextResponse.json(
-        { error: "Invalid file type. Please upload an audio file." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid file type. Please upload an audio file." }, { status: 400 });
     }
 
     // Create a new request record
@@ -54,10 +45,7 @@ export async function POST(req: NextRequest) {
           error: "Gemini API key not configured",
         },
       });
-      return NextResponse.json(
-        { error: "Gemini API key not configured" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Gemini API key not configured" }, { status: 500 });
     }
 
     const startTime = Date.now();
@@ -70,7 +58,7 @@ export async function POST(req: NextRequest) {
         extFormData.append("file", audioFile, audioFile.name);
 
         // Call external API
-        const extRes = await fetch("https://a582ee3c98ff.ngrok-free.app/stt/", {
+        const extRes = await fetch("https://4faad64e73c1.ngrok-free.app/stt/", {
           method: "POST",
           body: extFormData,
         });
@@ -83,10 +71,7 @@ export async function POST(req: NextRequest) {
               error: `External STT API error: ${extRes.status}`,
             },
           });
-          return NextResponse.json(
-            { error: `External STT API error: ${extRes.status}` },
-            { status: 500 }
-          );
+          return NextResponse.json({ error: `External STT API error: ${extRes.status}` }, { status: 500 });
         }
 
         const extJson = await extRes.json();
@@ -108,20 +93,14 @@ export async function POST(req: NextRequest) {
           where: { id: dbRequest.id },
           data: {
             status: "FAILED",
-            error:
-              error instanceof Error
-                ? error.message
-                : "Failed to process audio",
+            error: error instanceof Error ? error.message : "Failed to process audio",
           },
         });
         return NextResponse.json(
           {
-            error:
-              error instanceof Error
-                ? error.message
-                : "Failed to process audio",
+            error: error instanceof Error ? error.message : "Failed to process audio",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
     }
@@ -185,7 +164,7 @@ export async function POST(req: NextRequest) {
               controller.enqueue(encoder.encode(data));
 
               // Add a realistic delay to simulate processing
-              await new Promise((resolve) => setTimeout(resolve, 100));
+              await new Promise(resolve => setTimeout(resolve, 100));
             }
 
             // Send completion signal
@@ -210,10 +189,7 @@ export async function POST(req: NextRequest) {
               where: { id: dbRequest.id },
               data: {
                 status: "FAILED",
-                error:
-                  error instanceof Error
-                    ? error.message
-                    : "Failed to process audio",
+                error: error instanceof Error ? error.message : "Failed to process audio",
               },
             });
 
@@ -238,10 +214,7 @@ export async function POST(req: NextRequest) {
 
     // For English, return not implemented
     if (language === "en") {
-      return NextResponse.json(
-        { error: "English STT not implemented with external API." },
-        { status: 501 }
-      );
+      return NextResponse.json({ error: "English STT not implemented with external API." }, { status: 501 });
     }
 
     // Create streaming response
@@ -268,9 +241,7 @@ export async function POST(req: NextRequest) {
             File size: ${audioFile.size} bytes
             File type: ${audioFile.type}
 
-            Please provide the transcription in ${
-              language === "uz" ? "Uzbek" : "English"
-            } language.`;
+            Please provide the transcription in ${language === "uz" ? "Uzbek" : "English"} language.`;
 
           // Create the content parts for Gemini
           const contentParts = [
@@ -309,7 +280,7 @@ export async function POST(req: NextRequest) {
             controller.enqueue(encoder.encode(data));
 
             // Add a realistic delay to simulate processing
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise(resolve => setTimeout(resolve, 100));
           }
 
           // Send completion signal
@@ -334,10 +305,7 @@ export async function POST(req: NextRequest) {
             where: { id: dbRequest.id },
             data: {
               status: "FAILED",
-              error:
-                error instanceof Error
-                  ? error.message
-                  : "Failed to process audio",
+              error: error instanceof Error ? error.message : "Failed to process audio",
             },
           });
 
@@ -362,10 +330,9 @@ export async function POST(req: NextRequest) {
     console.error("STT API error:", error);
     return NextResponse.json(
       {
-        error:
-          error instanceof Error ? error.message : "Failed to process audio",
+        error: error instanceof Error ? error.message : "Failed to process audio",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
