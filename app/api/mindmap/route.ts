@@ -20,11 +20,12 @@ interface Mindmap {
   updatedAt: Date;
 }
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Validate mindmap data structure
+// -----------------------------
+// Helpers
+// -----------------------------
+
 function validateMindmapData(data: any): data is { nodes: MindmapNode[] } {
   if (!data || !Array.isArray(data.nodes)) return false;
   return data.nodes.every(
@@ -33,13 +34,115 @@ function validateMindmapData(data: any): data is { nodes: MindmapNode[] } {
       typeof node.title === "string" &&
       typeof node.content === "string" &&
       (node.parentId === null || typeof node.parentId === "string") &&
-      typeof node.position === "object" &&
+      node.position &&
       typeof node.position.x === "number" &&
       typeof node.position.y === "number"
   );
 }
 
+function buildFewShotMessages(topic: string, difficulty: string) {
+  return [
+    {
+      role: "system" as const,
+      content:
+        'Sen faqat bitta JSON obyektini qaytarasan. Hech qanday qo\'shimcha matn, markdown yoki izoh yozma. Tuzilma qat’iy: {"nodes":[{"id":string,"title":string,"content":string,"parentId":string|null,"position":{"x":number,"y":number}}]}',
+    },
+
+    // === FEW-SHOT EXAMPLE 1 ===
+    {
+      role: "user" as const,
+      content:
+        'Create a mindmap structure for the topic "Nyuton qonunlari" at "Boshlang’ich" level in Uzbek language.',
+    },
+    {
+      role: "assistant" as const,
+      content: JSON.stringify({
+        nodes: [
+          {
+            id: "root",
+            title: "Nyuton qonunlari",
+            content: "3 asosiy qonun: inersiya, F=m·a, qarshi ta’sir.",
+            parentId: null,
+            position: { x: 0, y: 0 },
+          },
+          {
+            id: "n1",
+            title: "1-qonun: Inersiya",
+            content: "Tashqi kuch bo‘lmasa, holat saqlanadi.",
+            parentId: "root",
+            position: { x: -240, y: 120 },
+          },
+          {
+            id: "n2",
+            title: "2-qonun: F = m·a",
+            content: "Kuch massaga va tezlanishga bog‘liq.",
+            parentId: "root",
+            position: { x: 0, y: 150 },
+          },
+          {
+            id: "n3",
+            title: "3-qonun: Qarshi ta’sir",
+            content: "Har bir ta’sirga teng va qarama-qarshi ta’sir bor.",
+            parentId: "root",
+            position: { x: 240, y: 120 },
+          },
+        ],
+      }),
+    },
+
+    // === FEW-SHOT EXAMPLE 2 ===
+    {
+      role: "user" as const,
+      content:
+        'Create a mindmap structure for the topic "Matritsalar asoslari" at "O‘rta" level in Uzbek language.',
+    },
+    {
+      role: "assistant" as const,
+      content: JSON.stringify({
+        nodes: [
+          {
+            id: "root2",
+            title: "Matritsalar asoslari",
+            content: "Turlar, amallar, qo‘llanishlar.",
+            parentId: null,
+            position: { x: 0, y: 0 },
+          },
+          {
+            id: "a1",
+            title: "Turlar",
+            content: "Kvadrat, diagonal, birlik, nol.",
+            parentId: "root2",
+            position: { x: -260, y: 120 },
+          },
+          {
+            id: "a2",
+            title: "Amallar",
+            content: "Qo‘shish, ko‘paytirish, transpozitsiya, determinant.",
+            parentId: "root2",
+            position: { x: 0, y: 150 },
+          },
+          {
+            id: "a3",
+            title: "Qo‘llanishlar",
+            content: "Chiziqli tenglamalar, kompyuter grafikasi.",
+            parentId: "root2",
+            position: { x: 260, y: 120 },
+          },
+        ],
+      }),
+    },
+
+    // === ACTUAL REQUEST ===
+    {
+      role: "user" as const,
+      content: `Create a mindmap structure for the topic "${topic}" at "${difficulty}" level in Uzbek language.`,
+    },
+  ];
+}
+
+// -----------------------------
 // GET - Fetch mindmap by ID
+// -----------------------------
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
@@ -64,8 +167,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Convert Prisma nodes to MindmapNode format
-    const formattedMindmap: Mindmap = {
+    const formatted: Mindmap = {
       ...mindmap,
       nodes: mindmap.nodes.map((node) => ({
         id: node.id,
@@ -76,7 +178,7 @@ export async function GET(request: NextRequest) {
       })),
     };
 
-    return NextResponse.json(formattedMindmap);
+    return NextResponse.json(formatted);
   } catch (error) {
     console.error("Fikrlar xaritasini olishda xatolik:", error);
     return NextResponse.json(
@@ -86,9 +188,10 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST - Create new mindmap
+// -----------------------------
+// POST - Create new mindmap (Few-shot)
+// -----------------------------
 export async function POST(request: NextRequest) {
-  
   try {
     const { title, topic, difficulty } = await request.json();
 
@@ -99,48 +202,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate initial mindmap structure using OpenAI
-    const prompt = `Create a mindmap structure for the topic "${topic}" at ${difficulty} level in Uzbek language.
-        Return a JSON object with the following structure:
-        {
-            "nodes": [
-                {
-                    "id": "unique_id",
-                    "title": "node_title",
-                    "content": "node_content",
-                    "parentId": null,
-                    "position": { "x": 0, "y": 0 }
-                },
-                // ... more nodes
-            ]
-        }`;
-
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: "user", content: prompt }],
-      model: "gpt-4o-mini",
-      response_format: { type: "json_object" },
-    });
-
-    const mindmapData = JSON.parse(
-      completion.choices[0].message.content || "{}"
-    );
-
-    if (!validateMindmapData(mindmapData)) {
-      return NextResponse.json(
-        { error: "Yaratilgan fikrlar xaritasi noto'g'ri formatda" },
-        { status: 500 }
-      );
-    }
-
-    const existingMindmap = await prisma.mindmap.findFirst({
+    // Return existing by (topic, difficulty)
+    const existing = await prisma.mindmap.findFirst({
       where: { topic, difficulty },
       include: { nodes: true },
     });
-
-    if (existingMindmap) {
+    if (existing) {
       const formatted: Mindmap = {
-        ...existingMindmap,
-        nodes: existingMindmap.nodes.map((node) => ({
+        ...existing,
+        nodes: existing.nodes.map((node) => ({
           id: node.id,
           title: node.title,
           content: node.content,
@@ -151,29 +221,60 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(formatted);
     }
 
-    // Create mindmap in database
-    const mindmap = await prisma.mindmap.create({
+    // Few-shot messages
+    const messages = buildFewShotMessages(topic, difficulty);
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages,
+      response_format: { type: "json_object" },
+      temperature: 0.2,
+    });
+
+    const jsonText = completion.choices?.[0]?.message?.content ?? "{}";
+
+    let mindmapData: unknown;
+    try {
+      mindmapData = JSON.parse(jsonText);
+    } catch (e) {
+      console.error("JSON parse error:", e, jsonText);
+      return NextResponse.json(
+        { error: "Model noto‘g‘ri JSON qaytardi" },
+        { status: 502 }
+      );
+    }
+
+    if (!validateMindmapData(mindmapData)) {
+      return NextResponse.json(
+        { error: "Yaratilgan fikrlar xaritasi noto'g'ri formatda" },
+        { status: 500 }
+      );
+    }
+
+    // Persist in DB
+    const created = await prisma.mindmap.create({
       data: {
         title,
         topic,
         difficulty,
         nodes: {
-          create: mindmapData.nodes.map((node: MindmapNode) => ({
-            title: node.title,
-            content: node.content,
-            parentId: node.parentId,
-            positionX: node.position.x,
-            positionY: node.position.y,
-          })),
+          create: (mindmapData as { nodes: MindmapNode[] }).nodes.map(
+            (node) => ({
+              title: node.title,
+              content: node.content,
+              parentId: node.parentId,
+              positionX: node.position.x,
+              positionY: node.position.y,
+            })
+          ),
         },
       },
       include: { nodes: true },
     });
 
-    // Convert Prisma nodes to MindmapNode format
-    const formattedMindmap: Mindmap = {
-      ...mindmap,
-      nodes: mindmap.nodes.map((node) => ({
+    const formatted: Mindmap = {
+      ...created,
+      nodes: created.nodes.map((node) => ({
         id: node.id,
         title: node.title,
         content: node.content,
@@ -182,7 +283,7 @@ export async function POST(request: NextRequest) {
       })),
     };
 
-    return NextResponse.json(formattedMindmap);
+    return NextResponse.json(formatted);
   } catch (error) {
     console.error("Fikrlar xaritasini yaratishda xatolik:", error);
     return NextResponse.json(
@@ -192,7 +293,9 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// -----------------------------
 // PUT - Update mindmap
+// -----------------------------
 export async function PUT(request: NextRequest) {
   try {
     const { id, nodes } = await request.json();
@@ -204,13 +307,9 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Delete existing nodes
-    await prisma.mindmapNode.deleteMany({
-      where: { mindmapId: id },
-    });
+    await prisma.mindmapNode.deleteMany({ where: { mindmapId: id } });
 
-    // Create new nodes
-    const mindmap = await prisma.mindmap.update({
+    const updated = await prisma.mindmap.update({
       where: { id },
       data: {
         nodes: {
@@ -226,10 +325,9 @@ export async function PUT(request: NextRequest) {
       include: { nodes: true },
     });
 
-    // Convert Prisma nodes to MindmapNode format
-    const formattedMindmap: Mindmap = {
-      ...mindmap,
-      nodes: mindmap.nodes.map((node) => ({
+    const formatted: Mindmap = {
+      ...updated,
+      nodes: updated.nodes.map((node) => ({
         id: node.id,
         title: node.title,
         content: node.content,
@@ -238,7 +336,7 @@ export async function PUT(request: NextRequest) {
       })),
     };
 
-    return NextResponse.json(formattedMindmap);
+    return NextResponse.json(formatted);
   } catch (error) {
     console.error("Fikrlar xaritasini yangilashda xatolik:", error);
     return NextResponse.json(
@@ -248,7 +346,9 @@ export async function PUT(request: NextRequest) {
   }
 }
 
+// -----------------------------
 // DELETE - Delete mindmap
+// -----------------------------
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
@@ -261,10 +361,7 @@ export async function DELETE(request: NextRequest) {
   }
 
   try {
-    await prisma.mindmap.delete({
-      where: { id },
-    });
-
+    await prisma.mindmap.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Fikrlar xaritasini o'chirishda xatolik:", error);
