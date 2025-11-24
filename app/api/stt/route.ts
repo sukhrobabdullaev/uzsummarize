@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         extFormData.append("file", audioFile, audioFile.name);
 
         // Call external API
-        const extRes = await fetch("https://4faad64e73c1.ngrok-free.app/stt/", {
+        const extRes = await fetch("https://83d99aa3bf30.ngrok-free.app/stt/", {
           method: "POST",
           body: extFormData,
         });
